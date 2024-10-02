@@ -38,6 +38,28 @@ input[name="buscadorArticle"] {
 .card {
     max-width: 30%;
     padding: 10px;
+    margin-top: 10px;
+    border: 2px solid grey;
+    background-color: transparent;
+}
+
+
+/************** FORM **********/
+
+main:has(form.articleForm) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.articleForm {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 50%;
 }
 
 
