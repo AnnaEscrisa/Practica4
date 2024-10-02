@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
 }
 
@@ -30,17 +30,19 @@ input[name="buscadorArticle"] {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    gap: 10%;
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
 }
 
 .card {
-    max-width: 30%;
+    max-width: 20%;
     padding: 10px;
     margin-top: 10px;
     border: 2px solid grey;
     background-color: transparent;
+    text-wrap: wrap;
 }
 
 
