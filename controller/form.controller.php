@@ -25,12 +25,12 @@ if ($isEdit) {
     $id = $_GET["id"];
     $article = $articleModel->selectArticleById($id);
 
-    //comprovem si l'article existeix, per si algun llest de torn canvia manualment l'id de l'article als parametres
+    //comprovem si l'article existeix, per si algun llest de torn canvia manualment l'id de l'article a la url
     if (!$article) {
         $error = $error_a4;
-        buildMessage($error, $class, $ruta, $previousParams);
+        showMessage($class, $error, $displayEliminar);
     } else {
-        //si l'article existeix, establirem el valor dels inputs
+        //si l'article existeix, establirem el valor dels inputs automaticament
         $article = $article[0];
         $pageTitle = "Editar article - " . $article["id"];
         $titol = $article["titol"];
@@ -49,7 +49,7 @@ if ($isDelete) {
 
     if (!$article) {
         $error = $error_a4;
-        buildMessage($error, $class, $ruta, $previousParams);
+        showMessage($class, $error, $displayEliminar);
     } else {
 
         //carreguem l'article perque l'usuari vegi quin article elimina
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $nouTitol = $_POST["nouTitol"] ?? false;
     $eliminacio = $_POST["elimina"] ?? false;
 
-    //entrada pel formulari d'eliminació
+    //*---- entrada pel formulari d'eliminació
     //eliminarà l'article i redireccionarà a Home amb un missatge
     if ($eliminacio) {
         $id = $_GET["id"];
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         buildMessage($error, $class, $ruta, "");
     }
 
-    //entrada pel formulari d'edicio/inserció
+    //*---- entrada pel formulari d'edicio/inserció
     if ($nouCos && $nouTitol) {
 
         //si estem editant

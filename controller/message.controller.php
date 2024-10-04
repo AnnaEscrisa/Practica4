@@ -1,4 +1,5 @@
 <?php
+//Anna Escribano
 
 //------------------- Missatges d'error ------------------------
 //missatges generals

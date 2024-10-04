@@ -1,4 +1,5 @@
 <?php
+//Anna Escribano
 
 // si hi ha items, els dividira en grups de la quantitat especificada a $max
 // i retornarà un array 
@@ -14,7 +15,8 @@ $currentPage = $_GET['page'] ?? 1;
 $nextPage = $currentPage + 1;
 $previousPage = $currentPage - 1;
 $totalPages = $articlesMostrats ? count($articlesMostrats) : 0;
-$previousClass = $previousPage == 0 ? 'hidden' : '';
-$nextClass = $nextPage == $totalPages + 1 ? "hidden" : '';
+
+$previousClass = $previousPage == 0 ? 'hidden' : '';//classe del boto pagina anterior
+$nextClass = $nextPage == $totalPages + 1 ? "hidden" : '';//classe del boto pagina següent
 
 ?>
