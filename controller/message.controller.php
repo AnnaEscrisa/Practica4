@@ -5,6 +5,7 @@
 $error_g1 = "Tots els camps han de ser omplerts";
 $error_g2 = "Caracters màxims excedits";
 $error_g3 = "Vols eliminar aquest registre? Aquesta acció és irreversible";
+$error_g4 = "No es permet l'inserció de codi html o javascript";
 $success_g1 = "S'ha eliminat el registre amb èxit.";
 
 //errors articles

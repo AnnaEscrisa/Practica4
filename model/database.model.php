@@ -92,9 +92,6 @@ class Database
             throw $th;
         }
     }
-    //! ALERTA ojo els ordres de les variables
-    //! vigila que no sea :id = ?
-    //comporvat-- no cal
 
     /* Fa un update de la taula determinada
     $valors ha de ser un array amb els nous valors a introduir
@@ -110,13 +107,12 @@ class Database
             $stmt->execute($valors);
             return true;
 
-            //! ALERTA valorar canviar aixo per una Exception
         } catch (\Throwable $th) {
             throw $th;
         }
     }
 
-    //! Vigila que no necessiti passarle id per param (execute)
+    //Fa un delete a la taula determinada
     function delete($taula, $id)
     {
         try {
@@ -143,6 +139,13 @@ class Database
     function comprovarCaractersMaxims($chars_maxims, $valor)
     {
         if (strlen($valor) > $chars_maxims) {
+            return true;
+        }
+    }
+
+    //comprova si hi ha elements html al parametre
+    function comprovarHtml($valor){
+        if(htmlspecialchars($valor) != $valor){
             return true;
         }
     }

@@ -30,7 +30,8 @@ class Article extends Database
     /* Inserta un nou registre a la taula articles
     comprova si el titol ja existeix a la bbdd i si es correcte, i si no, insereix un nou article
     Retorna:
-        3 -> el titol ja existeix
+        4 -> el titol ja existeix 
+        3 -> el titol o el cos tenen codi html/js
         2 -> el titol o el cos te massa caracters
         1 -> el registre s'ha insertat correctament
         0 -> error en l'inserció
@@ -40,6 +41,12 @@ class Article extends Database
         $existeix = $this->comprovarExistent($this->taula, "titol", $titol);
 
         if ($existeix) {
+            return 4;
+        }
+        if (
+            $this->comprovarHtml($titol) ||
+            $this->comprovarHtml($cos)
+        ) {
             return 3;
         }
         if (
@@ -51,16 +58,23 @@ class Article extends Database
         return $this->insert($this->taula, "titol, cos", [$titol, $cos], "?, ?") ? 1 : 0;
     }
 
-    //! ALERTA comprovar a la bbdd si titol es unique
     //Modifica un article. Retorna els mateixos valors amb les mateixes condicions que la funcio d'inserir
+    //Comprova si estem canviant el titol, i si es així, comprova si existeix
     function updateArticle($id, $titol, $cos)
     {
         $article = $this->selectArticleById($id);
+        
         if ($article[0]["titol"] != $titol) {
             $existeix = $this->comprovarExistent($this->taula, "titol", $titol);
             if ($existeix) {
-                return 3;
+                return 4;
             }
+        }
+        if (
+            $this->comprovarHtml($titol) ||
+            $this->comprovarHtml($cos)
+        ) {
+            return 3;
         }
         if (
             $this->comprovarCaractersMaxims(40, $titol) ||
@@ -75,7 +89,8 @@ class Article extends Database
     }
 
     //eleimina article 
-    function deleteArticle($id) {
+    function deleteArticle($id)
+    {
         $this->delete($this->taula, $id);
     }
 }

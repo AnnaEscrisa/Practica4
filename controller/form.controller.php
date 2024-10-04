@@ -9,7 +9,7 @@ $titol = ""; //titol actual de l'article
 $cos = ""; //cos actual de l'article
 $id = ""; //id actual de l'article
 
-$ruta= "form";
+$ruta = "form";
 
 
 //mostrem error actual si hi ha
@@ -92,12 +92,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         //si estem editant
         if ($id) {
             $result = $articleModel->updateArticle($id, $nouTitol, $nouCos);
-            $previousParams = "isEdit=true&id=$id";
 
             //comprovarà l'update i retornarà un missatge depenent del resultat
             switch ($result) {
-                case 3:
+                case 4:
                     $error = $error_a1;
+                    break;
+                case 3:
+                    $error = $error_g4;
                     break;
                 case 2:
                     $error = $error_g2;
@@ -105,20 +107,22 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 case 1:
                     $error = $success_a2;
                     $class = "success";
-                    $previousParams = "";
                     break;
                 default:
                     $error = $error_a3;
                     break;
             }
-        
-        //si estem creant un article nou
+
+            //si estem creant un article nou
         } else {
             $result = $articleModel->insertArticle($nouTitol, $nouCos);
 
             switch ($result) {
-                case 3:
+                case 4:
                     $error = $error_a1;
+                    break;
+                case 3:
+                    $error = $error_g4;
                     break;
                 case 2:
                     $error = $error_g2;
@@ -135,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     } else {
         $error = $error_g1;
-        $previousParams = "isEdit=true&id=$id";
+        $previousParams = $id? "isEdit=true&id=$id": "";
     }
 
     buildMessage($error, $class, $ruta, $previousParams);
