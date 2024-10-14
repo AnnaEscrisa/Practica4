@@ -1,16 +1,27 @@
 //! PENDENT
     // - escollir tema
+    // ferm mes users i canviar articles
 
 
+//* navbar
+    //- te una seccio my_articles, nomes mostrat si estem logats
+    //nou joc igual
+    //login, i canvia a logout
+        //if Session[user]? logout: login
 
 
 //* LOGIN
-    //-mateix per login i register
+    //? -mateix per login i register
+    // -link a register
+
+
+//* registre
+    //-hash a la contra
 
     
 //* Index -- my articles
-    //utilitzar vista index per my articles
-    //
+    //utilitzar vista i controller index per my articles
+    //pero amb diferent ruta (my_articles)
 
     //index
     //if session[user] -- editar i eliminar

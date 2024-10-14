@@ -13,6 +13,22 @@
           <a class="nav-link" href="form.php">Nou Article</a>
         </li>
       </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <?php if (!isset($_SESSION['user'])) {
+           echo '
+              <a class="nav-link" href="login.php">
+                Login
+              </a>';
+          } else {
+            echo '
+              <a class="nav-link" href="login.php?isLogout=true">
+                Logout
+              </a>';
+          }
+          ?>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>

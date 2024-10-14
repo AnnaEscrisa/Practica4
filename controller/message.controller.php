@@ -15,9 +15,24 @@ $error_a2 = "No s'ha pogut inserir";
 $error_a3 = "No s'ha pogut modificar";
 $error_a4 = "Article inexistent.";
 
-//exit articles
 $success_a1 = "Article inserit amb èxit";
 $success_a2 = "Article modificat amb èxit";
+
+//errors login
+$error_l1 = "Usuari o contrasenya incorrectes";
+$error_l2 = "No s'ha pogut iniciar sessió";
+
+$success_l1 = "S'ha iniciat sessió amb èxit";
+$success_l2 = "S'ha tancat la sessió amb èxit";
+
+//errors register
+$error_r1 = "No s'ha pogut crear l'usuari";
+$error_r2 = "El nom d'usuari ja existeix";
+$error_r3 = "Les contrasenyes no coincideixen";
+$error_r4 = "El format de l'email no és correcte";
+$error_r5 = "La contrasenya no és prou segura";
+
+$success_r1 = "S'ha creat l'usuari amb èxit";
 
 
 //-------------------Finestra d'error----------------------
