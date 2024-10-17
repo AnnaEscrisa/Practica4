@@ -8,6 +8,7 @@ function paginationChunks($max, $items)
     return $items ? array_chunk($items, $max) : "";
 }
 
+//! ALERTA fer max articles seleccionable per user
 $max_articles = 5;
 $articlesMostrats = paginationChunks($max_articles, $articles);
 

@@ -49,17 +49,6 @@ class Database
         return $resultat;
     }
 
-    // //!ALERTA POTSEr millor com un resultat = sleectAll , split o algo asi, first - last
-    // function selectAllLimit($taula, $first, $last)
-    // {
-    //     $sql = "SELECT * FROM $taula LIMIT $first, $last";
-
-    //     $stmt = $this->db->prepare($sql);
-    //     $stmt->execute();
-    //     $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     return $resultat;
-    // }
-
     //Retorna tots els registres d'una taula basant-se en el valor d'un camp concret
     function selectBy($taula, $columna, $valor)
     {
@@ -147,6 +136,15 @@ class Database
     function comprovarHtml($valor){
         if(htmlspecialchars($valor) != $valor){
             return true;
+        }
+    }
+
+    function comprovarHtmlCamps($arrayDades)
+    {
+        foreach ($arrayDades as $dada) {
+            if ($this->comprovarHtml($dada)) {
+                return true;
+            }
         }
     }
 

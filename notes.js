@@ -1,6 +1,15 @@
 //! PENDENT
     // - escollir tema
     // ferm mes users i canviar articles
+    // posar id user a articles 
+    // arreglar validacio
+        //funcio comprovar a cada model
+        //implementar validacio a controller
+    // fer que la session duri 40 min
+    //ficar nom user a cookies en remember me
+
+//* VISTAS
+    
 
 
 //* navbar

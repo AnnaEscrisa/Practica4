@@ -1,5 +1,6 @@
 <?php
-
+//Anna Escribano
+//!ALERTA probar a fer aixo amb namespaces
 
 require 'database.model.php';
 class Usuari extends Database
@@ -47,65 +48,22 @@ class Usuari extends Database
 
     }
 
+    //comprova si l'usuari existeix, i si és així comprova que la contrasenya es correspon amb la de la bbdd
     function login($possibleUsuari, $possibleContrasenya)
     {
         $usuari = $this->selectUserbyUsername($possibleUsuari);
         if ($usuari) {
+            //!vigila que usuari password existeixi (que no sigui 0, o 2...)
             $contrasenyaReal = $usuari['password'];
-            if (comprovarContrasenya($possibleContrasenya, $contrasenyaReal)) {
-                return true;
-            }
-            ;
-        }
-    }
 
-    //comprova les diferents dades necessaries per crear un usuari
-    function comprovarDades($user, $contrasenya, $repeticioContrasenya, $nom, $email)
-    {
-        $dades = [$user, $contrasenya, $nom, $email];
-
-        if (!comprovarContrasenya($contrasenya, $repeticioContrasenya)) {
-            return 6;
-        }
-
-        if (!contrasenyaSegura($contrasenya)) {
-            return 5;
-        }
-
-        if ($this->comprovarExistent($this->taula, "user", $user)) {
-            return 4;
-        }
-
-        if ($this->comprovarHtmlCamps($dades)) {
-            return 3;
-        }
-
-        if ($this->caractersMaximsCamps($dades)) {
-            return 2;
-        }
-
-        return NULL;
-    }
-
-    function comprovarHtmlCamps($arrayDades)
-    {
-
-        foreach ($arrayDades as $dada) {
-            if ($this->comprovarHtml($dada)) {
+            $realEncriptada = password_hash($contrasenyaReal, PASSWORD_DEFAULT);
+            $possibleEncriptada = password_hash($possibleContrasenya, PASSWORD_DEFAULT);
+            if (comprovarContrasenya($possibleEncriptada, $realEncriptada)) {
                 return true;
             }
         }
     }
 
-    //comprova que el nombre de caracters no exedeix el maxims permetits per tots els camps de User
-    function caractersMaximsCamps($arrayDades)
-    {
-        foreach ($arrayDades as $dada) {
-            if ($this->comprovarHtml($dada)) {
-                return true;
-            }
-        }
-    }
 
     //comporva que la contrasenya i la repeticio siguin iguals
     function comprovarContrasenya($contrasenya, $altreContrasenya)

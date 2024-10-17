@@ -9,7 +9,10 @@
         <li class="nav-item">
           <a class="nav-link" href="index.php">Home</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item <?php echo !isset($_SESSION['user'])? "hidden": "" ?>">
+          <a class="nav-link" href="index.php?myArticles=true">Els meus articles</a>
+        </li>
+        <li class="nav-item  <?php echo !isset($_SESSION['user'])? "hidden": "" ?>">
           <a class="nav-link" href="form.php">Nou Article</a>
         </li>
       </ul>

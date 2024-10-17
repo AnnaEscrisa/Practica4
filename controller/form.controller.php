@@ -10,6 +10,7 @@ $cos = ""; //cos actual de l'article
 $id = ""; //id actual de l'article
 
 $ruta = "form";
+$sessioIniciada = isset($_SESSION['user']);
 
 
 //mostrem error actual si hi ha
@@ -21,7 +22,7 @@ showMessage($tipus, $missatge, $displayEliminar);
 //comprovem si estem en mode edició
 $isEdit = $_GET["isEdit"] ?? false;
 
-if ($isEdit) {
+if ($isEdit && $sessioIniciada) {
     $id = $_GET["id"];
     $article = $articleModel->selectArticleById($id);
 
@@ -43,7 +44,7 @@ if ($isEdit) {
 //comprovem si estem en mode eliminació
 $isDelete = $_GET["isDelete"] ?? false;
 
-if ($isDelete) {
+if ($isDelete && $sessioIniciada) {
     $id = $_GET["id"];
     $article = $articleModel->selectArticleById($id);
 

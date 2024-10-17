@@ -19,8 +19,8 @@
                         <h2 class="card-title">' . $value['titol'] . '</h2>
                         <p class="card-text" >' . $value['cos'] . '</p>
                         <div class="card-body footer "> 
-                            <a class="btn btn-primary" href="form.php?id=' . $value['id'] . '&isEdit=true">Edit</a>
-                            <a class="btn btn-danger" href="form.php?id=' . $value['id'] . '&isDelete=true">Elimina</a>
+                            <a class="btn btn-primary '. $hiddenButton.'" href="form.php?id=' . $value['id'] . '&isEdit=true">Edit</a>
+                            <a class="btn btn-danger '. $hiddenButton.'" href="form.php?id=' . $value['id'] . '&isDelete=true">Elimina</a>
                         </div>
                     </article>';
                 }
