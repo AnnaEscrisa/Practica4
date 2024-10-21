@@ -51,11 +51,36 @@ class Database
         return $resultat;
     }
 
+    function selectAllSpecific($taula, $select, $join = NULL)
+    {
+        $join = $join ?? '';
+        $sql = "SELECT $select FROM $taula $join";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $resultat;
+    }
+
     //Retorna tots els registres d'una taula basant-se en el valor d'un camp concret
     function selectBy($taula, $columna, $valor, $join = NULL)
     {
         $join = $join ?? '';
         $sql = "SELECT * FROM $taula $join WHERE $columna = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$valor]);
+
+        $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultat;
+    }
+
+    //Selecciona camps especifics
+    //Permet utilitzar alies per diferenciar camps amb el mateix nom
+    function selectSpecific($taula, $select, $columna, $valor, $join = NULL)
+    {
+        $join = $join ?? '';
+        $sql = "SELECT $select FROM $taula $join WHERE $columna = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$valor]);
 

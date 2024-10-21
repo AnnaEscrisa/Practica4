@@ -16,54 +16,44 @@ class Article extends Database
     //Selecciona tots els articles i la info de l'usuari creador
     function selectArticles()
     {
+        $select = " articles.id, articles.cos, articles.titol, articles.ingredients, users.name, users.id as user_id ";
         $join = ' LEFT JOIN users ON articles.user_id = users.id ';
-        $resultat = $this->selectAll($this->taula, $join);
+        $resultat = $this->selectAllSpecific($this->taula, $select, $join);
         return $resultat;
     }
 
     //Selecciona per id
     function selectArticleById($id)
     {
+        $select = " articles.id, articles.cos, articles.titol, articles.ingredients, users.name, users.id as users_id ";
         $join = ' LEFT JOIN users ON articles.user_id = users.id ';
-        $resultat = $this->selectBy($this->taula, "id", $id, $join);
+        $resultat = $this->selectSpecific($this->taula, $select, "articles.id", $id, $join);
         return $resultat;
     }
 
     //Selecciona per usuari
     function selectArticleByUser($id)
     {
+        $select = " articles.id, articles.cos, articles.titol, articles.ingredients, users.name, users.id as user_id ";
         $join = ' LEFT JOIN users ON articles.user_id = users.id ';
-        $resultat = $this->selectBy($this->taula, "user_id", $id, $join);
+        $resultat = $this->selectSpecific($this->taula, $select, "user_id", $id, $join);
         return $resultat;
     }
 
     /* Inserta un nou registre a la taula articles
-    comprova si el titol ja existeix a la bbdd i si es correcte, i si no, insereix un nou article
-    Retorna:
-        4 -> el titol ja existeix 
-        3 -> el titol o el cos tenen codi html/js
-        2 -> el titol o el cos te massa caracters
-        1 -> el registre s'ha insertat correctament
-        0 -> error en l'inserció
+        Comprova si el titol existeix i si les dades tenen mes caracters dels permessos
     */
     function insertArticle($titol, $cos, $user_id, $ingredients)
     {
         $existeix = $this->comprovarExistent($this->taula, "titol", $titol);
 
         if ($existeix) {
-            return 4;
-        }
-        if (
-            $this->comprovarHtml($titol) ||
-            $this->comprovarHtml($cos) ||
-            $this->comprovarHtml($ingredients)
-        ) {
             return 3;
         }
         if (
             $this->comprovarCaractersMaxims(40, $titol) ||
             $this->comprovarCaractersMaxims(400, $cos) ||
-            $this->comprovarCaractersMaxims(400, $ingredients)  // Afegir mida per ingredients a la bbdd
+            $this->comprovarCaractersMaxims(400, $ingredients) 
         ) {
             return 2;
         }
@@ -77,17 +67,7 @@ class Article extends Database
         $article = $this->selectArticleById($id);
         $titolActual = $article[0]['titol'];
 
-        //TODO canviar per que sigui error 3
         if ($titolActual != $titol && $this->comprovarExistent($this->taula, "titol", $titol)) {
-            return 4;
-        }
-
-        //TODO aixo fora
-        if (
-            $this->comprovarHtml($titol) ||
-            $this->comprovarHtml($cos) ||
-            $this->comprovarHtml($ingredients)  
-        ) {
             return 3;
         }
 

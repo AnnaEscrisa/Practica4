@@ -13,7 +13,7 @@ if (isset($_SESSION['lastaccess'])) {
     $duration = time() - intval($_SESSION['lastaccess']);
 
     if ($duration > $timeout) {
-
+        //esborrem dades de sessio i redirigim a login
         session_unset();
         session_destroy();
         $ruta = 'login';
@@ -24,11 +24,8 @@ if (isset($_SESSION['lastaccess'])) {
 }
 
 if (isset($_SESSION['user'])) {
-    //enrellistrem l'ultim acces de l'usuari
+    //enrellistrem l'ultim acces de l'usuari ara
     $_SESSION['lastaccess'] = time();
 }
-
-
-
 
 ?>

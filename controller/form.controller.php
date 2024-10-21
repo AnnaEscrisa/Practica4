@@ -39,7 +39,7 @@ if ($isEdit && $sessioIniciada) {
         $titol = $article["titol"];
         $cos = $article["cos"];
         $ingredients = $article["ingredients"];
-        $user_id = $article["user_id"];
+        $user_id = $article["users_id"];
     }
 }
 
@@ -73,14 +73,14 @@ if ($isDelete && $sessioIniciada) {
     }
 }
 
-//*--------------------Inserir/editar ---------------
+//*--------------------Inserir/editar/eliminar ---------------
 
 //només s'executarà si s'ha enviat un formulari
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $nouCos = $_POST["nouCos"] ?? false;
     $nouTitol = $_POST["nouTitol"] ?? false;
-    $nousIngredients = $_POST["nousIngredients"]?? false;
+    $nousIngredients = $_POST["nousIngredients"] ?? false;
     $user_id = $_POST["user_id"] ?? false;
     $eliminacio = $_POST["elimina"] ?? false;
 
@@ -100,52 +100,35 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         //si estem editant
         if ($id) {
-            $result = $articleModel->updateArticle($id, $nouTitol, $nouCos, $nousIngredients);
+            $result = getInitialArticleValidation($nouTitol, $nouCos, $nousIngredients);
+            if (!$result) {
+                $result = $articleModel->updateArticle($id, $nouTitol, $nouCos, $nousIngredients);
+            }
+
+            $dadesMissatge = parseArticleError($result, 'edit');
 
             //comprovarà l'update i retornarà un missatge depenent del resultat
-            switch ($result) {
-                case 4:
-                    $error = $error_a1;
-                    break;
-                case 3:
-                    $error = $error_g4;
-                    break;
-                case 2:
-                    $error = $error_g2;
-                    break;
-                case 1:
-                    $error = $success_a2;
-                    $class = "success";
-                    break;
-                default:
-                    $error = $error_a3;
-                    break;
-            }
+            $error = $dadesMissatge[0];
+            $class = $dadesMissatge[1];
 
             //si estem creant un article nou
         } else {
-            $result = $articleModel->insertArticle($nouTitol, $nouCos, $user_id, $nousIngredients);
-
-            switch ($result) {
-                case 4:
-                    $error = $error_a1;
-                    break;
-                case 3:
-                    $error = $error_g4;
-                    break;
-                case 2:
-                    $error = $error_g2;
-                    break;
-                case 1:
-                    $error = $success_a1;
-                    $class = "success";
-                    $nouCos = $nouTitol = $nousIngredients = '';
-
-                    break;
-                case 0:
-                    $error = $error_a2;
-                    break;
+            $result = getInitialArticleValidation($nouTitol, $nouCos, $nousIngredients);
+           
+            if (!$result) {
+                $result = $articleModel->insertArticle($nouTitol, $nouCos, $user_id, $nousIngredients);
             }
+
+            $dadesMissatge = parseArticleError($result, 'insert');
+
+            $error = $dadesMissatge[0];
+            $class = $dadesMissatge[1];
+            if ($class == 'success') {
+
+                //esborrem el valor dels inputs perque no surtin al form
+                $nouCos = $nouTitol = $nousIngredients = '';
+            }
+
         }
 
     } else {

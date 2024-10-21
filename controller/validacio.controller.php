@@ -10,14 +10,14 @@ function parseArticleError($result, $operation)
     global $error_a1, $error_a2, $error_a3, $error_g2, $error_g4, $success_a1, $success_a2;
 
     $messages = $operation === 'insert' ? [
-        4 => $error_a1,
-        3 => $error_g4,
+        4 => $error_g4,
+        3 => $error_a1,
         2 => $error_g2,
         1 => $success_a1,
         0 => $error_a2
     ] : [
-        4 => $error_a1,
-        3 => $error_g4,
+        4 => $error_g4,
+        3 => $error_a1,
         2 => $error_g2,
         1 => $success_a2,
         0 => $error_a3
@@ -84,6 +84,18 @@ function getInitialUserValidation($usuari, $contrasenya, $repeticioContrasenya, 
 
     return NULL;
 }
+
+function getInitialArticleValidation($titol, $cos, $ingredients)
+{
+    $dades= [$titol, $cos, $ingredients];
+    if (comprovarHtmlCamps($dades)) {
+        return 4;
+    }
+
+    return NULL;
+}
+
+//*---------------------- Funcions de comprovacio --------
 
 //comprova si hi ha contingut script o html
 function comprovarHtml($valor)
