@@ -100,21 +100,25 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         //si estem editant
         if ($id) {
+
+            //validacio inicial
             $result = getInitialArticleValidation($nouTitol, $nouCos, $nousIngredients);
             if (!$result) {
+                //validacio al model
                 $result = $articleModel->updateArticle($id, $nouTitol, $nouCos, $nousIngredients);
             }
 
+            //comprovarà l'update i retornarà un missatge depenent del resultat
             $dadesMissatge = parseArticleError($result, 'edit');
 
-            //comprovarà l'update i retornarà un missatge depenent del resultat
             $error = $dadesMissatge[0];
             $class = $dadesMissatge[1];
 
-            //si estem creant un article nou
-        } else {
+        }
+        //si estem creant un article nou
+        else {
             $result = getInitialArticleValidation($nouTitol, $nouCos, $nousIngredients);
-           
+
             if (!$result) {
                 $result = $articleModel->insertArticle($nouTitol, $nouCos, $user_id, $nousIngredients);
             }
@@ -131,11 +135,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         }
 
-    } else {
+    }
+    //si no hi ha inputs de l'usuari 
+    else {
         $error = $error_g1;
         $previousParams = $id ? "isEdit=true&id=$id" : "";
     }
 
+    //ensenya missatge amb errors de edit o insert
     showMessage($class, $error, $displayEliminar);
 
 }

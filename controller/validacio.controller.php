@@ -1,10 +1,9 @@
 <?php
 //Anna Escribano
 
-/* Controller que inclou funcions per validar l'input de l'usuari.
-Parseja els possibles errors i els converteix en missatges d'error.
-*/
+//Controller que inclou funcions per validar l'input de l'usuari.
 
+//Parseja els possibles errors dels articles i els converteix en missatges d'error.
 function parseArticleError($result, $operation)
 {
     global $error_a1, $error_a2, $error_a3, $error_g2, $error_g4, $success_a1, $success_a2;

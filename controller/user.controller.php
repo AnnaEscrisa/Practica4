@@ -77,13 +77,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             buildMessage($error, $class, $ruta, $previousParams);
         }
     }
-   
-
+   //sense inputs
     $error = $error_g1;
     buildMessage($error, $class, $ruta, $previousParams);
 
 }
-
+//la vista canvia depenent de la ruta original (login/registre)
 include "view/$ruta.vista.php";
 
 ?>

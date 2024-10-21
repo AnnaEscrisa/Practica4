@@ -51,6 +51,8 @@ class Database
         return $resultat;
     }
 
+    //Tots els registres, pero permet especificar els camps
+     //Permet utilitzar alies per diferenciar camps amb el mateix nom
     function selectAllSpecific($taula, $select, $join = NULL)
     {
         $join = $join ?? '';
@@ -76,7 +78,7 @@ class Database
     }
 
     //Selecciona camps especifics
-    //Permet utilitzar alies per diferenciar camps amb el mateix nom
+   
     function selectSpecific($taula, $select, $columna, $valor, $join = NULL)
     {
         $join = $join ?? '';
@@ -112,7 +114,8 @@ class Database
 
     /* Fa un update de la taula determinada
     $valors ha de ser un array amb els nous valors a introduir
-    $reassignacions ha de ser un string 
+    $reassignacions ha de ser un string. ex:
+        $reassignacions = "nom =?, edat =?"
     permet reassignar tants camps com tingui la taula
     */
     function update($taula, $id, $valors, $reassignacions)
@@ -169,24 +172,6 @@ class Database
     {
         if (strlen($valor) > $chars_maxims) {
             return true;
-        }
-    }
-
-    //!ALERTA esborrar aixo
-    //comprova si hi ha elements html al parametre
-    function comprovarHtml($valor)
-    {
-        if (htmlspecialchars($valor) != $valor) {
-            return true;
-        }
-    }
-
-    function comprovarHtmlCamps($arrayDades)
-    {
-        foreach ($arrayDades as $dada) {
-            if ($this->comprovarHtml($dada)) {
-                return true;
-            }
         }
     }
 

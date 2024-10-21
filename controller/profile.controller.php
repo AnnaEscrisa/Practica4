@@ -6,6 +6,7 @@ $userModel = new Usuari();
 
 $user_id = $_GET['id'] ?? '';
 
+//nomes permet entrar si la cookie esta settejada, sino mostrarà la pagina en blanc
 if (isset($_COOKIE['permisCanviPass'])) {
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -13,6 +14,7 @@ if (isset($_COOKIE['permisCanviPass'])) {
         $contrasenya = $_POST['password'];
         $repeticioContrasenya = $_POST['passwordRepeat'];
 
+        //si rebem tot el necessari del form
         if ($contrasenya && $repeticioContrasenya) {
 
             //validem les contrasenyes
@@ -21,15 +23,16 @@ if (isset($_COOKIE['permisCanviPass'])) {
             } else if (!contrasenyaSegura($contrasenya)) {
                 $error = $error_r5;
             } else {
-                
-                $valors = password_hash($contrasenya, PASSWORD_DEFAULT);
-                
-                $userModel->updateUsuari($user_id, [$valors], 'password = ?');
-                
-                //cokie unset perque no permeti més canvis
-                setcookie('permisCanviPass', time() - 3600);
-                setcookie('emailSent', true, time() - 3600);
 
+                $valors = password_hash($contrasenya, PASSWORD_DEFAULT);
+
+                $userModel->updateUsuari($user_id, [$valors], 'password = ?');
+
+                //cokie unset perque no permeti més canvis
+                setcookie('permisCanviPass', false, time() - 3600);
+                setcookie('emailSent', false, time() - 3600);
+
+                //com no hi ha errors, donarem missatge d'exit a l'index
                 $error = $success_rec2;
                 $classe = 'success';
                 $ruta = 'index';
@@ -39,7 +42,7 @@ if (isset($_COOKIE['permisCanviPass'])) {
             //si no ha introduit dades
             $error = $error_g1;
             $previousParams = "$reset=true&id=$user_id";
-           
+
         }
         buildMessage($error, $classe, $ruta, $previousParams);
     }

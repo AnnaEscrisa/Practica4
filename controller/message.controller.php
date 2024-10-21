@@ -2,6 +2,7 @@
 //Anna Escribano
 
 //------------------- Missatges d'error ------------------------
+
 //missatges generals
 $error_g1 = "Tots els camps han de ser omplerts";
 $error_g2 = "Caracters màxims excedits";
@@ -38,27 +39,30 @@ $success_r1 = "S'ha creat l'usuari amb èxit";
 //errors recuperacio
 $error_rec1 = 'Usuari no trobat';
 $error_rec2 = "Dades incorrectes. El codi pot ser incorrecte o expirat";
+
 $success_rec1 = 'Mail enviat amb èxit';
 $success_rec2 = "Contrasenya canviada";
 
 
 //-------------------Finestra d'error----------------------
-//variables per recollir possibles errors
+/*variables per recollir possibles errors.
+Seran omplenades a mida que trobem errors als inputs de l'usuari*/
 $error;
 $class = "error";
 $previousParams = "";
 
-//variables per mostrar error actual
-$tipus = $_GET["Tipus"] ?? false; //classe passada per url
-$missatge = $_GET["Message"] ?? false; //missatge passat per url
+/*variables per mostrar últim error.
+Reben el valor dels parametres de la ruta*/
+$tipus = $_GET["Tipus"] ?? false;
+$missatge = $_GET["Message"] ?? false;
 $displayEliminar = "hidden"; //display del boto d'eliminar, ocult per defecte
 
 
-//si missatge te valor, mostrarà un missatge a la pàgina actual
+//si missatge te valor, mostrarà un missatge a la pàgina a la que ens trobem
 function showMessage($tipus, $missatge, $displayEliminar)
 {
     if ($missatge) {
-        
+
         $alerta = "<div class='alert alert-dismissible alert-$tipus' role='alert'>
             <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Tancar'></button>
             <h4>$missatge</h4>
@@ -70,7 +74,8 @@ function showMessage($tipus, $missatge, $displayEliminar)
     }
 }
 
-//Carrega una pagina, adjuntant diversos parametres a la url per confeccionar un missatge d'error
+/*Carrega una pagina, adjuntant diversos parametres a la url per confeccionar un missatge d'error
+que sera llegit per la funcio anterior*/
 function buildMessage($message, $class, $location, $parametres)
 {
     header("Location:" . $location . ".php?Message=" . $message . "&Tipus=" . $class . "&" . $parametres);

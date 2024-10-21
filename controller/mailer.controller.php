@@ -1,4 +1,5 @@
 <?php
+//Anna Escribano
 
 require './PHP_Mailer/PHPMailer.php';
 require './PHP_Mailer/SMTP.php';

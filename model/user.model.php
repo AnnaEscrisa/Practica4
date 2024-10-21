@@ -69,6 +69,7 @@ class Usuari extends Database
         }
     }
 
+    //insereix un registre a la taula user_codes, per codis de recuperacio
     function inserirCodiUsuari($codi, $user_id, $expiracio)
     {
         $valors = [$user_id, $codi, $expiracio];

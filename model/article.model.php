@@ -41,7 +41,8 @@ class Article extends Database
     }
 
     /* Inserta un nou registre a la taula articles
-        Comprova si el titol existeix i si les dades tenen mes caracters dels permessos
+        Comprova si el titol existeix i si les dades tenen mes caracters dels permessos.
+        Retorna codis que seran llegits per validacio.controller
     */
     function insertArticle($titol, $cos, $user_id, $ingredients)
     {

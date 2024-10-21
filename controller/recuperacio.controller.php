@@ -17,13 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         if ($user) {
             $user = $user[0];
+            //creació de codi randomitzat
             $codi = substr(md5(uniqid(rand(), true)), 0, 10);
             $expiracio = time() + 7200; //expiracio de dues hores
             $user_id = $user['id'];
 
-            //esborrem els codis passats en enviar un de nou
+            //esborra els codis passats en enviar un de nou
             $userModel->deleteBy('user_codes', 'user_id', $user_id);
-            //inserim el codi nou a la seva taula
+            //insereix el codi nou a la seva taula
             $userModel->inserirCodiUsuari($codi, $user_id, $expiracio);
 
             $mailTo = $user['email'];
@@ -33,10 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <p>Aquest es el teu codi de recuperacio per la teva contrasenya:  </p>
                 <p><b>$codi</b></p>";
 
+            //envia mail i rep el resultat
             $result = enviarMail($phpMailer, $mailTo, $mailSubject, $mailBody);
             $error = $result[0];
             $class = $result[1];
-            //creem cookie perque apareixi la opcio d'inserir codi al formulari
+
+            //l'opcio d'inserir el codi al formulari només és possible si aqueta cookie està settejada
             setcookie('emailSent', true, $expiracio);
             buildMessage($error, $class, 'recupera', '');
         } else {
@@ -54,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         //buscar codi per user id
         if ($userModel->comprovarCodi($codiPost, $user['id'])) {
+            //donem permís per canviar la contrasenya durant 2 hores
             setcookie('permisCanviPass', true, time() + 3600);
             header('Location: newPass.php?id=' . $user['id']);
             exit();
