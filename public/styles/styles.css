@@ -1,5 +1,12 @@
 * {
     margin: 0;
+   
+}
+
+body {
+    /* background-image: linear-gradient(#0f0927, #1c128e);*/
+    background-repeat: no-repeat;
+    min-height: 100vh;
 }
 
 /********* NAV *******/
@@ -52,6 +59,10 @@ input[name="buscadorArticle"] {
     border: 2px solid grey;
     background-color: transparent;
     text-wrap: wrap;
+}
+
+.card .card-text.nom {
+    color: grey;
 }
 
 

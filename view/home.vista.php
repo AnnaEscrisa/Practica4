@@ -13,11 +13,15 @@
             <?php
 
             if (!empty($articlesMostrats)) {
-                foreach ($articlesMostrats[$currentPage - 1] as $key => $value) {
+                foreach ($articlesMostrats[$paginesData['currentPage'] - 1] as $key => $value) {
                     echo '
                     <article class="card">
                         <h2 class="card-title">' . $value['titol'] . '</h2>
-                        <p class="card-text" >' . $value['cos'] . '</p>
+                        <p class="card-text nom" >' . $value['name'] . '</p>
+                        <div>
+                            <p class="card-text" >' . $value['cos'] . '</p>
+                            <p class="card-text" >' . $value['ingredients'] . '</p>
+                        </div>
                         <div class="card-body footer "> 
                             <a class="btn btn-primary '. $hiddenButton.'" href="form.php?id=' . $value['id'] . '&isEdit=true">Edit</a>
                             <a class="btn btn-danger '. $hiddenButton.'" href="form.php?id=' . $value['id'] . '&isDelete=true">Elimina</a>
@@ -34,16 +38,16 @@
             if (!empty($articlesMostrats)) {
             
                 echo '
-                <a href="index.php?page=' . $previousPage . '"
-                    class="btn btn-primary ' . $previousClass . '">
+                <a href="index.php?page=' . $paginesData['previousPage'] . '"
+                    class="btn btn-primary ' . $paginesData['previousClass'] . '">
                             Anterior
                     </a>
                 <a class="btn btn-primary"
                     href="#" >' .
-                    $currentPage
+                    $paginesData['currentPage']
                     . '</a>
-                 <a class="btn btn-primary ' . $nextClass . '"
-                    href= "index.php?page=' . $nextPage . '" >
+                 <a class="btn btn-primary ' . $paginesData['nextClass'] . '"
+                    href= "index.php?page=' . $paginesData['nextPage'] . '" >
                         Següent
                 </a>';
             }

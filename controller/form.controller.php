@@ -7,6 +7,8 @@ $articleModel = new Article();
 $pageTitle = "Nou Article";
 $titol = ""; //titol actual de l'article
 $cos = ""; //cos actual de l'article
+$ingredients = ""; //ingredients actuals
+$user_id = ""; //id de l-usuari creador
 $id = ""; //id actual de l'article
 
 $ruta = "form";
@@ -36,6 +38,8 @@ if ($isEdit && $sessioIniciada) {
         $pageTitle = "Editar article - " . $article["id"];
         $titol = $article["titol"];
         $cos = $article["cos"];
+        $ingredients = $article["ingredients"];
+        $user_id = $article["user_id"];
     }
 }
 
@@ -58,6 +62,8 @@ if ($isDelete && $sessioIniciada) {
         $pageTitle = "Eliminar article - " . $article["id"];
         $titol = $article["titol"];
         $cos = $article["cos"];
+        $ingredients = $article["ingredients"];
+        $user_id = $article["user_id"];
 
         $error = $error_g3;
         $previousParams = "id=$id";
@@ -74,6 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $nouCos = $_POST["nouCos"] ?? false;
     $nouTitol = $_POST["nouTitol"] ?? false;
+    $nousIngredients = $_POST["nousIngredients"]?? false;
+    $user_id = $_POST["user_id"] ?? false;
     $eliminacio = $_POST["elimina"] ?? false;
 
     //*---- entrada pel formulari d'eliminació
@@ -92,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         //si estem editant
         if ($id) {
-            $result = $articleModel->updateArticle($id, $nouTitol, $nouCos);
+            $result = $articleModel->updateArticle($id, $nouTitol, $nouCos, $nousIngredients);
 
             //comprovarà l'update i retornarà un missatge depenent del resultat
             switch ($result) {
@@ -116,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             //si estem creant un article nou
         } else {
-            $result = $articleModel->insertArticle($nouTitol, $nouCos);
+            $result = $articleModel->insertArticle($nouTitol, $nouCos, $user_id, $nousIngredients);
 
             switch ($result) {
                 case 4:
@@ -131,6 +139,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 case 1:
                     $error = $success_a1;
                     $class = "success";
+                    $nouCos = $nouTitol = $nousIngredients = '';
+
                     break;
                 case 0:
                     $error = $error_a2;
@@ -140,8 +150,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     } else {
         $error = $error_g1;
-        $previousParams = $id? "isEdit=true&id=$id": "";
+        $previousParams = $id ? "isEdit=true&id=$id" : "";
     }
 
-    buildMessage($error, $class, $ruta, $previousParams);
+    showMessage($class, $error, $displayEliminar);
+
 }

@@ -5,18 +5,13 @@
     <?php include "view/partials/_nav.vista.php"; ?>
     <main class="container">
         <form action="" method="post">
-            <label class="form-label">Usuari</label>
-            <input name="usuari" class="form-control" type="text" required>
+            <input type="hidden" name="user_id" value="<?php echo $_GET["id"]; ?>" />
             <label class="form-label">Contrasenya</label>
             <input name="password" type="password" class="form-control" required>
             <label class="form-label">Repetir contrasenya</label>
             <input name="passwordRepeat" type="password" class="form-control" required>
-            <label for="">Nom</label>
-            <input name="nom" type="text" class="form-control" required>
-            <label for="">Email</label>
-            <input name="email" type="email" class="form-control" required>
 
-            <button type="submit" class="btn btn-primary">Registra't</button>
+            <button type="submit" class="btn btn-primary">Canvia</button>
         </form>
     </main>
 

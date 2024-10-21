@@ -2,8 +2,9 @@
 //Anna Escribano
 
 require 'controller/message.controller.php';
-require 'controller/home.controller.php';
+require 'controller/session.controller.php';
 include 'controller/pagination.controller.php';
-include 'view/home.vista.php';
+require 'controller/home.controller.php';
+
 
 ?>

@@ -7,6 +7,7 @@ $error_g1 = "Tots els camps han de ser omplerts";
 $error_g2 = "Caracters màxims excedits";
 $error_g3 = "Vols eliminar aquest registre? Aquesta acció és irreversible";
 $error_g4 = "No es permet l'inserció de codi html o javascript";
+$error_g5 = "S'ha tancat la sessió per inactivitat";
 $success_g1 = "S'ha eliminat el registre amb èxit.";
 
 //errors articles
@@ -33,6 +34,12 @@ $error_r4 = "El format de l'email no és correcte";
 $error_r5 = "La contrasenya no és prou segura";
 
 $success_r1 = "S'ha creat l'usuari amb èxit";
+
+//errors recuperacio
+$error_rec1 = 'Usuari no trobat';
+$error_rec2 = "Dades incorrectes. El codi pot ser incorrecte o expirat";
+$success_rec1 = 'Mail enviat amb èxit';
+$success_rec2 = "Contrasenya canviada";
 
 
 //-------------------Finestra d'error----------------------
@@ -69,3 +76,5 @@ function buildMessage($message, $class, $location, $parametres)
     header("Location:" . $location . ".php?Message=" . $message . "&Tipus=" . $class . "&" . $parametres);
     exit;
 }
+
+?>

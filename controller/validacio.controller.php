@@ -1,67 +1,123 @@
 <?php
 //Anna Escribano
 
-function validaDades($model, $result, $operation) {
-   
-    switch ($model) {
-        case 'article':
-            return getArticleError($result, $operation);
-        case 'user':
-            return getArticleError($result, $operation);
-        
-    }
-}
+/* Controller que inclou funcions per validar l'input de l'usuari.
+Parseja els possibles errors i els converteix en missatges d'error.
+*/
 
-//! comprovar que els missatges estan be
-function getArticleError($result, $operation) {
+function parseArticleError($result, $operation)
+{
     global $error_a1, $error_a2, $error_a3, $error_g2, $error_g4, $success_a1, $success_a2;
 
     $messages = $operation === 'insert' ? [
-        4 => $error_a1, 
-        3 => $error_g4, 
+        4 => $error_a1,
+        3 => $error_g4,
         2 => $error_g2,
-        1 => $success_a1, 
-        0 => $error_a2  
+        1 => $success_a1,
+        0 => $error_a2
     ] : [
         4 => $error_a1,
-        3 => $error_g4, 
-        2 => $error_g2, 
+        3 => $error_g4,
+        2 => $error_g2,
         1 => $success_a2,
-        0 => $error_a3 
+        0 => $error_a3
     ];
 
     return getValorMessage($result, $messages);
 }
 
 
-//! ALERTA agafar errors de user
-function getUserError($result, $operation) {
-    global $error_r2, $error_r4, $error_r5, $success_r1;
+//TODO canviar errors update (que no existeix)
+function parseUserError($result, $operation)
+{
+    global $error_r2, $error_r3, $error_r4, $error_r5, $success_r1, $error_g2,  $error_g4,  $success_r2, $error_r1;
 
     $messages = $operation === 'insert' ? [
-        4 => $error_r2, // Username exists
-        3 => $error_r4, // Invalid email
-        2 => $error_r5, // Weak password
-        1 => $success_r1, // Insert successful
-        0 => $error_r1  // Insert failed
+        7 => $error_r3,
+        6 => $error_r4,
+        5 => $error_r5,
+        4 => $error_g4, 
+        3 => $error_r2, 
+        2 => $error_g2, 
+        1 => $success_r1, 
+        0 => $error_r1  
     ] : [
-        4 => $error_r2, // Username exists
-        3 => $error_r4, // Invalid email
-        2 => $error_r5, // Weak password
-        1 => $success_r2, // Update successful
-        0 => $error_r1  // Update failed
+        4 => $error_r2, 
+        3 => $error_r4, 
+        2 => $error_r5, 
+        1 => $success_r2,
+        0 => $error_r1  
     ];
 
     return getValorMessage($result, $messages);
 }
 
 //EN base al resultat, escollirà un missatge d'error i una classe d'error i el retornarà
-//! mirar si posar millor en controlador tipus=result[1]?? $classe;
-function getValorMessage($result, $messages) {
+function getValorMessage($result, $messages)
+{
     if ($result == 1) {
         return [$messages[$result], 'success'];
     } else {
-        return [$messages[$result] , 'error'];
+        return [$messages[$result], 'error'];
+    }
+}
+
+//Comprovacions de l'input de l'usuari abans de probar les validacions del model
+function getInitialUserValidation($usuari, $contrasenya, $repeticioContrasenya, $nom, $email)
+{
+    $dades= [$usuari, $contrasenya, $repeticioContrasenya, $nom, $email];
+    if (comprovarHtmlCamps($dades)) {
+        return 4;
+    }
+
+    if (!contrasenyaSegura($contrasenya)) {
+        return 5;
+    }
+
+    if(comprovarEmail($email)){
+        return 6;
+    }
+
+    if(!mateixaContrasenya($contrasenya, $repeticioContrasenya)) {
+        return 7;
+    }
+
+    return NULL;
+}
+
+//comprova si hi ha contingut script o html
+function comprovarHtml($valor)
+{
+    if (htmlspecialchars($valor) != $valor) {
+        return true;
+    }
+}
+
+function comprovarHtmlCamps($arrayDades)
+{
+    foreach ($arrayDades as $dada) {
+        if (comprovarHtml($dada)) {
+            return true;
+        }
+    }
+}
+
+function mateixaContrasenya($contrasenya, $altreContrasenya){
+    return $contrasenya == $altreContrasenya;
+}
+
+//comprova si la contrasenya te numeros i lletres
+function contrasenyaSegura($contrasenya)
+{
+    if (strlen($contrasenya) >= 8 && preg_match("#[0-9]+#", $contrasenya) && preg_match("#[a-z]+#", $contrasenya)) {
+        return true;
+    }
+}
+
+function comprovarEmail($email)
+{
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return true;
     }
 }
 

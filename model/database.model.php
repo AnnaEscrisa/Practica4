@@ -39,9 +39,11 @@ class Database
     }
 
     //Retorna tots els registres d'una taula en format array de registres
-    function selectAll($taula)
+    //permet fer un join si aquest es passat per parametre
+    function selectAll($taula, $join = NULL)
     {
-        $sql = "SELECT * FROM $taula";
+        $join = $join ?? '';
+        $sql = "SELECT * FROM $taula $join";
 
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
@@ -50,9 +52,10 @@ class Database
     }
 
     //Retorna tots els registres d'una taula basant-se en el valor d'un camp concret
-    function selectBy($taula, $columna, $valor)
+    function selectBy($taula, $columna, $valor, $join = NULL)
     {
-        $sql = "SELECT * FROM $taula WHERE $columna = ?";
+        $join = $join ?? '';
+        $sql = "SELECT * FROM $taula $join WHERE $columna = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$valor]);
 
@@ -90,7 +93,8 @@ class Database
     function update($taula, $id, $valors, $reassignacions)
     {
         try {
-            $sql = "UPDATE $taula SET $reassignacions WHERE id = $id";
+            $sql = "UPDATE $taula SET $reassignacions WHERE id = ?";
+            $valors[] = $id;
 
             $stmt = $this->db->prepare($sql);
             $stmt->execute($valors);
@@ -108,7 +112,18 @@ class Database
             $sql = "DELETE FROM $taula WHERE id = $id";
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
-        } catch  (\Throwable $th){
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    function deleteBy($taula, $camp, $valor)
+    {
+        try {
+            $sql = "DELETE FROM $taula WHERE $camp = $valor";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+        } catch (\Throwable $th) {
             throw $th;
         }
     }
@@ -132,9 +147,11 @@ class Database
         }
     }
 
+    //!ALERTA esborrar aixo
     //comprova si hi ha elements html al parametre
-    function comprovarHtml($valor){
-        if(htmlspecialchars($valor) != $valor){
+    function comprovarHtml($valor)
+    {
+        if (htmlspecialchars($valor) != $valor) {
             return true;
         }
     }

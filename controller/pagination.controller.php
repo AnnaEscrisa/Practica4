@@ -8,16 +8,24 @@ function paginationChunks($max, $items)
     return $items ? array_chunk($items, $max) : "";
 }
 
-//! ALERTA fer max articles seleccionable per user
-$max_articles = 5;
-$articlesMostrats = paginationChunks($max_articles, $articles);
 
-$currentPage = $_GET['page'] ?? 1;
-$nextPage = $currentPage + 1;
-$previousPage = $currentPage - 1;
-$totalPages = $articlesMostrats ? count($articlesMostrats) : 0;
+function getPagesData($itemsEnChunks)
+{
+    $currentPage = $_GET['page'] ?? 1;
+    $nextPage = $currentPage + 1;
+    $previousPage = $currentPage - 1;
+    $totalPages = $itemsEnChunks ? count($itemsEnChunks) : 0;
 
-$previousClass = $previousPage == 0 ? 'hidden' : '';//classe del boto pagina anterior
-$nextClass = $nextPage == $totalPages + 1 ? "hidden" : '';//classe del boto pagina següent
+    $data = [
+        'currentPage' => $currentPage,
+        'nextPage' => $currentPage + 1,
+        'previousPage' => $currentPage - 1,
+        'totalPages' => $totalPages,
+        'previousClass' => $previousPage == 0 ? 'hidden' : '',//classe del boto pagina anterior
+        'nextClass' => $nextPage == $totalPages + 1 ? "hidden" : '',//classe del boto pagina següent
+    ];
+
+    return $data;
+}
 
 ?>
