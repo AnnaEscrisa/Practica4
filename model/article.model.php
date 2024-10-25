@@ -25,7 +25,7 @@ class Article extends Database
     //Selecciona per id
     function selectArticleById($id)
     {
-        $select = " articles.id, articles.cos, articles.titol, articles.ingredients, users.name, users.id as users_id ";
+        $select = " articles.id, articles.cos, articles.titol, articles.ingredients, users.name, users.id as user_id ";
         $join = ' LEFT JOIN users ON articles.user_id = users.id ';
         $resultat = $this->selectSpecific($this->taula, $select, "articles.id", $id, $join);
         return $resultat;
@@ -82,6 +82,11 @@ class Article extends Database
 
         $reassignacions = "titol = ?, cos = ?, ingredients = ?";
         return $this->update($this->taula, $id, [$titol, $cos, $ingredients], $reassignacions) ? 1 : 0;
+    }
+
+    //Modifica el user_id d'un article a 0 (anonim)
+    function setArticleAnonimous($user_id) {
+        $this->updateBy($this->taula, "user_id", $user_id, [0], "user_id =?");
     }
 
     //eleimina article 

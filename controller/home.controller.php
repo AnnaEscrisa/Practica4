@@ -39,7 +39,9 @@ if ($privat && isset($_SESSION['user'])) {
 
 //*-------- Paginacio--------
 
-$max_articles = 5;
+//5 per defecte, o els escollits per l'usuari
+$max_articles = $_POST['selectPagines'] ?? 5;
+
 
 $articlesMostrats = paginationChunks($max_articles, $articles);
 $paginesData = getPagesData($articlesMostrats);

@@ -3,7 +3,7 @@
     // ferm mes users i canviar articles
     //// posar id user a articles 
     //// afegir comprovacio dos contrasenyes iguals a controller
-    // arreglar validacio
+    //// arreglar validacio
         //funcio comprovar a cada model
         //canviar nums de article a validacio cont
         //implementar validacio a controller
@@ -15,18 +15,20 @@
     ////oblit contrasenya
     ////comprovar si funciona cookie -- guarda pero sempre, encara que no check
     ////a form recuperacio, posarse el nom user automatic
-    //missatge misterios a recupera.php
+    ////missatge misterios a recupera.php
     ////entra per user, no per codi
+    //403 (entrada no permesa) a l'htaccess
+    //vista amb tots usuaris per Admin
+    //rols d'usuari (user per defecte, admin per admin)
 
     //implementar imatges
     ////mailer per contrasenya
     ////username a article (by pepito)
     //data creacio article
     //data modificacio article
-    //rols d'usuari (user per defecte, admin per admin)
-    //vista amb tots usuaris per Admin
     //eliminacio d'usuaris posa els seus articles en anonim
-    //403 (entrada no permesa) a l'htaccess
+    ////paginacio selectiva
+    
 
 
     //! COmprovacions

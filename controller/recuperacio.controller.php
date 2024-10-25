@@ -1,5 +1,8 @@
 <?php
 
+//Controla la recuperació de la contrasenya
+
+
 require "model/user.model.php";
 $userModel = new Usuari();
 
@@ -11,15 +14,14 @@ showMessage($tipus, $missatge, $displayEliminar);
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-    //petició de codi
+    //petició de codi per part de l'usuari
     if ($usuari && !$codiPost) {
         $user = $userModel->selectUserByUsername($usuari);
 
         if ($user) {
             $user = $user[0];
-            //creació de codi randomitzat
             $codi = substr(md5(uniqid(rand(), true)), 0, 10);
-            $expiracio = time() + 7200; //expiracio de dues hores
+            $expiracio = time() + 7200;
             $user_id = $user['id'];
 
             //esborra els codis passats en enviar un de nou
@@ -34,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <p>Aquest es el teu codi de recuperacio per la teva contrasenya:  </p>
                 <p><b>$codi</b></p>";
 
-            //envia mail i rep el resultat
             $result = enviarMail($phpMailer, $mailTo, $mailSubject, $mailBody);
             $error = $result[0];
             $class = $result[1];
@@ -52,7 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         //inroducció de codi de recuperacio
     } else if ($usuari && $codiPost) {
 
-        //seleccionar user
         $user = $userModel->selectUserByUsername($usuari)[0];
 
         //buscar codi per user id
