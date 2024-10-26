@@ -23,8 +23,8 @@
                             <p class="card-text" >' . $value['ingredients'] . '</p>
                         </div>
                         <div class="card-body footer "> 
-                            <a class="btn btn-primary '. $hiddenButton.'" href="form.php?id=' . $value['id'] . '&isEdit=true">Edit</a>
-                            <a class="btn btn-danger '. $hiddenButton.'" href="form.php?id=' . $value['id'] . '&isDelete=true">Elimina</a>
+                            <a class="btn btn-primary ' . $hiddenButton . '" href="form.php?id=' . $value['id'] . '&isEdit=true">Edit</a>
+                            <a class="btn btn-danger ' . $hiddenButton . '" href="form.php?id=' . $value['id'] . '&isDelete=true">Elimina</a>
                         </div>
                     </article>';
                 }
@@ -34,9 +34,17 @@
             ?>
         </section>
         <section class="pages">
-            <?php 
+            <form action="" method="POST">
+                <select name="selectPagines" onchange="this.form.submit();">
+                    <option value="5" <?= $max_articles == 5 ? 'selected': '' ?>>5</option>
+                    <option value="10" <?= $max_articles == 10 ? 'selected': '' ?>>10</option>
+                    <option value="15" <?= $max_articles == 15 ? 'selected': '' ?>>15</option>
+                </select>
+            </form>
+
+            <?php
             if (!empty($articlesMostrats)) {
-            
+
                 echo '
                 <a href="index.php?page=' . $paginesData['previousPage'] . '"
                     class="btn btn-primary ' . $paginesData['previousClass'] . '">
@@ -51,7 +59,7 @@
                         Següent
                 </a>';
             }
-            
+
             ?>
         </section>
     </main>

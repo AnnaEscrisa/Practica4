@@ -6,13 +6,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
+        <li id="home" class="nav-item">
           <a class="nav-link" href="index.php">Home</a>
         </li>
-        <li class="nav-item <?php echo !isset($_SESSION['user'])? "hidden": "" ?>">
+        <li id="myArticles" class="nav-item <?php echo !isset($_SESSION['user'])? "hidden": "" ?>">
           <a class="nav-link" href="index.php?myArticles=true">Els meus articles</a>
         </li>
-        <li class="nav-item  <?php echo !isset($_SESSION['user'])? "hidden": "" ?>">
+        <li id="newArticle" class="nav-item  <?php echo !isset($_SESSION['user'])? "hidden": "" ?>">
           <a class="nav-link" href="form.php">Nou Article</a>
         </li>
       </ul>
@@ -20,14 +20,18 @@
         <li class="nav-item">
           <?php if (!isset($_SESSION['user'])) {
            echo '
+           <li id="login" class="nav-item">
               <a class="nav-link" href="login.php">
                 Login
-              </a>';
+              </a>
+            </li>';
           } else {
             echo '
+            <li class="nav-item">
               <a class="nav-link" href="login.php?isLogout=true">
                 Logout
-              </a>';
+              </a>
+            </li>';
           }
           ?>
         </li>

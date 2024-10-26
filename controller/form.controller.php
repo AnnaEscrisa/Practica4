@@ -1,15 +1,18 @@
 <?php
 // Anna Escribano
 
+//Controla l'insercio i edicio d'articles
+
+
 require "model/article.model.php";
 
 $articleModel = new Article();
 $pageTitle = "Nou Article";
-$titol = ""; //titol actual de l'article
-$cos = ""; //cos actual de l'article
-$ingredients = ""; //ingredients actuals
-$user_id = ""; //id de l-usuari creador
-$id = ""; //id actual de l'article
+$titol = ""; 
+$cos = ""; 
+$ingredients = ""; 
+$user_id = ""; 
+$id = ""; 
 
 $ruta = "form";
 $sessioIniciada = isset($_SESSION['user']);
@@ -39,7 +42,7 @@ if ($isEdit && $sessioIniciada) {
         $titol = $article["titol"];
         $cos = $article["cos"];
         $ingredients = $article["ingredients"];
-        $user_id = $article["users_id"];
+        $user_id = $article["user_id"];
     }
 }
 

@@ -1,5 +1,4 @@
 <?php
-
 // Anna Escribano Sabio
 
 class Database
@@ -7,14 +6,14 @@ class Database
     protected $db; //connexió a la bbdd a través de PDO
     protected $db_server; //servidor que allotja bbdd
     protected $db_user; //usuari de la bbdd
-    protected $db_pass; //contrasenya
+    protected $db_pass; //contrasenya encriptada
     protected $db_name; //nom de la bbdd
 
     public function __construct()
     {
         $this->db_server = "mysql-8001.dinaserver.com";
         $this->db_user = "p2_admin";
-        $this->db_pass = "Practica_02";
+        $this->db_pass = openssl_decrypt("RzsBvtK4pNqPQp2jAY/WEw==","AES-128-ECB","password");
         $this->db_name = "Pt02_Ana_Escribano";
         $this->db = $this->connectarDB("mysql", $this->db_server, $this->db_user, $this->db_pass, $this->db_name);
     }
@@ -51,7 +50,7 @@ class Database
         return $resultat;
     }
 
-    //Tots els registres, pero permet especificar els camps
+    //Tots els registres, pero permet especificar els camps especifics
      //Permet utilitzar alies per diferenciar camps amb el mateix nom
     function selectAllSpecific($taula, $select, $join = NULL)
     {
@@ -78,7 +77,6 @@ class Database
     }
 
     //Selecciona camps especifics
-   
     function selectSpecific($taula, $select, $columna, $valor, $join = NULL)
     {
         $join = $join ?? '';
@@ -133,6 +131,22 @@ class Database
         }
     }
 
+    //permet fer update en base a un camp concret(no id)
+    function updateBy($taula, $campWhere, $valorWhere, $valors, $reassignacions) {
+
+        try {
+            $sql = "UPDATE $taula SET $reassignacions WHERE $campWhere = ?";
+            $valors[] = $valorWhere;
+
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute($valors);
+            return true;
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
     //Fa un delete a la taula determinada
     function delete($taula, $id)
     {
@@ -145,6 +159,7 @@ class Database
         }
     }
 
+    //Delete per camp especific
     function deleteBy($taula, $camp, $valor)
     {
         try {

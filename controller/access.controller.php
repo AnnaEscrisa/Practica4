@@ -1,6 +1,9 @@
 <?php
 //Anna Escribano
 
+//Controla el login, logout, registre
+
+
 require "model/user.model.php";
 $userModel = new Usuari();
 //treiem la ruta i pageTitle del nom d'aquest mateix arxiu
@@ -24,7 +27,7 @@ if ($isLogout) {
 }
 
 
-//*------------- LOGIN / REGISTRE / RECUPERACIO ---------
+//*------------- LOGIN / REGISTRE ---------
 
 $usuari = $_POST["usuari"] ?? null;
 $contrasenya = $_POST["password"] ?? null;
@@ -77,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             buildMessage($error, $class, $ruta, $previousParams);
         }
     }
-   //sense inputs
+   //submit sense inputs
     $error = $error_g1;
     buildMessage($error, $class, $ruta, $previousParams);
 

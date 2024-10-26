@@ -3,6 +3,7 @@
 
 //Controller que inclou funcions per validar l'input de l'usuari.
 
+
 //Parseja els possibles errors dels articles i els converteix en missatges d'error.
 function parseArticleError($result, $operation)
 {
@@ -26,7 +27,7 @@ function parseArticleError($result, $operation)
 }
 
 
-//TODO canviar errors update (que no existeix)
+//Parseja els possibles errors dels usuaris i els converteix en missatges d'error.
 function parseUserError($result, $operation)
 {
     global $error_r2, $error_r3, $error_r4, $error_r5, $success_r1, $error_g2,  $error_g4,  $success_r2, $error_r1;

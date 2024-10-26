@@ -16,6 +16,10 @@ body {
     color: black;
 }
 
+nav .nav-item.nav-selected {
+    background-color: blue;
+}
+
 /********* PAGINATION *******/
 
 section.pages {

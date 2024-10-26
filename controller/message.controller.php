@@ -55,7 +55,7 @@ $previousParams = "";
 Reben el valor dels parametres de la ruta*/
 $tipus = $_GET["Tipus"] ?? false;
 $missatge = $_GET["Message"] ?? false;
-$displayEliminar = "hidden"; //display del boto d'eliminar, ocult per defecte
+$displayEliminar = "hidden";
 
 
 //si missatge te valor, mostrarà un missatge a la pàgina a la que ens trobem
