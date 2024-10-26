@@ -2,6 +2,9 @@
 
 Projecte realitzat amb **PHP**, establint connexions amb bases de dades **MYSQL** mitjançant **PDO**. Permet a l'usuari crear un compte i inserir, editar, eliminar i consultar els diversos articles de la base de dades.
 
+**Canvis 26/10 **
+Petita correcció a nom de variable erroni. Nombre d'articles per pàgina seleccionable per l'usuari. Començament de futures millores (panell d'usuaris per l'administrador, per exemple).
+
 
 # Instal·lació
 
