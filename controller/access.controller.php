@@ -2,8 +2,8 @@
 //Anna Escribano
 
 //Controla el login, logout, registre
-
-
+require 'lib/reCaptcha/recaptchalib.php';
+require "utils/captcha.controller.php";
 require "model/user.model.php";
 $userModel = new Usuari();
 //treiem la ruta i pageTitle del nom d'aquest mateix arxiu
@@ -36,6 +36,7 @@ $nom = $_POST["nom"] ?? null;
 $email = $_POST["email"] ?? null;
 $recorda = $_POST["recorda"] ?? null;
 $loginSubmit = $_POST["loginSubmit"] ?? null;
+$recaptcha = $_POST['g-recaptcha-response'] ?? null;
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
@@ -61,21 +62,33 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     //utilitzem loginSubmit per assegurar que esta intentant entrar pel form de login, i no el de registre
     if ($usuari && $contrasenya && $loginSubmit) {
 
-        if ($recorda) {
-            setcookie("recorda", $usuari, time() + 10 * 24 * 60 * 60);
+        //nomes comprovarem el captcha si hi 3 intents de login
+        if ($_COOKIE['intentsLogin'] >= 3 && !$recaptcha) {
+            $error = $error_g1;
+            buildMessage($error, $class, $ruta, $previousParams);
         }
 
         $login = $userModel->login($usuari, $contrasenya);
         if ($login) {
+
+            if ($recorda) {
+                setcookie("recorda", $usuari, time() + 10 * 24 * 60 * 60);
+            }
+
             $_SESSION["user"] = $usuari;
             $user = $userModel->selectUserByUsername($usuari)[0];
             $_SESSION['user_id'] = $user['id'];
+
+            setcookie('intentsLogin', 0);
 
             $error = $success_l1;
             $params = "myArticles=true";
             $class = 'success';
             buildMessage($error, $class, "index", $params);
         } else {
+            $intentsLogin = $_COOKIE['intentsLogin'] ?? 0;
+            setcookie('intentsLogin', 1 + $intentsLogin);
+            
             $error = $error_l1;
             buildMessage($error, $class, $ruta, $previousParams);
         }

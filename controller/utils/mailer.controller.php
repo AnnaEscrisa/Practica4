@@ -1,9 +1,9 @@
 <?php
 //Anna Escribano
 
-require './PHP_Mailer/PHPMailer.php';
-require './PHP_Mailer/SMTP.php';
-require './PHP_Mailer/Exception.php';
+require 'lib/PHP_Mailer/PHPMailer.php';
+require 'lib/PHP_Mailer/SMTP.php';
+require 'lib/PHP_Mailer/Exception.php';
 use PHPMailer\PHPMailer\PHPMailer;
 
 $phpMailer = new PHPMailer();

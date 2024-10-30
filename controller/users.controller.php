@@ -12,7 +12,7 @@ $usuaris;
 
 
 showMessage($tipus, $missatge, $displayEliminar);
-
+$_SESSION['userRole'] = 'Administrator';
 
 if (isset($_SESSION['user']) && $_SESSION['userRole'] == 'Administrator') {
     $usuaris = $userModel->selectUsers();

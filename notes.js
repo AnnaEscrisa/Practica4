@@ -18,8 +18,10 @@
     ////missatge misterios a recupera.php
     ////entra per user, no per codi
     //403 (entrada no permesa) a l'htaccess
-    //vista amb tots usuaris per Admin
+    ////vista amb tots usuaris per Admin
     //rols d'usuari (user per defecte, admin per admin)
+    ////recaptcha en 3 intents fallits
+    
 
     //implementar imatges
     ////mailer per contrasenya
@@ -28,6 +30,7 @@
     //data modificacio article
     //eliminacio d'usuaris posa els seus articles en anonim
     ////paginacio selectiva
+
     
 
 

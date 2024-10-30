@@ -2,9 +2,9 @@
 //Anna Escribano
 
 
-require 'controller/message.controller.php';
-require 'controller/session.controller.php';
-require 'controller/mailer.controller.php';
+require 'controller/utils/message.controller.php';
+require 'controller/utils/session.controller.php';
+require 'controller/utils/mailer.controller.php';
 require 'controller/recuperacio.controller.php';
 
 
