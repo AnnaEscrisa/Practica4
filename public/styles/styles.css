@@ -1,15 +1,23 @@
 * {
     margin: 0;
-   
+    padding: 0;
 }
 
+
 body {
-    /* background-image: linear-gradient(#0f0927, #1c128e);*/
+    background-image: linear-gradient(#120b13, #471a52);
     background-repeat: no-repeat;
+    background-size: cover;
     min-height: 100vh;
+    height: 100%;
+    width: 100%;
 }
 
 /********* NAV *******/
+
+nav {
+    grid-area: nav;
+}
 
 .nav-link:hover {
     background-color: aqua;
@@ -20,19 +28,44 @@ nav .nav-item.nav-selected {
     background-color: blue;
 }
 
-/********* PAGINATION *******/
+/****** HOME  ******/
 
-section.pages {
-    display: flex;
+.container_home {
+    min-height: 100vh;
+    height: 100%;
     width: 100%;
-    gap: 10px;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 15% 60% 25%;
+    grid-template-rows: 50px 1fr;
+    grid-template-areas:
+        "nav nav nav"
+        "side-nav main details";
 }
 
+.nav_aside {
+    grid-area: side-nav;
+    position: sticky;
+    left: 0;
+    top: 10%;
+    background-image: linear-gradient(rgb(68, 68, 221, 0.5), transparent);
+    z-index: 1;
+}
 
-/************* HOME ************/
+main {
+    grid-area: main;
+    display: grid;
+    grid-template-rows: 50px 1fr 50px;
+}
+
+.details_aside {
+    grid-area: details;
+}
+
+/** buscador **/
 
 .home-form {
+    margin-top: 10px;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,33 +73,50 @@ section.pages {
 }
 
 input[name="buscadorArticle"] {
-    margin-top: 10px;
     width: 20%;
-    transition: 0.5s;
 }
 
+/**cards**/
 
 .homeCards {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 10%;
-    justify-content: space-between;
+    gap: 5%;
+    justify-content: center;
     align-items: center;
-    margin-top: 20px;
 }
 
-.card {
-    max-width: 20%;
-    padding: 10px;
-    margin-top: 10px;
-    border: 2px solid grey;
-    background-color: transparent;
-    text-wrap: wrap;
+.article_card {
+    width: 20%;
+    height: 40%;
+    color: white;
 }
 
-.card .card-text.nom {
-    color: grey;
+.ac_outline_mal {
+    outline: 7px solid red;
+}
+
+.ac_outline_nigrom {
+    outline: 7px solid green;
+}
+
+.ac_wrapper {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    outline-offset: 10px;
+}
+
+/********* PAGINATION *******/
+
+section.pages {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    justify-content: center;
 }
 
 
