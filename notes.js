@@ -1,6 +1,11 @@
 //! PENDENT
     //// - escollir tema
-    // ferm mes users i canviar articles
+    // fer mes users i canviar articles
+    // canviar de posicio login i logout
+    // fer ${nomUser} a navbar, per perfil, i que sigui desplegable
+        //login
+        //logout
+        //perfil
     //// posar id user a articles 
     //// afegir comprovacio dos contrasenyes iguals a controller
     //// arreglar validacio
@@ -20,9 +25,11 @@
     //403 (entrada no permesa) a l'htaccess
     ////vista amb tots usuaris per Admin
     //rols d'usuari (user per defecte, admin per admin)
-    ////recaptcha en 3 intents fallits
+    ////@ts-check recaptcha en 3 intents fallits
     
 
+    //no mostrar ingredients, nomes desc
+        //ingredients a detall
     //implementar imatges
     ////mailer per contrasenya
     ////username a article (by pepito)
@@ -45,13 +52,15 @@
 
 //* VISTAS
     // que se vea bien el login y registre
+    ///estil navbar
+    //estil general (fons, lletra, cards)
 
 
 //* navbar
     ////- te una seccio my_articles, nomes mostrat si estem logats
     ////nou article igual
     ////login, i canvia a logout
-        //if Session[user]? logout: login
+        ////if Session[user]? logout: login
 
 
 //* LOGIN
@@ -68,4 +77,8 @@
     ////pero amb diferent ruta (my_articles)
 
     //index
-    //if session[user] -- editar i eliminar
+    ////if session[user] -- editar i eliminar
+
+
+//?referencies 
+    //captcha --> https://davisonpro.dev/php-recaptcha/
