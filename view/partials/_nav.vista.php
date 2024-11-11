@@ -1,6 +1,5 @@
 <!-- Anna Escribano -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container">
+<nav class="navbar-expand-lg">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -19,7 +18,6 @@
       </ul>
       <ul class="navbar-nav">
         <?php if (!isset($_SESSION['user'])): ?>
-
           <li id="login" class="nav-item">
             <a class="nav-link" href="login.php">
               Login
@@ -33,12 +31,11 @@
               <?= $_SESSION['user'] ?>
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Perfil</a></li>
+              <li><a class="dropdown-item" href="profile.php">Perfil</a></li>
               <li><a class="dropdown-item" href="login.php?isLogout=true">Logout</a></li>
             </ul>
           </div>
         <?php endif; ?>
       </ul>
     </div>
-  </div>
 </nav>

@@ -3,7 +3,7 @@
 
 <body>
     <?php include "view/partials/_nav.vista.php"; ?>
-    <main class="container">
+    <main class="login_main">
         <form action="" method="post">
             <label class="form-label">Usuari</label>
             <input name="usuari" class="form-control" type="text" value="<?php echo $_COOKIE['recorda'] ?? '' ?>">

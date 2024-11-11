@@ -26,6 +26,16 @@
     ////vista amb tots usuaris per Admin
     //rols d'usuari (user per defecte, admin per admin)
     ////@ts-check recaptcha en 3 intents fallits
+    //ordenacio de articles, guardat a cookies
+        //array_order 
+    //recuperar contrasenya verifica tambe email, 
+    //canviar metode enviar codi, amb un enllaç, per contrasenya
+        //si es usuari oAuth, no pot canviar contrasenya
+            //a desplegable if !user_ouath enseña eso
+        //que l'enllaç sigui nomes un boto (recuperar contrasenya)
+        //format bonic, com fer filegetcontent en un template a part
+        //bin2hex(randombytes 16)
+
     
 
     //no mostrar ingredients, nomes desc

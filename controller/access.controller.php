@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             buildMessage($error, $class, "index", $params);
         } else {
             $intentsLogin = $_COOKIE['intentsLogin'] ?? 0;
-            setcookie('intentsLogin', 1 + $intentsLogin);
+            setcookie('intentsLogin', 1 + $intentsLogin, time() + 10 * 60);
             
             $error = $error_l1;
             buildMessage($error, $class, $ruta, $previousParams);

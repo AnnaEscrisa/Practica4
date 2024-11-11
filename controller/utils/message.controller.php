@@ -4,7 +4,7 @@
 //------------------- Missatges d'error ------------------------
 
 //missatges generals
-$error_g1 = "Tots els camps han de ser omplerts";
+$error_g1 = "Tots els camps amb asterisc han de ser omplerts";
 $error_g2 = "Caracters màxims excedits";
 $error_g3 = "Vols eliminar aquest registre? Aquesta acció és irreversible";
 $error_g4 = "No es permet l'inserció de codi html o javascript";
@@ -63,11 +63,12 @@ function showMessage($tipus, $missatge, $displayEliminar)
 {
     if ($missatge) {
 
-        $alerta = "<div class='alert alert-dismissible alert-$tipus' role='alert'>
+        $alerta = "<div id='alerta_miss' class='alert alert-dismissible alert-$tipus' role='alert'>
             <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Tancar'></button>
             <h4>$missatge</h4>
             <form action='' method='post' class='$displayEliminar'>
-                <input class='btn btn-danger' type='submit' name='elimina' value='Eliminar'></input>
+                <input class='btn btn-danger' type='submit' name='elimina' value='Si'></input>
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Tancar'>No</button>
             </form>
         </div>";
         echo $alerta;

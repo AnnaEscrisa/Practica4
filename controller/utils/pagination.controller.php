@@ -17,10 +17,14 @@ function getPagesData($itemsEnChunks)
     $nextPage = $currentPage + 1;
     $previousPage = $currentPage - 1;
     $totalPages = $itemsEnChunks ? count($itemsEnChunks) : 0;
+    //si algu posa un numero de pagina inexistent, retorna a primera pàgina
+    if($currentPage > $totalPages) {
+        header('Location: index.php');
+    }
 
     $data = [
         'currentPage' => $currentPage,
-        'nextPage' =>$nextPage,
+        'nextPage' => $nextPage,
         'previousPage' => $previousPage,
         'totalPages' => $totalPages,
         'previousClass' => $previousPage == 0 ? 'hidden' : '',//classe del boto pagina anterior

@@ -4,8 +4,11 @@
 require 'model/user.model.php';
 $userModel = new Usuari();
 
+$token = $_GET['token'] ?? '';
 $user_id = $_GET['id'] ?? '';
+//$ruta = $_GET
 
+//!CANVIAR qeu miri si hi ha token i user id, i si esta entrara 
 //nomes permet entrar si la cookie esta settejada, sino mostrarà la pagina en blanc
 if (isset($_COOKIE['permisCanviPass'])) {
 
@@ -49,6 +52,8 @@ if (isset($_COOKIE['permisCanviPass'])) {
 
     include 'view/newPass.vista.php';
 }
+
+
 
 
 
