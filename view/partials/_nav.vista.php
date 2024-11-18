@@ -7,19 +7,19 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li id="home" class="nav-item">
-          <a class="nav-link" href="index.php">Home</a>
+          <a class="nav-link" href="home">Home</a>
         </li>
         <li id="myArticles" class="nav-item <?php echo !isset($_SESSION['user']) ? "hidden" : "" ?>">
-          <a class="nav-link" href="index.php?myArticles=true">Els meus articles</a>
+          <a class="nav-link" href="home?myArticles=true">Els meus articles</a>
         </li>
         <li id="newArticle" class="nav-item  <?php echo !isset($_SESSION['user']) ? "hidden" : "" ?>">
-          <a class="nav-link" href="form.php">Nou Article</a>
+          <a class="nav-link" href="articles_form">Nou Article</a>
         </li>
       </ul>
       <ul class="navbar-nav">
         <?php if (!isset($_SESSION['user'])): ?>
           <li id="login" class="nav-item">
-            <a class="nav-link" href="login.php">
+            <a class="nav-link" href="login">
               Login
             </a>
           </li>
@@ -31,8 +31,8 @@
               <?= $_SESSION['user'] ?>
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="profile.php">Perfil</a></li>
-              <li><a class="dropdown-item" href="login.php?isLogout=true">Logout</a></li>
+              <li><a class="dropdown-item" href="profile">Perfil</a></li>
+              <li><a class="dropdown-item" href="login?isLogout=true">Logout</a></li>
             </ul>
           </div>
         <?php endif; ?>

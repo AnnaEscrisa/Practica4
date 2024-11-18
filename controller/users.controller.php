@@ -2,8 +2,7 @@
 // Anna Escribano
 
 //Pròximament: mostrarà tots els usuaris per l'Admin
-
-
+require 'utils/permis.controller.php';
 require "model/user.model.php";
 $userModel = new Usuari();
 
@@ -12,9 +11,8 @@ $usuaris;
 
 
 showMessage($tipus, $missatge, $displayEliminar);
-$_SESSION['userRole'] = 'Administrator';
 
-if (isset($_SESSION['user']) && $_SESSION['userRole'] == 'Administrator') {
+if ($_SESSION['user'] == 'Administrador') {
     $usuaris = $userModel->selectUsers();
 
 

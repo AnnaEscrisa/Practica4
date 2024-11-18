@@ -6,6 +6,9 @@
     <main class="container">
         <form action="" method="post">
             <input type="hidden" name="user_id" value="<?php echo $_GET["id"]; ?>" />
+            
+            <label class="form-label">Contrasenya</label>
+            <input name="password" type="password" class="form-control" required>
             <label class="form-label">Contrasenya</label>
             <input name="password" type="password" class="form-control" required>
             <label class="form-label">Repetir contrasenya</label>

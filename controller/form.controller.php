@@ -2,39 +2,54 @@
 // Anna Escribano
 
 //Controla l'insercio i edicio d'articles
-
-
+require 'utils/validacio.controller.php';
 require "model/article.model.php";
-
 $articleModel = new Article();
+
 $pageTitle = "Nou Article";
 $titol = ""; 
 $cos = ""; 
 $ingredients = ""; 
 $user_id = ""; 
-$id = ""; 
 
-$ruta = "form";
-$sessioIniciada = isset($_SESSION['user']);
+$ruta = "articles_form";
 
+$permisCanvis = false;
+$currentUser = $_SESSION['user_id'] ?? false;
 
 //mostrem error actual si hi ha
-showMessage($tipus, $missatge, $displayEliminar);
 
+
+$id = $_GET["id"] ?? '';
+$isEdit = $_GET["isEdit"] ?? false;
+$isDelete = $_GET["isDelete"] ?? false;
+
+//nomes els usuaris logats poden crear, modificar o eliminar
+if ($currentUser){
+    $articles = $articleModel->selectArticleByUser($currentUser);
+    
+    $articlesIds = array_flip(array_column($articles, 'id'));
+    
+    //comprovem si aquest article es de l'usuari
+    $permisCanvis = $articlesIds[$id] === null ? true : false;
+}  else {
+    buildMessage($error_a6, $class, 'login', "");
+}
+
+if (($isEdit || $isDelete) && !$permisCanvis) {
+    buildMessage($error_a5, $class, $ruta, "");
+}
 
 //*------------------- Carregar mode edició -----------------------
 
-//comprovem si estem en mode edició
-$isEdit = $_GET["isEdit"] ?? false;
+//comprovem si estem en mode edició i tenim permis
 
-if ($isEdit && $sessioIniciada) {
-    $id = $_GET["id"];
+if ($isEdit && $permisCanvis) {
     $article = $articleModel->selectArticleById($id);
 
     //comprovem si l'article existeix, per si algun llest de torn canvia manualment l'id de l'article a la url
     if (!$article) {
-        $error = $error_a4;
-        showMessage($class, $error, $displayEliminar);
+        $missatge = $error_a4;
     } else {
         //si l'article existeix, establirem el valor dels inputs automaticament
         $article = $article[0];
@@ -49,15 +64,14 @@ if ($isEdit && $sessioIniciada) {
 //*--------------------- Carregar mode eliminació----------------
 
 //comprovem si estem en mode eliminació
-$isDelete = $_GET["isDelete"] ?? false;
 
-if ($isDelete && $sessioIniciada) {
-    $id = $_GET["id"];
+
+if ($isDelete && $permisCanvis) {
     $article = $articleModel->selectArticleById($id);
 
     if (!$article) {
-        $error = $error_a4;
-        showMessage($class, $error, $displayEliminar);
+        $missatge = $error_a4;
+        $tipus = 'error';
     } else {
 
         //carreguem l'article perque l'usuari vegi quin article elimina
@@ -68,11 +82,9 @@ if ($isDelete && $sessioIniciada) {
         $ingredients = $article["ingredients"];
         $user_id = $article["user_id"];
 
-        $error = $error_g3;
-        $previousParams = "id=$id";
+        $missatge = $error_g3;
+        $tipus = 'error';
         $displayEliminar = "";
-
-        showMessage($class, $error, $displayEliminar);
     }
 }
 
@@ -94,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $articleModel->deleteArticle($id);
         $error = $success_g1;
         $class = "success";
-        $ruta = "index";
+        $ruta = "home";
         buildMessage($error, $class, $ruta, "");
     }
 
@@ -114,8 +126,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             //comprovarà l'update i retornarà un missatge depenent del resultat
             $dadesMissatge = parseArticleError($result, 'edit');
 
-            $error = $dadesMissatge[0];
-            $class = $dadesMissatge[1];
+            $missatge = $dadesMissatge[0];
+            $tipus = $dadesMissatge[1];
+            
 
         }
         //si estem creant un article nou
@@ -128,24 +141,26 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             $dadesMissatge = parseArticleError($result, 'insert');
 
-            $error = $dadesMissatge[0];
-            $class = $dadesMissatge[1];
-            if ($class == 'success') {
+            $missatge = $dadesMissatge[0];
+            $tipus = $dadesMissatge[1];
+            if ($tipus == 'success') {
 
                 //esborrem el valor dels inputs perque no surtin al form
                 $nouCos = $nouTitol = $nousIngredients = '';
             }
-
         }
-
     }
     //si no hi ha inputs de l'usuari 
     else {
-        $error = $error_g1;
+        $missatge = $error_g1;
         $previousParams = $id ? "isEdit=true&id=$id" : "";
     }
 
-    //ensenya missatge amb errors de edit o insert
-    showMessage($class, $error, $displayEliminar);
+    //! OJO ESTO
 
+    //ensenya missatge amb errors de edit o insert
+    showMessage($tipus, $missatge, $displayEliminar);
 }
+include "view/form.vista.php";
+
+?>

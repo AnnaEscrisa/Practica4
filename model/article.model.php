@@ -40,6 +40,14 @@ class Article extends Database
         return $resultat;
     }
 
+    function selectArticleByName($name)
+    {
+        $select = " articles.id, articles.cos, articles.titol, articles.ingredients, users.name, users.id as user_id ";
+        $join = ' LEFT JOIN users ON articles.user_id = users.id ';
+        $resultat = $this->selectSpecific($this->taula, $select, "articles.titol", $name, $join);
+        return $resultat;
+    }
+
     /* Inserta un nou registre a la taula articles
         Comprova si el titol existeix i si les dades tenen mes caracters dels permessos.
         Retorna codis que seran llegits per validacio.controller

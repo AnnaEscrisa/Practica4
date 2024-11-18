@@ -210,7 +210,27 @@ main:has(form.articleForm) {
 }
 
 .alert-error::before {
-    content: '❗/etdfjafd';
+    content: '❗';
     background-color: rgb(194, 32, 32);
     border: 1px solid rgb(248, 186, 186);
+}
+
+#alerta_miss {
+    opacity: 0;
+    animation: fadeInOut 3.5s forwards;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+    80%{
+        opacity: 1;
+    }
+    85% {
+        opacity: 0;
+    }
 }

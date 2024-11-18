@@ -2,17 +2,16 @@
 //Anna Escribano
 
 //Controla el login, logout, registre
+
 require 'lib/reCaptcha/recaptchalib.php';
-require "utils/captcha.controller.php";
+require "utils/validacio.controller.php";
 require "model/user.model.php";
 $userModel = new Usuari();
 //treiem la ruta i pageTitle del nom d'aquest mateix arxiu
-$ruta = basename($_SERVER["SCRIPT_FILENAME"], '.php');
+$ruta = array_slice(explode('/',$_SERVER["REQUEST_URI"]), -1)[0];
+
 $pageTitle = $ruta;
 
-
-//mostrem error actual si hi ha
-showMessage($tipus, $missatge, $displayEliminar);
 
 //*------------- LOGOUT ---------
 
@@ -20,10 +19,11 @@ $isLogout = $_GET['isLogout'] ?? null;
 
 //si cliquem a "logout", tancara la sessió i redireccionarà amb missatge
 if ($isLogout) {
+    session_unset();
     session_destroy();
     $error = $success_l2;
     $class = "success";
-    buildMessage($error, $class, "index", $previousParams);
+    buildMessage($error, $class, "home", "");
 }
 
 
@@ -53,9 +53,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $dadesmissatge = parseUserError($result, "insert");
         $error = $dadesmissatge[0];
         $class = $dadesmissatge[1];
-        $ruta = $class == "success" ? "index" : "registre";
+        $ruta = $class == "success" ? "home" : "registre";
 
-        buildMessage($error, $class, $ruta, $previousParams);
+        buildMessage($error, $class, $ruta, "");
     }
 
     // entrada per login
@@ -84,13 +84,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $error = $success_l1;
             $params = "myArticles=true";
             $class = 'success';
-            buildMessage($error, $class, "index", $params);
+            buildMessage($error, $class, "home", $params);
         } else {
             $intentsLogin = $_COOKIE['intentsLogin'] ?? 0;
             setcookie('intentsLogin', 1 + $intentsLogin, time() + 10 * 60);
             
             $error = $error_l1;
-            buildMessage($error, $class, $ruta, $previousParams);
+            buildMessage($error, $class, "login", "");
         }
     }
    //submit sense inputs
@@ -98,7 +98,5 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     buildMessage($error, $class, $ruta, $previousParams);
 
 }
-//la vista canvia depenent de la ruta original (login/registre)
-include "view/$ruta.vista.php";
 
 ?>

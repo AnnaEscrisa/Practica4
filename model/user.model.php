@@ -36,7 +36,7 @@ class Usuari extends Database
     //primer valida els valors, i despres inserta l'usuari amb la contraenya hashejada
     function insertUsuari($usuari, $contrasenya, $nom, $email)
     {
-        $comprovacions = $this->comprovarDades($usuari, $contrasenya, $nom, $email);
+        $comprovacions = $this->comprovarDades($usuari, $nom, $email);
 
         if ($comprovacions == NULL) {
             $contrasenyaEncriptada = password_hash($contrasenya, PASSWORD_DEFAULT);
@@ -85,7 +85,7 @@ class Usuari extends Database
     }
 
     //comprovacio inicial abans de la inserció. Comprova que l'usari no existeixi i que la mida no sigui excessiva
-    function comprovarDades($user, $contrasenya, $nom, $email)
+    function comprovarDades($user, $nom, $email)
     {
         if ($this->selectUserByUsername($user)) {
             return 3;

@@ -2,8 +2,9 @@
 <?php include "partials/_head.vista.php"; ?>
 
 <body>
+    <?php showMessage($tipus, $missatge, $displayEliminar); ?>
     <?php include "partials/_nav.vista.php"; ?>
-    <main class="container">
+    <main>
         <h3>
             <?php echo $pageTitle ?>
         </h3>
@@ -38,7 +39,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary" <?php echo $isDelete ? "hidden" : "" ?>><?php echo $isEdit ? "Editar" : "Inserir" ?></button>
-            <a href="form.php?isDelete=true"></a>
+            <a href="articles_form?isDelete=true"></a>
         </form>
     </main>
 </body>

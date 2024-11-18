@@ -18,8 +18,8 @@
                             <p class="card-text" >' . $value['email'] . '</p>
                         </div>
                         <div class="card-body footer "> 
-                            <a class="btn btn-primary href="form.php?id=' . $value['id'] . '&isEdit=true">Edit</a>
-                            <a class="btn btn-danger href="form.php?id=' . $value['id'] . '&isDelete=true">Elimina</a>
+                            <a class="btn btn-primary href="articles_form?id=' . $value['id'] . '&isEdit=true">Edit</a>
+                            <a class="btn btn-danger href="articles_form?id=' . $value['id'] . '&isDelete=true">Elimina</a>
                         </div>
                     </article>';
                 }
@@ -40,7 +40,7 @@
             if (!empty($usuarisMostrats)) {
 
                 echo '
-                <a href="users.php?page=' . $paginesData['previousPage'] . '"
+                <a href="users?page=' . $paginesData['previousPage'] . '"
                     class="btn btn-primary ' . $paginesData['previousClass'] . '">
                             Anterior
                     </a>
@@ -49,7 +49,7 @@
                     $paginesData['currentPage']
                     . '</a>
                  <a class="btn btn-primary ' . $paginesData['nextClass'] . '"
-                    href= "users.php?page=' . $paginesData['nextPage'] . '" >
+                    href= "users?page=' . $paginesData['nextPage'] . '" >
                         Següent
                 </a>';
             }

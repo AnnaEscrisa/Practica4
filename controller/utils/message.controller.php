@@ -4,11 +4,12 @@
 //------------------- Missatges d'error ------------------------
 
 //missatges generals
-$error_g1 = "Tots els camps amb asterisc han de ser omplerts";
+$error_g1 = "Tots els camps obligatoris han de ser omplerts";
 $error_g2 = "Caracters màxims excedits";
 $error_g3 = "Vols eliminar aquest registre? Aquesta acció és irreversible";
 $error_g4 = "No es permet l'inserció de codi html o javascript";
 $error_g5 = "S'ha tancat la sessió per inactivitat";
+$error_g6 = "No tens permís per accedir a aquest recurs.";
 $success_g1 = "S'ha eliminat el registre amb èxit.";
 
 //errors articles
@@ -16,6 +17,7 @@ $error_a1 = "Aquest títol ja existeix";
 $error_a2 = "No s'ha pogut inserir";
 $error_a3 = "No s'ha pogut modificar";
 $error_a4 = "Article inexistent.";
+$error_a5 = "No tens permís per modificar aquest article.";
 
 $success_a1 = "Article inserit amb èxit";
 $success_a2 = "Article modificat amb èxit";
@@ -79,7 +81,7 @@ function showMessage($tipus, $missatge, $displayEliminar)
 que sera llegit per la funcio anterior*/
 function buildMessage($message, $class, $location, $parametres)
 {
-    header("Location:" . $location . ".php?Message=" . $message . "&Tipus=" . $class . "&" . $parametres);
+    header("Location:" . $location . "?Message=" . $message . "&Tipus=" . $class . "&" . $parametres);
     exit;
 }
 

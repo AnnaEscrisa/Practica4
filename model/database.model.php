@@ -11,10 +11,10 @@ class Database
 
     public function __construct()
     {
-        $this->db_server = "mysql-8001.dinaserver.com";
-        $this->db_user = "p2_admin";
-        $this->db_pass = openssl_decrypt("RzsBvtK4pNqPQp2jAY/WEw==","AES-128-ECB","password");
-        $this->db_name = "Pt02_Ana_Escribano";
+        $this->db_server = DB_SERVER;
+        $this->db_user = DB_USER;
+        $this->db_pass = DB_PASS;
+        $this->db_name = DB_NAME;
         $this->db = $this->connectarDB("mysql", $this->db_server, $this->db_user, $this->db_pass, $this->db_name);
     }
 

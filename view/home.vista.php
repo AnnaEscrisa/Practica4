@@ -2,6 +2,7 @@
 <?php include "view/partials/_head.vista.php"; ?>
 
 <body>
+    <?php showMessage($tipus, $missatge, $displayEliminar); ?> 
     <div class="container_home">
         <div class="grid_nav">
             <?php include "view/partials/_nav.vista.php"; ?>
@@ -13,9 +14,9 @@
 
         <div class="grid_main">
             <main>
-                <form action="index.php" method="post" class="home-form">
+                <form action="" method="post" class="home-form">
                     <label for="">Buscar article: </label>
-                    <input class="form-control" type="text" name="buscadorArticle" placeholder="Id de l'article">
+                    <input class="form-control" type="text" name="buscadorArticle" placeholder="Nom de l'article">
                     <button class="btn btn-primary" type="submit">Buscar</button>
                 </form>
                 <section class="cards_container">
@@ -32,17 +33,17 @@
                                         <h3 class="a_title"> <?= $value['titol'] ?></h3>
                                     </div>
 
-                                    <!-- <div class="card-body footer ">
+                                    <div class="card-body footer ">
                                 <a class="btn btn-primary <?= $hiddenButton ?>"
-                                    href="form.php?id= <?= $value['id'] ?>&isEdit=true">Edit</a>
+                                    href="articles_form?id=<?= $value['id'] ?>&isEdit=true">Edit</a>
                                 <a class="btn btn-danger <?= $hiddenButton ?>"
-                                    href="form.php?id=' <?= $value['id'] ?>&isDelete=true">Elimina</a>
-                            </div> -->
+                                    href="articles_form?id='<?= $value['id'] ?>&isDelete=true">Elimina</a>
+                            </div>
                                 </article>
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        No hi ha articles per mostrar
+                        <p>No hi ha articles per mostrar</p>
                     <?php endif; ?>
                 </section>
                 <section class="pages">
@@ -54,25 +55,18 @@
                         </select>
                     </form>
 
-                    <?php
-                    if (!empty($articlesMostrats)) {
-
-                        echo '
-                        <a href="index.php?page=' . $paginesData['previousPage'] . '"
-                            class="btn btn-primary ' . $paginesData['previousClass'] . '">
+                    <? if (!empty($articlesMostrats)): ?>
+                        <a href="home?page=<?= $paginesData['previousPage']?>"
+                            class="btn btn-primary <?= $paginesData['previousClass']?>">
                                     Anterior
                             </a>
-                        <a class="btn btn-primary"
-                            href="#" >' .
-                                    $paginesData['currentPage']
-                                    . '</a>
-                        <a class="btn btn-primary ' . $paginesData['nextClass'] . '"
-                            href= "index.php?page=' . $paginesData['nextPage'] . '" >
+                        <a class="btn btn-primary" href="#" > <?= $paginesData['currentPage'] ?></a>
+                        <a class="btn btn-primary <?= $paginesData['nextClass']?>"
+                            href= "home?page=<?=$paginesData['nextPage']?>" >
                                 Següent
-                        </a>';
-                    }
+                        </a>
 
-                    ?>
+                    <? endif ?>
                 </section>
             </main>
         </div>

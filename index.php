@@ -1,40 +1,57 @@
 <?php
 //Anna Escribano
-// require 'controller/utils/message.controller.php';
-// require 'controller/utils/session.controller.php';
 
+require 'config.php';
 require 'controller/utils/message.controller.php';
 require 'controller/utils/session.controller.php';
-include 'controller/utils/pagination.controller.php';
-require 'controller/home.controller.php';
 
-// $route = $_GET['route'] ?? 'home';
+comprovarActivitat(SESSION_TIMEOUT);
+registrarActivitat();
 
-// switch ($route) {
-//     case 'home':
-//         include 'controller/utils/pagination.controller.php';
-//         require 'controller/home.controller.php';
-//         break;
-//     case 'login':
-//     case 'registre':
-//         require 'controller/utils/validacio.controller.php';
-//         require "controller/access.controller.php";
-//     case 'form':
-//         require 'controller/utils/validacio.controller.php';
-//         require 'controller/form.controller.php';
-//         include 'view/form.vista.php';
-//         break;
-//     case 'recupera':
-//         require 'controller/utils/mailer.controller.php';
-//         require 'controller/recuperacio.controller.php';
-//     case 'newPass':
-//         require 'controller/utils/validacio.controller.php';
-//         require 'controller/profile.controller.php';
-//     case 'users':
-//     case 'profile':
-//     default:
+$route = $_GET['route'];
 
-//         break;
+switch ($route) {
+    case '':
+    case 'home':
+        require 'controller/home.controller.php';
+        break;
+    case 'login':
+        require "controller/access.controller.php";
+        include 'view/login.vista.php';
+        break;
+    case 'register':
+    case 'registre':
+        require "controller/access.controller.php";
+        include 'view/registre.vista.php';
+        break;
+    case 'articles_form':
+        require 'controller/form.controller.php';
+        break;
+    case 'recuperacio':
+        require 'controller/recuperacio.controller.php';
+        break;
+    case 'regeneracio':
+        require 'controller/profile.controller.php';
+        break;
+    case 'users':
+        require 'controller/users.controller.php';
+        break;
+    case 'profile':
+    default:
+        http_response_code(404);
+        break;
+}
+
+// enrutar('home', 'home.controller', homeIndex());
+
+// function enrutar($ruta, $controller, $funcio) {
+//     $route = $_GET['route'];
+
+//     if ($route === $ruta) {
+//         require "controller/$controller.php";
+//         $funcio;
+//     }
+
 // }
 
 ?>
