@@ -20,6 +20,7 @@
         </form>
         <p> <a href="recuperacio">Has oblidat la contrasenya? </a> </p>
         <p> No tens compte d'usuari? <a href="registre">Registra't</a> </p>
+        <p> Iniciar sessio amb <a href="login?github=true">GitHub</a> </p>
     </main>
     
 </body>

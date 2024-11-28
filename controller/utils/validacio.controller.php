@@ -7,20 +7,18 @@
 //Parseja els possibles errors dels articles i els converteix en missatges d'error.
 function parseArticleError($result, $operation)
 {
-    global $error_a1, $error_a2, $error_a3, $error_g2, $error_g4, $success_a1, $success_a2;
-
     $messages = $operation === 'insert' ? [
-        4 => $error_g4,
-        3 => $error_a1,
-        2 => $error_g2,
-        1 => $success_a1,
-        0 => $error_a2
+        4 => error_g4,
+        3 => error_a1,
+        2 => error_g2,
+        1 => success_a1,
+        0 => error_a2
     ] : [
-        4 => $error_g4,
-        3 => $error_a1,
-        2 => $error_g2,
-        1 => $success_a2,
-        0 => $error_a3
+        4 => error_g4,
+        3 => error_a1,
+        2 => error_g2,
+        1 => success_a2,
+        0 => error_a3
     ];
 
     return getValorMessage($result, $messages);
@@ -30,23 +28,21 @@ function parseArticleError($result, $operation)
 //Parseja els possibles errors dels usuaris i els converteix en missatges d'error.
 function parseUserError($result, $operation)
 {
-    global $error_r2, $error_r3, $error_r4, $error_r5, $success_r1, $error_g2,  $error_g4,  $success_r2, $error_r1;
-
     $messages = $operation === 'insert' ? [
-        7 => $error_r3,
-        6 => $error_r4,
-        5 => $error_r5,
-        4 => $error_g4, 
-        3 => $error_r2, 
-        2 => $error_g2, 
-        1 => $success_r1, 
-        0 => $error_r1  
+        7 => error_r3,
+        6 => error_r4,
+        5 => error_r5,
+        4 => error_g4, 
+        3 => error_r2, 
+        2 => error_g2, 
+        1 => success_r1, 
+        0 => error_r1  
     ] : [
-        4 => $error_r2, 
-        3 => $error_r4, 
-        2 => $error_r5, 
-        1 => $success_r2,
-        0 => $error_r1  
+        4 => error_r2, 
+        3 => error_r4, 
+        2 => error_r5, 
+        1 => success_r2,
+        0 => error_r1  
     ];
 
     return getValorMessage($result, $messages);

@@ -22,7 +22,7 @@
                 <section class="cards_container">
                     <?php
 
-                    if (!empty($articlesMostrats)):
+                    if ($articlesMostrats):
                         foreach ($articlesMostrats[$paginesData['currentPage'] - 1] as $key => $value): ?>
 
                             <!--! afegir escola a article, i fer una clase per cada una -->
@@ -37,7 +37,7 @@
                                 <a class="btn btn-primary <?= $hiddenButton ?>"
                                     href="articles_form?id=<?= $value['id'] ?>&isEdit=true">Edit</a>
                                 <a class="btn btn-danger <?= $hiddenButton ?>"
-                                    href="articles_form?id='<?= $value['id'] ?>&isDelete=true">Elimina</a>
+                                    href="articles_form?id=<?= $value['id'] ?>&isDelete=true">Elimina</a>
                             </div>
                                 </article>
                             </div>
@@ -55,7 +55,7 @@
                         </select>
                     </form>
 
-                    <? if (!empty($articlesMostrats)): ?>
+                    <? if ($articlesMostrats): ?>
                         <a href="home?page=<?= $paginesData['previousPage']?>"
                             class="btn btn-primary <?= $paginesData['previousClass']?>">
                                     Anterior

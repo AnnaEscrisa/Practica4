@@ -5,46 +5,42 @@ require 'database.model.php';
 class Article extends Database
 {
     private $taula;//taula corresponent a la bbdd
+    private $select;
+    private $join;
 
-    //construim la classe mare al constructor per crear una connexió a la bbdd
     public function __construct()
     {
-        parent::__construct();
+        $this->db = Database::getInstance();
         $this->taula = "articles";
+        $this->select = " articles.id, articles.cos, articles.titol, articles.ingredients, users.name, users.id as user_id ";
+        $this->join = ' LEFT JOIN users ON articles.user_id = users.id ';
+
     }
 
     //Selecciona tots els articles i la info de l'usuari creador
     function selectArticles()
     {
-        $select = " articles.id, articles.cos, articles.titol, articles.ingredients, users.name, users.id as user_id ";
-        $join = ' LEFT JOIN users ON articles.user_id = users.id ';
-        $resultat = $this->selectAllSpecific($this->taula, $select, $join);
+        $resultat = $this->selectAllSpecific($this->taula, $this->select, $this->join);
         return $resultat;
     }
 
     //Selecciona per id
     function selectArticleById($id)
     {
-        $select = " articles.id, articles.cos, articles.titol, articles.ingredients, users.name, users.id as user_id ";
-        $join = ' LEFT JOIN users ON articles.user_id = users.id ';
-        $resultat = $this->selectSpecific($this->taula, $select, "articles.id", $id, $join);
+        $resultat = $this->selectSpecific($this->taula, $this->select, "articles.id", $id, $this->join);
         return $resultat;
     }
 
     //Selecciona per usuari
     function selectArticleByUser($id)
     {
-        $select = " articles.id, articles.cos, articles.titol, articles.ingredients, users.name, users.id as user_id ";
-        $join = ' LEFT JOIN users ON articles.user_id = users.id ';
-        $resultat = $this->selectSpecific($this->taula, $select, "user_id", $id, $join);
+        $resultat = $this->selectSpecific($this->taula, $this->select, "user_id", $id, $this->join);
         return $resultat;
     }
 
     function selectArticleByName($name)
     {
-        $select = " articles.id, articles.cos, articles.titol, articles.ingredients, users.name, users.id as user_id ";
-        $join = ' LEFT JOIN users ON articles.user_id = users.id ';
-        $resultat = $this->selectSpecific($this->taula, $select, "articles.titol", $name, $join);
+        $resultat = $this->selectSpecific($this->taula, $this->select, "articles.titol", $name, $this->join);
         return $resultat;
     }
 

@@ -3,11 +3,12 @@
 
 class Database
 {
-    protected $db; //connexió a la bbdd a través de PDO
-    protected $db_server; //servidor que allotja bbdd
-    protected $db_user; //usuari de la bbdd
-    protected $db_pass; //contrasenya encriptada
-    protected $db_name; //nom de la bbdd
+    private static $instance = null;
+    protected $db; 
+    protected $db_server; 
+    protected $db_user; 
+    protected $db_pass;
+    protected $db_name; 
 
     public function __construct()
     {
@@ -16,6 +17,13 @@ class Database
         $this->db_pass = DB_PASS;
         $this->db_name = DB_NAME;
         $this->db = $this->connectarDB("mysql", $this->db_server, $this->db_user, $this->db_pass, $this->db_name);
+    }
+
+    public static function getInstance() {
+        if (self::$instance === null) {
+            self::$instance = new Database();
+        }
+        return self::$instance->db;
     }
 
     //crea una instancia PDO i crea la connexió a la bbdd o llença un error
@@ -35,6 +43,11 @@ class Database
             echo "Error obtenint base de dades: " . $e->getMessage();
             return null;
         }
+    }
+
+    //get last inserted id
+    function getLastId(){
+        return $this->db->lastInsertId();
     }
 
     //Retorna tots els registres d'una taula en format array de registres

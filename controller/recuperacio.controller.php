@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             buildMessage($error, $class, 'recupera', '');
         } else {
             //usuari no trobat
-            $error = $error_rec1;
+            $error = error_rec1;
             $tipus = 'error';
             showMessage($tipus, $error, $displayEliminar);
         }

@@ -1,8 +1,7 @@
 <?php
 //Anna Escribano
 
-/* si hi ha items, els dividira en grups de la quantitat especificada a $max
-i retornarà un array */
+/* divideix items en parts */
 function paginationChunks($max, $items)
 {
     return $items ? array_chunk($items, $max) : "";
@@ -16,10 +15,10 @@ function getPagesData($itemsEnChunks)
     $currentPage = $_GET['page'] ?? 1;
     $nextPage = $currentPage + 1;
     $previousPage = $currentPage - 1;
-    $totalPages = $itemsEnChunks ? count($itemsEnChunks) : 0;
+    $totalPages = $itemsEnChunks ? count($itemsEnChunks) : 1;
     //si algu posa un numero de pagina inexistent, retorna a primera pàgina
     if($currentPage > $totalPages) {
-        header('Location: index.php');
+        header('Location: home');
     }
 
     $data = [

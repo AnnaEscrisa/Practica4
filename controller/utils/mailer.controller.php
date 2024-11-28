@@ -8,10 +8,16 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 class MailerController
 {
-    private $phpMailer = new PHPMailer();
+    public $phpMailer;
 
-    function enviarMail($mailer, $emailTo, $subject, $message)
+    public function __construct(){
+        $this->phpMailer = new PHPMailer();
+    }
+
+    function enviarMail($emailTo, $subject, $message)
     {
+        $mailer = $this->phpMailer;
+        
         try {
             //settings del server
             $mailer->isSMTP();

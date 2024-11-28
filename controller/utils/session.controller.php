@@ -5,8 +5,7 @@ session_start();
 
 //comprovem l'ultim acces de l'usuari. Si supera el timeout establert, se'l reconduirà al login
 function comprovarActivitat($timeout) {
-    global $error_g5;
-
+ 
     if (isset($_SESSION['lastaccess'])) {
 
         $duration = time() - intval($_SESSION['lastaccess']);
@@ -16,7 +15,7 @@ function comprovarActivitat($timeout) {
             session_unset();
             session_destroy();
             $ruta = 'login';
-            buildMessage($error_g5, 'error', $ruta, '');
+            buildMessage(error_g5, 'error', $ruta, '');
         }
     }
 }
