@@ -1,22 +1,29 @@
 <?php
-
 // Anna Escribano Sabio
 
 class Database
 {
-    protected $db; //connexió a la bbdd a través de PDO
-    protected $db_server; //servidor que allotja bbdd
-    protected $db_user; //usuari de la bbdd
-    protected $db_pass; //contrasenya
-    protected $db_name; //nom de la bbdd
+    private static $instance = null;
+    protected $db; 
+    protected $db_server; 
+    protected $db_user; 
+    protected $db_pass;
+    protected $db_name; 
 
     public function __construct()
     {
-        $this->db_server = "mysql-8001.dinaserver.com";
-        $this->db_user = "p2_admin";
-        $this->db_pass = "Practica_02";
-        $this->db_name = "Pt02_Ana_Escribano";
+        $this->db_server = DB_SERVER;
+        $this->db_user = DB_USER;
+        $this->db_pass = DB_PASS;
+        $this->db_name = DB_NAME;
         $this->db = $this->connectarDB("mysql", $this->db_server, $this->db_user, $this->db_pass, $this->db_name);
+    }
+
+    public static function getInstance() {
+        if (self::$instance === null) {
+            self::$instance = new Database();
+        }
+        return self::$instance->db;
     }
 
     //crea una instancia PDO i crea la connexió a la bbdd o llença un error
@@ -38,10 +45,17 @@ class Database
         }
     }
 
+    //get last inserted id
+    function getLastId(){
+        return $this->db->lastInsertId();
+    }
+
     //Retorna tots els registres d'una taula en format array de registres
-    function selectAll($taula)
+    //permet fer un join si aquest es passat per parametre
+    function selectAll($taula, $join = NULL)
     {
-        $sql = "SELECT * FROM $taula";
+        $join = $join ?? '';
+        $sql = "SELECT * FROM $taula $join";
 
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
@@ -49,21 +63,37 @@ class Database
         return $resultat;
     }
 
-    // //!ALERTA POTSEr millor com un resultat = sleectAll , split o algo asi, first - last
-    // function selectAllLimit($taula, $first, $last)
-    // {
-    //     $sql = "SELECT * FROM $taula LIMIT $first, $last";
+    //Tots els registres, pero permet especificar els camps especifics
+     //Permet utilitzar alies per diferenciar camps amb el mateix nom
+    function selectAllSpecific($taula, $select, $join = NULL)
+    {
+        $join = $join ?? '';
+        $sql = "SELECT $select FROM $taula $join";
 
-    //     $stmt = $this->db->prepare($sql);
-    //     $stmt->execute();
-    //     $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     return $resultat;
-    // }
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $resultat;
+    }
 
     //Retorna tots els registres d'una taula basant-se en el valor d'un camp concret
-    function selectBy($taula, $columna, $valor)
+    function selectBy($taula, $columna, $valor, $join = NULL)
     {
-        $sql = "SELECT * FROM $taula WHERE $columna = ?";
+        $join = $join ?? '';
+        $sql = "SELECT * FROM $taula $join WHERE $columna = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$valor]);
+
+        $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultat;
+    }
+
+    //Selecciona camps especifics
+    function selectSpecific($taula, $select, $columna, $valor, $join = NULL)
+    {
+        $join = $join ?? '';
+        $sql = "SELECT $select FROM $taula $join WHERE $columna = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$valor]);
 
@@ -95,13 +125,31 @@ class Database
 
     /* Fa un update de la taula determinada
     $valors ha de ser un array amb els nous valors a introduir
-    $reassignacions ha de ser un string 
+    $reassignacions ha de ser un string. ex:
+        $reassignacions = "nom =?, edat =?"
     permet reassignar tants camps com tingui la taula
     */
     function update($taula, $id, $valors, $reassignacions)
     {
         try {
-            $sql = "UPDATE $taula SET $reassignacions WHERE id = $id";
+            $sql = "UPDATE $taula SET $reassignacions WHERE id = ?";
+            $valors[] = $id;
+
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute($valors);
+            return true;
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    //permet fer update en base a un camp concret(no id)
+    function updateBy($taula, $campWhere, $valorWhere, $valors, $reassignacions) {
+
+        try {
+            $sql = "UPDATE $taula SET $reassignacions WHERE $campWhere = ?";
+            $valors[] = $valorWhere;
 
             $stmt = $this->db->prepare($sql);
             $stmt->execute($valors);
@@ -119,7 +167,19 @@ class Database
             $sql = "DELETE FROM $taula WHERE id = $id";
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
-        } catch  (\Throwable $th){
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    //Delete per camp especific
+    function deleteBy($taula, $camp, $valor)
+    {
+        try {
+            $sql = "DELETE FROM $taula WHERE $camp = $valor";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+        } catch (\Throwable $th) {
             throw $th;
         }
     }
@@ -139,13 +199,6 @@ class Database
     function comprovarCaractersMaxims($chars_maxims, $valor)
     {
         if (strlen($valor) > $chars_maxims) {
-            return true;
-        }
-    }
-
-    //comprova si hi ha elements html al parametre
-    function comprovarHtml($valor){
-        if(htmlspecialchars($valor) != $valor){
             return true;
         }
     }
