@@ -24,14 +24,14 @@ nav {
     color: white;
 }
 
-/* .nav-link:hover {
+.nav-link:hover {
     background-color: aqua;
     color: black;
 }
 
 nav .nav-item.nav-selected {
     background-color: blue;
-} */
+}
 
 /****** HOME  ******/
 
@@ -43,7 +43,6 @@ nav .nav-item.nav-selected {
     grid-template-areas:
     "nav nav nav"
     "left-nav main right-nav";
-    /*! añadir gap ya cuando pueda */
 }
 
 .grid_aside_left{
@@ -92,12 +91,6 @@ input[name="buscadorArticle"] {
 /**cards**/
 
 .cards_container {
-    /* display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8%;
-    justify-content: flex-start; */
-
     display: grid;
     grid-template-columns: auto auto auto;
     justify-content: space-evenly
@@ -152,6 +145,12 @@ main:has(form.articleForm) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.articleForm_form-text {
+    color: white;
+    margin-top: .25rem;
+    font-size: .875em;
 }
 
 

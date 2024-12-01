@@ -1,11 +1,14 @@
 <?php
 //Controla els diferents updates de les dades de l'usuari
-require 'controller/utils/validacio.controller.php';
-require 'controller/utils/mailer.controller.php';
-require 'oblit.controller.php';
-require 'newpass.controller.php';
 
 require 'model/user.model.php';
+
+require 'oblit.controller.php';
+require 'newpass.controller.php';
+require 'fitxa.controller.php';
+require 'controller/utils/validacio.controller.php';
+require 'controller/utils/mailer.controller.php';
+
 
 $userModel = new Usuari();
 $mailerController = new MailerController();

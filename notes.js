@@ -1,5 +1,11 @@
 //! PENDENT
    
+    //! readme
+        // que hem fet amb articles orfes?
+        // com es processa canvi pass per logats
+        //com funciona remember me
+        
+
     //! vigilar que si nom, email es null, surti un espai en blanc i no doni erro en profile de user
 
     //! SI NO FA REGISTRE, hauria de guardar les dades al form, pero les esborra
@@ -45,7 +51,7 @@
     //implementar imatges
     //eliminacio d'usuaris posa els seus articles en anonim
 
-    
+    //! CAPTCHA KEY NECESITA VERSION PARA DONDOMINIO 
 
 
     //! COmprovacions

@@ -15,7 +15,7 @@
                 <label for="" class="form-label">Títol*</label>
                 <input class="form-control" type="text" name="nouTitol" placeholder="Títol de l'article"
                     value="<?php echo $nouTitol?? $titol ?>">
-                <div class="form-text">
+                <div class="articleForm_form-text">
                     El títol no pot tenir més de 40 caràcters.
                 </div>
             </div>
@@ -24,7 +24,7 @@
                 <label for="" class="form-label">Descripció*</label>
                 <textarea class="form-control" name="nouCos"
                     placeholder="Descripció de l'article"><?php echo $nouCos?? $cos ?></textarea>
-                <div class="form-text">
+                <div class="articleForm_form-text">
                     La descripció no pot tenir més de 400 caràcters.
                 </div>
             </div>
@@ -33,7 +33,7 @@
                 <label for="" class="form-label">Ingredients</label>
                 <textarea class="form-control" name="nousIngredients"
                     placeholder="Ingredients"><?php echo $nousIngredients ?? $ingredients ?></textarea>
-                <div class="form-text">
+                <div class="articleForm_form-text">
                     Aquesta secció no pot tenir més de 500 caràcters.       
                 </div>
             </div>

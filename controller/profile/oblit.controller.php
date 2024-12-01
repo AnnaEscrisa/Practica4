@@ -3,7 +3,7 @@
 //Controla la recuperació de la contrasenya
 
 
-//enviar mail recu
+//enviar mail recuperacio
 function enviarMail($user, $mailerController, $link)
 {
 

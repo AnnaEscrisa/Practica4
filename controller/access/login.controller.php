@@ -1,5 +1,20 @@
 <?php
 
+function transformarRuta()
+{
+    $ruta = array_slice(explode('/', $_SERVER["REQUEST_URI"]), -1)[0];
+    switch (true) {
+        case str_contains($ruta, 'Logout'):
+            return 'logout';
+        case str_contains($ruta, 'deviantart'):
+            return 'deviantart';
+        case str_contains($ruta, 'github'):
+            return 'github';
+        default:
+           return $ruta;
+    }
+}
+
 function processarLogin($userModel, &$missatge)
 {
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
