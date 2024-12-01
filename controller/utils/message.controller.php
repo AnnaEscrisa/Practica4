@@ -36,6 +36,7 @@ const error_r2 = "El nom d'usuari ja existeix";
 const error_r3 = "Les contrasenyes no coincideixen";
 const error_r4 = "El format de l'email no és correcte";
 const error_r5 = "La contrasenya no és prou segura";
+const error_r6 = "La contrasenya antiga no es  correcta";
 
 const success_r1 = "S'ha creat l'usuari amb èxit";
 const success_r2 = "S'ha modificat l'usuari amb èxit";

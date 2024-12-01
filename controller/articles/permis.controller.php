@@ -23,7 +23,6 @@ function comprovarPossesioArticle($articleModel, $currentUser, $articleId)
 {
     $articles = $articleModel->selectArticleByUser($currentUser);
 
-    //! RESOLVER ALERTA
     $articlesIds = array_column($articles, 'id');
 
     return in_array($articleId, $articlesIds);
