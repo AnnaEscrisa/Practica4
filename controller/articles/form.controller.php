@@ -9,15 +9,6 @@ $ingredients = "";
 $user_id = "";
 $pageTitle = "";
 
-$ruta = "articles_form";
-
-
-$id = $_GET["id"] ?? '';
-$isEdit = $_GET["isEdit"] ?? false;
-$isDelete = $_GET["isDelete"] ?? false;
-
-
-
 
 function carregarEdicio($articleModel)
 {
@@ -75,7 +66,6 @@ if ($isDelete && $permisCanvis) {
 }
 
 
-
 function eliminarArticle($articleModel)
 {
     $eliminacio = $_POST["elimina"] ?? false;
@@ -102,9 +92,7 @@ function processarEdicio($articleModel, &$missatge, &$tipus)
                 $result = $articleModel->updateArticle($id, $nouTitol, $nouCos, $nousIngredients);
             }
 
-            //comprovarà l'update i retornarà un missatge depenent del resultat
             $dadesMissatge = parseArticleError($result, 'edit');
-
             $missatge = $dadesMissatge[0];
             $tipus = $dadesMissatge[1];
 

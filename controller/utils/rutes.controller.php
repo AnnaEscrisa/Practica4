@@ -43,6 +43,7 @@ function transformarRutaAdmin()
     }
 }
 
+
 function transformarRutaArticle()
 {
     $ruta = array_slice(explode('/', $_SERVER["REQUEST_URI"]), -1)[0];
@@ -53,9 +54,8 @@ function transformarRutaArticle()
             return 'editar';
         case str_contains($ruta, 'isDelete=true'):
             return 'eliminar';
-        case str_contains($ruta, 'isDelete=true'):
-            return 'eliminar';
+        case str_contains($ruta, 'home'):
         default:
-            return $ruta;
+            return 'home';
     }
 }

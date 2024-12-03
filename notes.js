@@ -25,6 +25,7 @@
         //que l'enllaç sigui nomes un boto (recuperar contrasenya)
         //format bonic, com fer filegetcontent en un template a part
     
+        //! canviar edit articles + nou article per que no es repeteixi codi
 
     //! fer DETALLL    
 
