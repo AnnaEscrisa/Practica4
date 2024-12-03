@@ -9,12 +9,12 @@
             <?php echo $pageTitle ?>
         </h3>
         <form action="" method="post" class="articleForm">
-            <input hidden class="form-control" type="text" name="user_id" placeholder="Títol de l'article"
+            <input hidden class="form-control" type="text" name="user_id"
                 value="<?php echo $_SESSION['user_id']?? '' ?>">
             <div>
                 <label for="" class="form-label">Títol*</label>
                 <input class="form-control" type="text" name="nouTitol" placeholder="Títol de l'article"
-                    value="<?php echo $nouTitol?? $titol ?>">
+                    value="<?php echo $nouTitol ?? $titol ?>">
                 <div class="articleForm_form-text">
                     El títol no pot tenir més de 40 caràcters.
                 </div>

@@ -19,7 +19,6 @@ const error_a3 = "No s'ha pogut modificar";
 const error_a4 = "Article inexistent.";
 const error_a5 = "No tens permís per modificar aquest article.";
 
-
 const success_a1 = "Article inserit amb èxit";
 const success_a2 = "Article modificat amb èxit";
 
@@ -37,6 +36,7 @@ const error_r3 = "Les contrasenyes no coincideixen";
 const error_r4 = "El format de l'email no és correcte";
 const error_r5 = "La contrasenya no és prou segura";
 const error_r6 = "La contrasenya antiga no es  correcta";
+const error_r7 = "No s'ha pogut editar l'usuari";
 
 const success_r1 = "S'ha creat l'usuari amb èxit";
 const success_r2 = "S'ha modificat l'usuari amb èxit";
@@ -59,7 +59,7 @@ $previousParams = "";
 /*variables per mostrar últim error.
 Reben el valor dels parametres de la ruta*/
 $tipus = $_GET["Tipus"] ?? "error";
-$missatge = $_GET["Message"] ?? false;
+$missatge = $_GET["Message"] ?? '';
 $displayEliminar = "hidden";
 
 
@@ -80,8 +80,7 @@ function showMessage($tipus, $missatge, $displayEliminar)
     }
 }
 
-/*Carrega una pagina, adjuntant diversos parametres a la url per confeccionar un missatge d'error
-que sera llegit per la funcio anterior*/
+/*Carrega una pagina, adjuntant diversos parametres a la url*/
 function buildMessage($message, $class, $location, $parametres)
 {
     header("Location:" . $location . "?Message=" . $message . "&Tipus=" . $class . "&" . $parametres);

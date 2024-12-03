@@ -31,7 +31,7 @@ define('CAPTCHA_KEY', "6LfcyHAqAAAAAPp_FxgyRsNzdvfAqkmYdpWMYtKx");
 
 //SESSION
 
-define('SESSION_TIMEOUT', 40 * 60);
+define('SESSION_TIMEOUT', 45 * 60);
 ini_set("session.gc_maxlifetime", SESSION_TIMEOUT);
 ini_set("session.cookie_lifetime", SESSION_TIMEOUT);
 

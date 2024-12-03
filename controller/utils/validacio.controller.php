@@ -32,17 +32,20 @@ function parseUserError($result, $operation)
         7 => error_r3,
         6 => error_r4,
         5 => error_r5,
-        4 => error_g4, 
-        3 => error_r2, 
-        2 => error_g2, 
-        1 => success_r1, 
-        0 => error_r1  
+        4 => error_g4,
+        3 => error_r2,
+        2 => error_g2,
+        1 => success_r1,
+        0 => error_r1
     ] : [
-        4 => error_r2, 
-        3 => error_r4, 
-        2 => error_r5, 
+        7 => error_r3,
+        6 => error_r4,
+        5 => error_r5,
+        4 => error_g4,
+        3 => error_r2,
+        2 => error_g2,
         1 => success_r2,
-        0 => error_r1  
+        0 => error_r7
     ];
 
     return getValorMessage($result, $messages);
@@ -59,23 +62,25 @@ function getValorMessage($result, $messages)
 }
 
 //Comprovacions de l'input de l'usuari abans de probar les validacions del model
-function getInitialUserValidation($usuari, $contrasenya, $repeticioContrasenya, $nom, $email)
+function getInitialUserValidation($operacio, $usuari, $nom, $email, $contrasenya = NULL, $repeticioContrasenya = NULL)
 {
-    $dades= [$usuari, $contrasenya, $repeticioContrasenya, $nom, $email];
+    $dades = [$usuari, $contrasenya, $repeticioContrasenya, $nom, $email];
     if (comprovarHtmlCamps($dades)) {
         return 4;
     }
 
-    if (!contrasenyaSegura($contrasenya)) {
-        return 5;
-    }
-
-    if(comprovarEmail($email)){
+    if (comprovarEmail($email)) {
         return 6;
     }
 
-    if(!mateixaContrasenya($contrasenya, $repeticioContrasenya)) {
-        return 7;
+    if ($operacio == 'insert') {
+        if (!contrasenyaSegura($contrasenya)) {
+            return 5;
+        }
+
+        if (!mateixaContrasenya($contrasenya, $repeticioContrasenya)) {
+            return 7;
+        }
     }
 
     return NULL;
@@ -83,12 +88,25 @@ function getInitialUserValidation($usuari, $contrasenya, $repeticioContrasenya, 
 
 function getInitialArticleValidation($titol, $cos, $ingredients)
 {
-    $dades= [$titol, $cos, $ingredients];
+    $dades = [$titol, $cos, $ingredients];
     if (comprovarHtmlCamps($dades)) {
         return 4;
     }
 
     return NULL;
+}
+
+function validacioDades($userModel, $operacio, $id, $usuari, $nom, $email, $repeticioContrasenya = NULL, $contrasenya = NULL)
+{
+    //validacio inicial al controlador
+    $result = getInitialUserValidation($operacio, $usuari, $nom, $email, $contrasenya, $repeticioContrasenya);
+    if (!$result) {
+        //Validacio al model
+        $result = $operacio == 'insert' ?
+            $userModel->insertUsuari($usuari, $contrasenya, $nom, $email) :
+            $userModel->updateUsuari($id, $usuari, $email, $nom);
+    }
+    return $result;
 }
 
 //*---------------------- Funcions de comprovacio --------
@@ -110,7 +128,8 @@ function comprovarHtmlCamps($arrayDades)
     }
 }
 
-function mateixaContrasenya($contrasenya, $altreContrasenya){
+function mateixaContrasenya($contrasenya, $altreContrasenya)
+{
     return $contrasenya == $altreContrasenya;
 }
 

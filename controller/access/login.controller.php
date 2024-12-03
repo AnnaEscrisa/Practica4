@@ -67,6 +67,7 @@ function guardarDadesSessio($userModel, $userName)
     $_SESSION["user"] = $userName;
     $user = $userModel->selectUserByUsername($userName)[0];
     $_SESSION['user_id'] = $user['id'];
+    $_SESSION['admin'] = $user['isAdmin'];
 }
 
 function setCookies($recorda, $usuari)

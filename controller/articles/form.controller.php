@@ -1,12 +1,6 @@
 <?php
 // Anna Escribano
 
-//Controla l'insercio i edicio d'articles
-require 'controller/utils/validacio.controller.php';
-require 'permis.controller.php';
-require 'articles.controller.php';
-require "model/article.model.php";
-$articleModel = new Article();
 
 
 $titol = "";
@@ -22,30 +16,38 @@ $id = $_GET["id"] ?? '';
 $isEdit = $_GET["isEdit"] ?? false;
 $isDelete = $_GET["isDelete"] ?? false;
 
-//nomes els usuaris logats poden crear, modificar o eliminar
-$permisCanvis = comprovarPermis($articleModel, $isEdit, $isDelete);
 
 
-//*------------------- Carregar mode edició -----------------------
 
-//comprovem si estem en mode edició i tenim permis
+function carregarEdicio($articleModel)
+{
+    $isEdit = $_GET["isEdit"] ?? false;
+    $permisCanvis = comprovarPermis($articleModel, $isEdit);
 
-if ($isEdit && $permisCanvis) {
-    $pageTitle = "Editar article";
+    if ($isEdit && $permisCanvis) {
+        $id = $_GET["id"] ?? '';
 
-    $article = $articleModel->selectArticleById($id);
+        $article = $articleModel->selectArticleById($id);
 
-    //comprovem si l'article existeix, per si algun llest de torn canvia manualment l'id de l'article a la url
-    if (!$article) {
-        $missatge = error_a4;
-    } else {
-        //si l'article existeix, establirem el valor dels inputs automaticament
-        $article = $article[0];
-        $titol = $article["titol"];
-        $cos = $article["cos"];
-        $ingredients = $article["ingredients"];
-        $user_id = $article["user_id"];
+        //comprovem si l'article existeix, per si algun llest de torn canvia manualment l'id de l'article a la url
+        if (!$article) {
+            $missatge = error_a4;
+        } else {
+            $article = $article[0];
+        }
     }
+    return $article;
+}
+
+function parsejarPropietats($article)
+{
+    //turn article properties into array keys
+    return get_object_vars($article);
+    // return $articleArray;
+    // $titol = $article["titol"];
+    // $cos = $article["cos"];
+    // $ingredients = $article["ingredients"];
+    // $user_id = $article["user_id"];
 }
 
 //*--------------------- Carregar mode eliminació----------------
@@ -72,30 +74,76 @@ if ($isDelete && $permisCanvis) {
     }
 }
 
-//*--------------------Inserir/editar/eliminar ---------------
 
-//només s'executarà si s'ha enviat un formulari
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-    $nouCos = $_POST["nouCos"] ?? false;
-    $nouTitol = $_POST["nouTitol"] ?? false;
-
-    //*---- entrada pel formulari d'eliminació
-
-    eliminarArticle($articleModel);
-
-    //*---- entrada pel formulari d'edicio/inserció
-
-    editarArticle($articleModel, $id, $missatge, $tipus);
-
-    insertarArticle($articleModel, $missatge, $tipus);
-
-    //si no hi ha inputs de l'usuari 
-    if (!$nouCos || !$nouTitol) {
-        $missatge = error_g1;
+function eliminarArticle($articleModel)
+{
+    $eliminacio = $_POST["elimina"] ?? false;
+    if ($eliminacio) {
+        $id = $_GET["id"];
+        $articleModel->deleteArticle($id);
+        buildMessage(success_g1, "success", "home", "");
     }
 }
 
-include "view/form.vista.php";
+function processarEdicio($articleModel, &$missatge, &$tipus)
+{
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-?>
+        $id = $_POST['id'] ?? false;
+        $nouCos = $_POST["nouCos"] ?? false;
+        $nouTitol = $_POST["nouTitol"] ?? false;
+        $nousIngredients = $_POST["nousIngredients"] ?? false;
+
+        if ($nouCos && $nouTitol && $id) {
+            $result = getInitialArticleValidation($nouTitol, $nouCos, $nousIngredients);
+            if (!$result) {
+
+                $result = $articleModel->updateArticle($id, $nouTitol, $nouCos, $nousIngredients);
+            }
+
+            //comprovarà l'update i retornarà un missatge depenent del resultat
+            $dadesMissatge = parseArticleError($result, 'edit');
+
+            $missatge = $dadesMissatge[0];
+            $tipus = $dadesMissatge[1];
+
+            if ($tipus == 'success') {
+
+                buildMessage(success_a2, $tipus, "home", "myArticles=true");
+            }
+        } else {
+            $missatge = error_g1;
+        }
+    }
+}
+
+function insertarArticle($articleModel, &$missatge, &$tipus)
+{
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+        $nouCos = $_POST["nouCos"] ?? false;
+        $nouTitol = $_POST["nouTitol"] ?? false;
+        $nousIngredients = $_POST["nousIngredients"] ?? false;
+        $user_id = $_POST["user_id"] ?? false;
+
+        if ($nouCos && $nouTitol) {
+            $result = getInitialArticleValidation($nouTitol, $nouCos, $nousIngredients);
+
+            if (!$result) {
+                $result = $articleModel->insertArticle($nouTitol, $nouCos, $user_id, $nousIngredients);
+            }
+
+            $dadesMissatge = parseArticleError($result, 'insert');
+
+            $missatge = $dadesMissatge[0];
+            $tipus = $dadesMissatge[1];
+            if ($tipus == 'success') {
+
+                buildMessage(success_a1, $tipus, "home", "myArticles=true");
+            }
+        } else {
+            $missatge = error_g1;
+        }
+    }
+}

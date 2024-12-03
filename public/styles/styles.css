@@ -1,4 +1,5 @@
 * {
+
     margin: 0;
     padding: 0
 }
@@ -20,8 +21,17 @@ nav {
     padding: 0;
 }
 
+.navb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2em;
+}
+
 .navbar-nav {
     color: white;
+    gap: 10%;
+    text-wrap: nowrap;
 }
 
 .nav-link:hover {
