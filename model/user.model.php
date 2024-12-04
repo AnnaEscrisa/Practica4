@@ -67,6 +67,9 @@ class Usuari extends Database
         }
     }
 
+    function updateContrasenya($id, $novaContrasenya){
+        $this->update($this->taula, $id, [$novaContrasenya], 'password =?');
+    }
 
     function deleteUsuari($id) {
         $this->delete($this->taula, $id);

@@ -26,6 +26,8 @@ function transformarRutaProfile()
             return 'editar';
         case str_contains($ruta, 'isDelete'):
             return 'eliminar';
+        case str_contains($ruta, 'new_pass'):
+            return 'new_pass';
         default:
             return $ruta;
     }
