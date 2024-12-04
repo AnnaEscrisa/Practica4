@@ -1,4 +1,5 @@
 * {
+
     margin: 0;
     padding: 0
 }
@@ -20,8 +21,17 @@ nav {
     padding: 0;
 }
 
+.navb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2em;
+}
+
 .navbar-nav {
     color: white;
+    gap: 10%;
+    text-wrap: nowrap;
 }
 
 .nav-link:hover {
@@ -99,7 +109,7 @@ input[name="buscadorArticle"] {
 .article_card {
     aspect-ratio: 1/1;
     text-wrap: wrap;
-    color: white;
+    color: black;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -212,6 +222,10 @@ main:has(form.articleForm) {
     content: '❗';
     background-color: rgb(194, 32, 32);
     border: 1px solid rgb(248, 186, 186);
+}
+
+.modal {
+    color: black;
 }
 
 #alerta_miss {

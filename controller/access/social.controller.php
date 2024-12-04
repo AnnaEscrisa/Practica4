@@ -28,7 +28,6 @@ function githubLogin($userModel)
 
 function deviantArtLogin($userModel)
 {
-
     $deviantart = new OAuth2\Client(DEVIANTART_ID, DEVIANTART_SECRET);
 
     $authUrl = $deviantart->getAuthenticationUrl(
@@ -93,6 +92,8 @@ function iniciSessio($userId, $username)
 {
     $_SESSION['user_id'] = $userId;
     $_SESSION['user'] = $username;
+    $_SESSION['admin'] = false;
+    $_SESSION['social'] = true;
 }
 
 

@@ -39,7 +39,7 @@ class Usuari extends Database
     //primer valida els valors, i despres inserta l'usuari amb la contraenya hashejada
     function insertUsuari($usuari, $contrasenya, $nom, $email)
     {
-        $comprovacions = $this->comprovarDades($usuari, $nom, $email);
+        $comprovacions = $this->comprovarDades("insert", $usuari, $nom, $email);
 
         if ($comprovacions == NULL) {
             $contrasenyaEncriptada = password_hash($contrasenya, PASSWORD_DEFAULT);
@@ -52,9 +52,27 @@ class Usuari extends Database
 
     }
 
-    function updateUsuari($id, $valors, $reassignacions)
+    function updateUsuari($id, $username, $email, $name)
     {
-        $this->update($this->taula, $id, $valors, $reassignacions);
+        $user = $this->selectUserById($id);
+        $usernameActual = $user['user'];
+
+        $comprovacions = $this->comprovarDades('edit', $username, $name, $email, $usernameActual);
+
+        if ($comprovacions == NULL) {
+            $reassignacions = "user = ?, email = ?, name = ?";
+            return $this->update($this->taula, $id, [$username, $email, $name], $reassignacions) ? 1 : 0;
+        } else {
+            return $comprovacions;
+        }
+    }
+
+    function updateContrasenya($id, $novaContrasenya){
+        $this->update($this->taula, $id, [$novaContrasenya], 'password =?');
+    }
+
+    function deleteUsuari($id) {
+        $this->delete($this->taula, $id);
     }
 
     //comprova si l'usuari existeix, i si és així comprova que la contrasenya es correspon amb la de la bbdd
@@ -63,7 +81,7 @@ class Usuari extends Database
         $usuari = $this->selectUserbyUsername($possibleUsuari);
 
         if ($usuari) {
-            $usuari= $usuari[0];
+            $usuari = $usuari[0];
 
             $contrasenyaReal = $usuari['password'];
 
@@ -88,7 +106,8 @@ class Usuari extends Database
         }
     }
 
-    function inserirSocialUser($user, $possibleEmail = null){
+    function inserirSocialUser($user, $possibleEmail = null)
+    {
         $valors = [$user, $possibleEmail, true]; // null per indicar que es un nou social user
         return $this->insert($this->taula, "user, email, isSocial", $valors, "?, ?, ?");
     }
@@ -99,7 +118,8 @@ class Usuari extends Database
         $this->insert($this->taula_socials, 'user_fk, token, social, social_id', $valors, '?, ?, ?, ?');
     }
 
-    function updateSocialToken($user_fk, $token){
+    function updateSocialToken($user_fk, $token)
+    {
         $this->updateBy($this->taula_socials, 'user_fk', $user_fk, [$token], 'token = ?');
     }
 
@@ -110,9 +130,9 @@ class Usuari extends Database
     }
 
     //comprovacio inicial abans de la inserció. Comprova que l'usari no existeixi i que la mida no sigui excessiva
-    function comprovarDades($user, $nom, $email)
+    function comprovarDades($operacio, $user, $nom, $email, $userVell = null)
     {
-        if ($this->selectUserByUsername($user)) {
+        if (($operacio == 'insert' || $user != $userVell) && $this->selectUserByUsername($user)) {
             return 3;
         }
 

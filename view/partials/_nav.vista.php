@@ -4,7 +4,8 @@
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse navb" id="navbarNav">
+      <div class="navbar_logo"></div>
       <ul class="navbar-nav">
         <li id="home" class="nav-item">
           <a class="nav-link" href="home">Home</a>
@@ -14,6 +15,12 @@
         </li>
         <li id="newArticle" class="nav-item  <?php echo !isset($_SESSION['user']) ? "hidden" : "" ?>">
           <a class="nav-link" href="articles_form">Nou Article</a>
+        </li>
+        <li id="newArticle" class="nav-item  <?php echo !isset($_SESSION['admin']) || !($_SESSION['admin']) ? "hidden" : '' ?>">
+          <a class="nav-link" href="admin">Users</a>
+        </li>
+        <li id="newArticle" class="nav-item">
+          <a class="nav-link" href="">Contacte</a>
         </li>
       </ul>
       <ul class="navbar-nav">

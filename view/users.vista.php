@@ -2,31 +2,36 @@
 <?php include "view/partials/_head.vista.php"; ?>
 
 <body>
+    <?php showMessage($tipus, $missatge, $displayEliminar); ?>
     <?php include "view/partials/_nav.vista.php"; ?>
     <main class="container">
 
         <section class="userCards">
-            <?php
-
-            if (!empty($usuarisMostrats)) {
-                foreach ($usuarisMostrats[$paginesData['currentPage'] - 1] as $key => $value) {
-                    echo '
+            <?php if (!empty($usuarisMostrats)):
+                foreach ($usuarisMostrats[$paginesData['currentPage'] - 1] as $key => $value): ?>
                     <article class="card">
-                        <h2 class="card-title">' . $value['user'] . '</h2>
+                        <h2 class="card-title"><?= $value['user'] ?></h2>
                         <div>
-                            <p class="card-text" >' . $value['name'] . '</p>
-                            <p class="card-text" >' . $value['email'] . '</p>
+                            <p class="card-text"><?= $value['name'] ?></p>
+                            <p class="card-text"><?= $value['email'] ?></p>
+                            <?php if ($value['isSocial']): ?>
+                                Accés a través de xarxes socials
+                            <?php endif; ?>
                         </div>
-                        <div class="card-body footer "> 
-                            <a class="btn btn-primary href="articles_form?id=' . $value['id'] . '&isEdit=true">Edit</a>
-                            <a class="btn btn-danger href="articles_form?id=' . $value['id'] . '&isDelete=true">Elimina</a>
+                        <div class="card-body footer ">
+                            <a class="btn btn-primary" href="profile?id=<?= $value['id'] ?>&isEdit=true">Editar</a>
+                            <button class="btn btn-danger" onclick="new bootstrap.Modal(document.getElementById('modal-delete')).show();">Eliminar</button>
+                            <?php
+                            $item = 'usuari';
+                            $ruta = "profile?isDelete=true&id=".$value['id'];
+                            include "view/partials/_modal-delete.vista.php"; ?>
                         </div>
-                    </article>';
-                }
-            } else {
-                echo "No hi ha articles per mostrar";
-            }
-            ?>
+                    </article>
+
+                <?php endforeach; ?>
+            <?php else: ?>
+                No hi ha articles per mostrar
+            <?php endif; ?>
         </section>
         <section class="pages">
             <form action="" method="POST">
@@ -40,7 +45,7 @@
             if (!empty($usuarisMostrats)) {
 
                 echo '
-                <a href="users?page=' . $paginesData['previousPage'] . '"
+                <a href="admin?page=' . $paginesData['previousPage'] . '"
                     class="btn btn-primary ' . $paginesData['previousClass'] . '">
                             Anterior
                     </a>
@@ -49,7 +54,7 @@
                     $paginesData['currentPage']
                     . '</a>
                  <a class="btn btn-primary ' . $paginesData['nextClass'] . '"
-                    href= "users?page=' . $paginesData['nextPage'] . '" >
+                    href= "admin?page=' . $paginesData['nextPage'] . '" >
                         Següent
                 </a>';
             }

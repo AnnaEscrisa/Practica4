@@ -11,20 +11,24 @@ function comprovarActivitat($timeout) {
         $duration = time() - intval($_SESSION['lastaccess']);
     
         if ($duration > $timeout) {
-            //esborrem dades de sessio i redirigim a login
             session_unset();
             session_destroy();
-            $ruta = 'login';
-            buildMessage(error_g5, 'error', $ruta, '');
+            buildMessage(error_g5, 'error', 'login', '');
         }
     }
 }
 
 function registrarActivitat(){
     if (isset($_SESSION['user'])) {
-        //enrellistrem l'ultim acces de l'usuari ara
         $_SESSION['lastaccess'] = time();
     }
+}
+
+//mantenir sessio oberta
+
+function mantenerSessioOberta() {
+    session_regenerate_id(true);
+    $_SESSION['lastaccess'] = time();
 }
 
 ?>

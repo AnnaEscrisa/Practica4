@@ -1,1 +1,1 @@
-Erro 403, sense permis
+Error 403, sense permis

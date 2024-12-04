@@ -3,33 +3,41 @@
 
 require 'model/user.model.php';
 
-require 'oblit.controller.php';
-require 'newpass.controller.php';
 require 'fitxa.controller.php';
 require 'controller/utils/validacio.controller.php';
-require 'controller/utils/mailer.controller.php';
-
+require 'controller/utils/rutes.controller.php';
 
 $userModel = new Usuari();
-$mailerController = new MailerController();
 
-$ruta = array_slice(explode('/', $_SERVER["REQUEST_URI"]), -1)[0];
-$ruta = explode('?', $ruta)[0];
+
+$ruta = transformarRutaProfile();
 $permis = "";
 
 
 switch ($ruta) {
     case 'profile':
         $pageTitle = 'Perfil';
-        //carregarPerfil($userModel, $permis, $missatge);
+        $user = carregarUser($userModel);
+        include 'view/profile.vista.php';
         break;
 
     case 'editar':
         $pageTitle = 'Editar usuari';
-        //carregarEdicio($userModel, $permis, $missatge);
+        $user = carregarUser($userModel);
+        processarEdicioUser($userModel, $missatge, $tipus);
+        include 'view/edicioUser.vista.php';
+        break;
+
+    case 'eliminar':
+        require 'model/article.model.php';
+
+        $articleModel = new Article();
+        eliminarUser($userModel, $articleModel);
         break;
 
     case 'new_pass':
+        require 'newpass.controller.php';
+
         $pageTitle = 'Canvi Contrasenya';
         carregarCanviPass($userModel, $permis, $missatge);
         processarCanviPass($userModel, $missatge);
@@ -37,12 +45,15 @@ switch ($ruta) {
         break;
 
     case 'recuperacio':
+        require 'oblit.controller.php';
+        require 'controller/utils/mailer.controller.php';
+        $mailerController = new MailerController();
+
         $pageTitle = 'Recuperació';
         recuperacio($userModel, $mailerController, $missatge, $tipus);
         include 'view/recupera.vista.php';
         break;
 }
-
 
 
 //presentar ficha usuari

@@ -17,7 +17,7 @@ function processarCanviPass($userModel, &$missatge)
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-        if ($_SESSION['user_id']) {
+        if (isset($_SESSION['user_id'])) {
             canviUserLogat($userModel, $missatge);
         } else {
             canviUserNoLogat($userModel, $missatge);
@@ -48,8 +48,7 @@ function canviUserLogat($userModel, &$missatge)
         $missatge = error_r5;
     } else {
         $valors = password_hash($contrasenya, PASSWORD_DEFAULT);
-
-        $userModel->updateUsuari($_SESSION['user_id'], [$valors], 'password = ?');
+        $userModel->updateContrasenya($_SESSION['user_id'], $valors);
         buildMessage(success_rec2, 'success', 'home', '');
     }
 }
@@ -74,7 +73,7 @@ function canviUserNoLogat($userModel, &$missatge)
     } else {
         $valors = password_hash($contrasenya, PASSWORD_DEFAULT);
 
-        $userModel->updateUsuari($user_id, [$valors], 'password = ?');
+        $userModel->updateContrasenya($user_id, $valors);
         buildMessage(success_rec2, 'success', 'home', '');
     }
 }

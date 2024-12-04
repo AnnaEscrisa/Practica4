@@ -11,11 +11,11 @@ require "login.controller.php";
 require "registre.controller.php";
 require "social.controller.php";
 require "controller/utils/validacio.controller.php";
-
+require 'controller/utils/rutes.controller.php';
 
 $userModel = new Usuari();
 
-$ruta = transformarRuta();
+$ruta = transformarRutaAccess();
 $pageTitle = $ruta;
 
 

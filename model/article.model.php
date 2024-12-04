@@ -1,7 +1,7 @@
 <?php
 // Anna Escribano Sabio
 
-require 'database.model.php';
+require_once 'database.model.php';
 class Article extends Database
 {
     private $taula;//taula corresponent a la bbdd
@@ -12,7 +12,7 @@ class Article extends Database
     {
         $this->db = Database::getInstance();
         $this->taula = "articles";
-        $this->select = " articles.id, articles.cos, articles.titol, articles.ingredients, users.name, users.id as user_id ";
+        $this->select = " articles.id, articles.cos, articles.titol, articles.ingredients, articles.image, users.name, users.id as user_id ";
         $this->join = ' LEFT JOIN users ON articles.user_id = users.id ';
 
     }

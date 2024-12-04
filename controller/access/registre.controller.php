@@ -28,15 +28,4 @@ function processarRegistre($userModel, &$tipus, &$missatge)
 
 }
 
-function validacioDades($userModel, $usuari, $repeticioContrasenya, $contrasenya, $nom, $email)
-{
-    //validacio inicial al controlador
-    $result = getInitialUserValidation($usuari, $contrasenya, $repeticioContrasenya, $nom, $email);
-    if (!$result) {
-        //Validacio al model
-        $result = $userModel->insertUsuari($usuari, $contrasenya, $nom, $email);
-    }
-    return $result;
-}
-
 ?>
