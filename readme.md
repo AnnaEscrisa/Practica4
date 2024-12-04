@@ -2,14 +2,11 @@
 
 Projecte realitzat amb **PHP**, establint connexions amb bases de dades **MYSQL** mitjançant **PDO**. Permet a l'usuari crear un compte i inserir, editar, eliminar i consultar els diversos articles de la base de dades.
 
-**Canvis 26/10 **
-Petita correcció a nom de variable erroni. Nombre d'articles per pàgina seleccionable per l'usuari. Començament de futures millores (panell d'usuaris per l'administrador, per exemple).
-
 
 # Instal·lació
 
 Situar la carpeta del projecte a *htdocs* en cas d'utilitzar XAMPP i accedir a *localhost* (en cas d'utilitzar altre programari, consultar la seva guia).
-No cal importar la base de dades; és allotjada al núvol (dinahosting).
+No cal importar la base de dades; és allotjada al núvol (dondominio).
 
 # Estructura
 El projecte està estructurat seguint el sistema MVC + una carpeta public.
@@ -22,38 +19,23 @@ La classe article hereta tots els mètodes i els aplica a les seves caracteristi
 
 ### Controllers
 Conté els controladors principals (els que s'encarreguen de direccionar el codi, donar resposta a les peticions de l'usuari i carregar les vistes) i els secundaris (aquells que ofereixen funcionalitat extra o d'ajut).
-Totes les rutes principals requereixen `SessionController` per comprovar l'estat de la sessió.
+Organitzat per carpetes depenent de les seves funcions.
 
-- **HomeController**
-Carrega i mostra els articles. Es utilitzat tant per mostrar tots els articles com pels de l'usuari especific de la sessió a través de paràmetres a la URL.
+- **Access**
+Controlador base `access.controller`. Controla el login i el registre, inclòs el registre mitjançant xarxes socials (DeviantArt i GitHub). Permet a un mateix email estar en diversos comptes (tant socials com normals). 
 
-- **FormController**
-Tracta la insercio, modificació i eliminacio dels articles.
-Mitjançant les variables isEdit o isDelete ( o l'absencia d'elles ) determina el mètode a emprar. Processa dos formularis: el de inserció/edició (form.vista) i el de eliminació (apareix al missatge de confirmació de l'eliminació). Empra les funcions de `MessageController` per donar feedback a l'usuari.
+- **Adminr**
+Controlador base `admin.controller`. En entrar comprovarà que l'usuari te permissos per veure els recursos de la pàgina. Podrà administrar els diversos usuaris de la aplicació. En eliminar un usuari, passa els seus articles a anònim.
 
-- **UserController**
-Tracta la inserció, login i logout d'usuaris. Fa comprovacions dels camps mitjançant `ValidacioController. Inicia sessió i guarda les variables de sessió.
+- **Articles**
+Controlador base `articles.controller`. Mostra els articles i gestiona la seva inserció, eedició i eliminació. Comprova que els usuari puguin fer canvis als articles (només l'autor pot fer canvis).
 
-- **RecuperacioController**
-S'encarrega de comprovar l'existencia de l'usuari que oblida la contrasenya i enviar-li el codi de recuperació. Insereix i elimina aquest codi de la taula *user_codes*. En rebre un codi correcte, crea una cookie i redirecciona a la pàgina de canvi de contrasenya. Permet fer diverses peticions de codi, en cas que l'usuari el perdi o caduqui.
+- **Profile**
+Controlador base `profile.controller`. Administra el canvi de les dades de l'usuari, inclosa la contrasenya. No permet canviar la contrasenya als usuaris logats mitjançant xarxes socials.
 
-- **ProfileController**
-Si la cookie previament mentada existeix, permetrà omplenar el formulari de canvi de contrasenya. Farà les comprovacions pertinents a la contrasenya i farà l'update de l'usuari. Més endevant controlarà també el canvi d'altres dades de l'usuari.
+- **Utils**
+Diversos controladors amb funcionalitats extra utilitzades a diferents seccions del codi, pero que no pertanyen a una secció especifica.
 
-- **PaginationController**
-Divideix els articles en grups i configura el número de pàgines i la classe dels botons de paginació.
-
- - **MessageController**
-Ofereix funcionalitat per mostrar missatges a l'usuari. Reutilitzable i ampliable segons canviin les necessitats del projecte.
-
- - **ValidacioController**
-Fa validacions inicials dels inputs introduits per l'usuari. Comprova aquells possibles errors no relacionats amb la base de dades (inputs buits, contrasenyes no segures, formats incorrectes...) i els transforma en errors del controlador `MessageController`.
-
-- **MailerController**
-A través de la classe PHPMailer, envia un missatge a l'email de l'usuari.
-
-- **SessionController**
-Controla la duració de la sessió de l'usuari. Cada vegada que aquest carrega una pàgina, es cridat i fa la comprovació. Redirecciona amb un missatge si la sessió ha sigut tancada.
 
 ### Vistes
 Dividit entre vistes i partials. Les vistes només inclouen el body de l'html per reduir el codi repetit. Inclouen certa reactivitat al codi per mantenir dades a formularis o mostrar unes seccions o altres.
