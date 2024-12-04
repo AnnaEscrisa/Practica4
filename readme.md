@@ -11,6 +11,9 @@ No cal importar la base de dades; és allotjada al núvol (dondominio).
 # Estructura
 El projecte està estructurat seguint el sistema MVC + una carpeta public.
 
+- **Rutes**
+Les rutes (home, login, registre...) passen per un primer filtre per l'htacces, que les canvia de ""index?route=home" a "home". Secundariament, passen per altre filtre als controladors, que les redirigeixen a la funcionalitat especifica (edicio, inserció, etc).
+
 ### Models
 Conté classes que representen l'accés a les dades de la base de dades.
 La clase database serveix com a base per realizar les principals interaccions amb una bbdd (conexio, insertar, modificar, eliminar, seleccionar...) i algunes comprovacions de dades (aquelles que requereixen una petició a la bbdd o coneixement d'aquesta). 
