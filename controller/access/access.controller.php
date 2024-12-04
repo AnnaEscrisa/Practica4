@@ -3,7 +3,7 @@
 
 require 'lib/reCaptcha/recaptchalib.php';
 require 'lib/Hybridauth/autoload.php';
-require 'lib/Oauth2/autoloader.php';
+require 'lib/OAuth2/autoloader.php';
 
 require "model/user.model.php";
 

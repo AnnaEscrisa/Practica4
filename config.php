@@ -16,15 +16,17 @@ if(ENVIRONMENT == 'dev'){
     define('GITHUB_ID', 'Ov23liuvq0ONjCjFACZu');
     define('GITHUB_SECRET','2f6b30072107ccb7cf2e0c81059e4e8f201e7fa1');
     define('CALLBACK', 'http://localhost/Xavi/practica2_1/login?github=true');
+    define('DEVIANT_CALLBACK', 'http://localhost/Xavi/practica2_1/login?deviantart=true');
+
 } else {
     define('GITHUB_ID', 'Ov23liIJrpyrzzkGvrTy');
     define('GITHUB_SECRET','1cee8af6c2e0f02bacdbbb3fd2842a669b44d883');
     define('CALLBACK', 'http://www.annaescribano.cat/backend/login?github=true');
+    define('DEVIANT_CALLBACK', 'http://www.annaescribano.cat/backend/login?deviantart=true');
 }
 
 define ('DEVIANTART_ID', '44074');
 define('DEVIANTART_SECRET', 'a6dcca6b6a458b95081ec8b2c5c2d858');
-define('DEVIANT_CALLBACK', 'http://localhost/Xavi/practica2_1/login?deviantart=true');
 
 define('CAPTCHA_KEY', "6LfcyHAqAAAAAPp_FxgyRsNzdvfAqkmYdpWMYtKx");
 
