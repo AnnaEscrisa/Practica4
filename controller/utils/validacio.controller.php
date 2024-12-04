@@ -69,8 +69,10 @@ function getInitialUserValidation($operacio, $usuari, $nom, $email, $contrasenya
         return 4;
     }
 
-    if (comprovarEmail($email)) {
-        return 6;
+    if($email){
+        if (comprovarEmail($email)) {
+            return 6;
+        }
     }
 
     if ($operacio == 'insert') {
@@ -84,6 +86,17 @@ function getInitialUserValidation($operacio, $usuari, $nom, $email, $contrasenya
     }
 
     return NULL;
+}
+
+function getConditionalUserValidation($nom, $usuari, $email){
+   
+    $dades = [$usuari, $nom, $email];
+    if (comprovarHtmlCamps($dades)) {
+        return 4;
+    }
+   
+   
+    
 }
 
 function getInitialArticleValidation($titol, $cos, $ingredients)

@@ -55,7 +55,11 @@ function transformarRutaArticle()
         case str_contains($ruta, 'isDelete=true'):
             return 'eliminar';
         case str_contains($ruta, 'home'):
-        default:
             return 'home';
+        case str_contains($ruta, 'articles_form'):
+            return 'nou';
+        default:
+            return $ruta;
+
     }
 }

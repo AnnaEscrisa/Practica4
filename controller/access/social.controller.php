@@ -93,6 +93,7 @@ function iniciSessio($userId, $username)
     $_SESSION['user_id'] = $userId;
     $_SESSION['user'] = $username;
     $_SESSION['admin'] = false;
+    $_SESSION['social'] = true;
 }
 
 

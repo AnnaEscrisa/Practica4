@@ -1,7 +1,7 @@
 <?php
 
 
-function comprovarPermis($articleModel, $isMode){
+function comprovarPermis($articleModel){
     $permisCanvis = false;
     $currentUser = $_SESSION['user_id'] ?? false;
     $id = $_GET["id"] ?? '';
@@ -13,7 +13,7 @@ function comprovarPermis($articleModel, $isMode){
         buildMessage(error_a5, "error", 'login', "");
     }
     
-    if ($isMode && !$permisCanvis) {
+    if (!$permisCanvis) {
         buildMessage(error_a5, "error", 'home', "");
     }
     return $permisCanvis;

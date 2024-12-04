@@ -1,7 +1,7 @@
 <?php
 // Anna Escribano Sabio
 
-require 'database.model.php';
+require_once 'database.model.php';
 class Article extends Database
 {
     private $taula;//taula corresponent a la bbdd

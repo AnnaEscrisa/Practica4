@@ -1,21 +1,11 @@
 <?php
 // Anna Escribano
 
-
-
-$titol = "";
-$cos = "";
-$ingredients = "";
-$user_id = "";
-$pageTitle = "";
-
-
 function carregarEdicio($articleModel)
 {
-    $isEdit = $_GET["isEdit"] ?? false;
-    $permisCanvis = comprovarPermis($articleModel, $isEdit);
+    $permisCanvis = comprovarPermis($articleModel);
 
-    if ($isEdit && $permisCanvis) {
+    if ($permisCanvis) {
         $id = $_GET["id"] ?? '';
 
         $article = $articleModel->selectArticleById($id);
@@ -41,44 +31,31 @@ function parsejarPropietats($article)
     // $user_id = $article["user_id"];
 }
 
-//*--------------------- Carregar mode eliminació----------------
-
-//comprovem si estem en mode eliminació
-
-if ($isDelete && $permisCanvis) {
-    $article = $articleModel->selectArticleById($id);
-
-    if (!$article) {
-        $missatge = error_a4;
-    } else {
-
-        //carreguem l'article perque l'usuari vegi quin article elimina
-        $article = $article[0];
-        $pageTitle = "Eliminar article - " . $article["id"];
-        $titol = $article["titol"];
-        $cos = $article["cos"];
-        $ingredients = $article["ingredients"];
-        $user_id = $article["user_id"];
-
-        $missatge = error_g3;
-        $displayEliminar = "";
-    }
-}
-
 
 function eliminarArticle($articleModel)
 {
-    $eliminacio = $_POST["elimina"] ?? false;
-    if ($eliminacio) {
-        $id = $_GET["id"];
-        $articleModel->deleteArticle($id);
-        buildMessage(success_g1, "success", "home", "");
+    $permisCanvis = comprovarPermis($articleModel);
+
+    if ($permisCanvis) {
+        $id = $_GET["id"] ?? '';
+
+        $article = $articleModel->selectArticleById($id);
+        if ($article) {
+            $articleModel->deleteArticle($id);
+            buildMessage(success_g1, "success", "home", "");
+        }
+        buildMessage(error_a4, "error", "home", "");
+
+    } else {
+
     }
 }
 
 function processarEdicio($articleModel, &$missatge, &$tipus)
 {
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        $permisCanvis = comprovarPermis($articleModel);
+        if (!$permisCanvis) buildMessage();
 
         $id = $_POST['id'] ?? false;
         $nouCos = $_POST["nouCos"] ?? false;
@@ -106,14 +83,16 @@ function processarEdicio($articleModel, &$missatge, &$tipus)
     }
 }
 
-function insertarArticle($articleModel, &$missatge, &$tipus)
+function insertarArticle($articleModel, &$missatge, &$tipus, &$displayEliminar)
 {
+    $pageTitle = 'Nou Article';
+    $nouTitol = $nouCos = $nousIngredients = $user_id = "";
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         $nouCos = $_POST["nouCos"] ?? false;
         $nouTitol = $_POST["nouTitol"] ?? false;
         $nousIngredients = $_POST["nousIngredients"] ?? false;
-        $user_id = $_POST["user_id"] ?? false;
+        $user_id = $_SESSION['user_id'];
 
         if ($nouCos && $nouTitol) {
             $result = getInitialArticleValidation($nouTitol, $nouCos, $nousIngredients);
@@ -134,4 +113,6 @@ function insertarArticle($articleModel, &$missatge, &$tipus)
             $missatge = error_g1;
         }
     }
+    include "view/form.vista.php";
+
 }

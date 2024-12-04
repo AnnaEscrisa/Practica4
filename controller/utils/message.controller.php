@@ -40,6 +40,7 @@ const error_r7 = "No s'ha pogut editar l'usuari";
 
 const success_r1 = "S'ha creat l'usuari amb èxit";
 const success_r2 = "S'ha modificat l'usuari amb èxit";
+const success_r3 = "S'ha eliminar l'usuari amb èxit";
 
 //errors recuperacio
 const error_rec1 = 'Usuari no trobat';

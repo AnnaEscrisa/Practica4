@@ -7,11 +7,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        Vols eliminar aquest <?=$item?>? Aquesta acció es irreversible.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <a type="button" class="btn btn-primary" href="profile?isDelete=true&id=">Elimina</a>
+        <a type="button" class="btn btn-primary" href="<?= $ruta?>">Elimina</a>
       </div>
     </div>
   </div>

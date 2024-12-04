@@ -8,7 +8,7 @@ require 'controller/utils/validacio.controller.php';
 require 'controller/utils/rutes.controller.php';
 
 $userModel = new Usuari();
-$mailerController = new MailerController();
+
 
 $ruta = transformarRutaProfile();
 $permis = "";
@@ -29,7 +29,10 @@ switch ($ruta) {
         break;
 
     case 'eliminar':
-        eliminarUser($userModel);
+        require 'model/article.model.php';
+
+        $articleModel = new Article();
+        eliminarUser($userModel, $articleModel);
         break;
 
     case 'new_pass':
@@ -44,6 +47,7 @@ switch ($ruta) {
     case 'recuperacio':
         require 'oblit.controller.php';
         require 'controller/utils/mailer.controller.php';
+        $mailerController = new MailerController();
 
         $pageTitle = 'Recuperació';
         recuperacio($userModel, $mailerController, $missatge, $tipus);

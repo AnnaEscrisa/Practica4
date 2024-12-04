@@ -20,11 +20,10 @@
                         </div>
                         <div class="card-body footer ">
                             <a class="btn btn-primary" href="profile?id=<?= $value['id'] ?>&isEdit=true">Editar</a>
-                            <button class="btn btn-primary" onclick="new bootstrap.Modal(document.getElementById('modal-delete')).show();">Eliminar</button>
+                            <button class="btn btn-danger" onclick="new bootstrap.Modal(document.getElementById('modal-delete')).show();">Eliminar</button>
                             <?php
                             $item = 'usuari';
-                            $ruta = 'profile';
-                            $id = $value['id'];
+                            $ruta = "profile?isDelete=true&id=".$value['id'];
                             include "view/partials/_modal-delete.vista.php"; ?>
                         </div>
                     </article>

@@ -67,6 +67,11 @@ class Usuari extends Database
         }
     }
 
+
+    function deleteUsuari($id) {
+        $this->delete($this->taula, $id);
+    }
+
     //comprova si l'usuari existeix, i si és així comprova que la contrasenya es correspon amb la de la bbdd
     function login($possibleUsuari, $possibleContrasenya)
     {

@@ -22,31 +22,37 @@ function processarEdicioUser($userModel, &$missatge, &$tipus)
         $nouEmail = $_POST['email'] ?? '';
         $nouNom = $_POST['nom'] ?? '';
 
-        if ($nouUser && $nouNom && $nouEmail) {
+        $result = validacioDades($userModel, 'edit', $id, $nouUser, $nouNom, $nouEmail);
 
-            $result = validacioDades($userModel, 'edit', $id, $nouUser, $nouNom, $nouEmail);
+        $dadesmissatge = parseUserError($result, "edit");
+        $missatge = $dadesmissatge[0];
+        $tipus = $dadesmissatge[1];
 
-            $dadesmissatge = parseUserError($result, "edit");
-            $missatge = $dadesmissatge[0];
-            $tipus = $dadesmissatge[1];
-
-            if ($tipus == "success") {
-                buildMessage($missatge, $tipus, $_SESSION['admin'] ? 'admin' : "home", "");
-            }
-        } else {
-            $missatge = error_g1;
+        
+        if ($tipus == "success") {
+            if (!$_SESSION['admin']) $_SESSION['user'] = $nouUser;
+            buildMessage($missatge, $tipus, $_SESSION['admin'] ? 'admin' : "home", "");
         }
+
     }
 }
 
-function eliminarUser($userModel) {
+function eliminarUser($userModel, $articleModel)
+{
     $id = $_GET['id'];
     comprovarPermis($id);
     $user = $userModel->selectUserById($id);
     if (!$user) {
         buildMessage(error_rec1, 'error', 'home', '');
     }
-    $userModel->deleteUser($id);
+    //comprovar si te articles, si te posar en anonim
+    $articles = $articleModel->selectArticleByUser($id);
+    if ($articles) {
+        $articleModel->setArticleAnonimous($id);
+    }
+
+    $userModel->deleteUsuari($id);
+    buildMessage(success_r3, 'success', 'admin', '');
 }
 
 function comprovarPermis($id)

@@ -46,11 +46,17 @@
                                     <div class="card-body footer ">
                                         <a class="btn btn-primary <?= $hiddenButton ?>"
                                             href="articles_form?id=<?= $value['id'] ?>&isEdit=true">Edit</a>
-                                        <a class="btn btn-danger <?= $hiddenButton ?>"
-                                            href="articles_form?id=<?= $value['id'] ?>&isDelete=true">Elimina</a>
+                                        <button class="btn btn-danger <?= $hiddenButton ?>"
+                                            onclick="new bootstrap.Modal(document.getElementById('modal-delete')).show();">Eliminar</button>
+
                                     </div>
+
                                 </article>
                             </div>
+                            <?php
+                            $item = 'article';
+                            $ruta = "articles_form?isDelete=true&id=" . $value['id'];
+                            include "view/partials/_modal-delete.vista.php"; ?>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <p>No hi ha articles per mostrar</p>
