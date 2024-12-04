@@ -61,7 +61,7 @@ function transformarRutaArticle()
         case str_contains($ruta, 'articles_form'):
             return 'nou';
         default:
-            return $ruta;
+            return 'home';
 
     }
 }
