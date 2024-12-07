@@ -37,18 +37,12 @@
                             <!--! afegir escola a article, i fer una clase per cada una -->
                             <div class="grid_card">
                                 <article class="article_card ac_outline_evocation"
-                                    style="background-image: url('public/img/articles/<?= $value['image'] ?>')">
+                                    style="background-image: url('public/img/articles/<?= $value['image'] ?>')"
+                                    onclick="showSidebar(<?= htmlspecialchars(json_encode($value)) ?>)"
+                                    >
 
                                     <div class="ac_banner">
                                         <h3 class="a_title"> <?= $value['titol'] ?></h3>
-                                    </div>
-
-                                    <div class="card-body footer ">
-                                        <a class="btn btn-primary <?= $hiddenButton ?>"
-                                            href="articles_form?id=<?= $value['id'] ?>&isEdit=true">Edit</a>
-                                        <button class="btn btn-danger <?= $hiddenButton ?>"
-                                            onclick="new bootstrap.Modal(document.getElementById('modal-delete')).show();">Eliminar</button>
-
                                     </div>
 
                                 </article>
@@ -88,10 +82,7 @@
         </div>
 
         <div class="grid_aside_right">
-            <aside class="aside_right">
-                <!-- obrirem modal amb info de article -->
-
-            </aside>
+            <?php include 'view/partials/_rsidebar-article.vista.php'; ?>
         </div>
 
     </div>

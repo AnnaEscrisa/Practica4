@@ -114,6 +114,7 @@ input[name="buscadorArticle"] {
     background-position: center;
     background-repeat: no-repeat;
     outline-offset: 5px;
+    cursor: pointer;
 }
 
 .ac_outline_evocation {
