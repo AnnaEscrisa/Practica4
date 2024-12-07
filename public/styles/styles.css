@@ -1,15 +1,38 @@
 * {
+
     margin: 0;
-   
+    padding: 0
 }
 
 body {
-    /* background-image: linear-gradient(#0f0927, #1c128e);*/
+    background-image: linear-gradient(#120b13, #471a52);
     background-repeat: no-repeat;
-    min-height: 100vh;
+    background-size: cover;
+    color: white;
 }
 
 /********* NAV *******/
+
+.grid_nav {
+    grid-area: nav;
+}
+
+nav {
+    padding: 0;
+}
+
+.navb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2em;
+}
+
+.navbar-nav {
+    color: white;
+    gap: 10%;
+    text-wrap: nowrap;
+}
 
 .nav-link:hover {
     background-color: aqua;
@@ -19,6 +42,95 @@ body {
 nav .nav-item.nav-selected {
     background-color: blue;
 }
+
+/****** HOME  ******/
+
+.container_home {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 15% 60% 1fr;
+    grid-template-rows: 40px 1fr;
+    grid-template-areas:
+    "nav nav nav"
+    "left-nav main right-nav";
+}
+
+.grid_aside_left{
+    grid-area: left-nav;
+}
+
+.aside_left {
+  min-height: 100%;
+    background-image: linear-gradient(rgb(68, 68, 221, 0.5), transparent);
+}
+
+.grid_main {
+    grid-area: main;
+}
+
+.grid_main main {
+   
+    gap: 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+.grid_aside_right{
+    grid-area: right-nav;
+}
+
+/* .aside_right {
+   
+} */
+
+/** buscador **/
+
+.home-form {
+    margin-top: 10px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+input[name="buscadorArticle"] {
+    width: 20%;
+}
+
+/**cards**/
+
+.cards_container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: space-evenly
+}
+
+.article_card {
+    aspect-ratio: 1/1;
+    text-wrap: wrap;
+    color: black;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    outline-offset: 5px;
+    cursor: pointer;
+}
+
+.ac_outline_evocation {
+    outline: 3px solid rgb(0, 251, 255);
+    filter: drop-shadow(5px 5px 10px #4444dd); 
+}
+
+/* .ac_outline_mal {
+    outline: 3px solid red;
+    filter: drop-shadow(5px 5px 10px #dd2266); 
+}
+
+.ac_outline_nigrom {
+    outline: 3px solid green;
+} */
+
 
 /********* PAGINATION *******/
 
@@ -30,44 +142,11 @@ section.pages {
 }
 
 
-/************* HOME ************/
+/******* login *******/
+/* .login_main {
+    min-height: 90%;
+} */
 
-.home-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px
-}
-
-input[name="buscadorArticle"] {
-    margin-top: 10px;
-    width: 20%;
-    transition: 0.5s;
-}
-
-
-.homeCards {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10%;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.card {
-    max-width: 20%;
-    padding: 10px;
-    margin-top: 10px;
-    border: 2px solid grey;
-    background-color: transparent;
-    text-wrap: wrap;
-}
-
-.card .card-text.nom {
-    color: grey;
-}
 
 
 /************** FORM **********/
@@ -77,6 +156,12 @@ main:has(form.articleForm) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.articleForm_form-text {
+    color: white;
+    margin-top: .25rem;
+    font-size: .875em;
 }
 
 
@@ -116,7 +201,7 @@ main:has(form.articleForm) {
 }
 
 .alert-success::before,
-.alert-danger::before {
+.alert-error::before {
     position: absolute;
     width: 10%;
     height: 100%;
@@ -134,8 +219,32 @@ main:has(form.articleForm) {
     border: 1px solid rgb(186, 248, 186);
 }
 
-.alert-danger::before {
+.alert-error::before {
     content: '❗';
     background-color: rgb(194, 32, 32);
     border: 1px solid rgb(248, 186, 186);
+}
+
+.modal {
+    color: black;
+}
+
+#alerta_miss {
+    opacity: 0;
+    animation: fadeInOut 3.5s forwards;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+    80%{
+        opacity: 1;
+    }
+    85% {
+        opacity: 0;
+    }
 }

@@ -2,6 +2,7 @@
 <?php include "partials/_head.vista.php"; ?>
 
 <body>
+    <?php showMessage($tipus, $missatge, $displayEliminar); ?>
     <?php include "view/partials/_nav.vista.php"; ?>
     <main class="container">
         <form action="" method="post">

@@ -14,7 +14,7 @@ let routes = [{
     nav: 'newArticle'
 },
 {
-    ruta: 'index',
+    ruta: 'home',
     nav: 'home'
 }];
 
