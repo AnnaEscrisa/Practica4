@@ -1,4 +1,3 @@
-
 <div class="modal" id="modal-delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -7,11 +6,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Vols eliminar aquest <?=$item?>? Aquesta acció es irreversible.
+        Vols eliminar aquest <span id="modal-item"></span>? Aquesta acció es irreversible.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <a type="button" class="btn btn-primary" href="<?= $ruta?>">Elimina</a>
+        <a id="modal-delete-link" class="btn btn-primary" href="#">Elimina</a>
       </div>
     </div>
   </div>

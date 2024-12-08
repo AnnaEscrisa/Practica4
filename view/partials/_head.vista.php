@@ -14,5 +14,6 @@
         crossorigin="anonymous"></script>
     <script defer src="public/js/nav-selected.js"></script>
     <script src="public/js/article-sidebar.js"></script>
+    <script src="public/js/alertes.js"></script>
     <link rel="stylesheet" href="public/styles/styles.css">
 </head>
