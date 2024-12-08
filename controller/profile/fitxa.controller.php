@@ -2,7 +2,7 @@
 
 function carregarUser($userModel)
 {
-    $id = $_SESSION['user_id'];
+    $id = $_GET['id'] ?? $_SESSION['user_id'];
     comprovarPermis($id);
 
     $user = $userModel->selectUserById($id);
