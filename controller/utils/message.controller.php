@@ -76,7 +76,8 @@ function showMessage($tipus, $missatge, $displayEliminar)
                 <input class='btn btn-danger' type='submit' name='elimina' value='Si'></input>
                 <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Tancar'>No</button>
             </form>
-        </div>";
+        </div>
+        <script src='public/js/reload.js'></script>";
         echo $alerta;
     }
 }

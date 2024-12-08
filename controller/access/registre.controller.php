@@ -11,7 +11,7 @@ function processarRegistre($userModel, &$tipus, &$missatge)
 
         if ($usuari && $contrasenya && $repeticioContrasenya && $nom && $email) {
 
-            $result = validacioDades($userModel, $usuari, $repeticioContrasenya, $contrasenya, $nom, $email);
+            $result = validacioDades($userModel, 'insert', $usuari, $nom, $email, repeticioContrasenya: $repeticioContrasenya, contrasenya: $contrasenya );
 
             $dadesmissatge = parseUserError($result, "insert");
             $missatge = $dadesmissatge[0];
@@ -25,7 +25,6 @@ function processarRegistre($userModel, &$tipus, &$missatge)
             $missatge = error_g1;
         }
     }
-
 }
 
 ?>

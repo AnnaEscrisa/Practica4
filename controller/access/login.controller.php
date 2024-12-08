@@ -21,10 +21,9 @@ function processarLogin($userModel, &$missatge)
         $usuari = $_POST["usuari"] ?? null;
         $contrasenya = $_POST["password"] ?? null;
         $recorda = $_POST["recorda"] ?? null;
+        $captcha = captchaBuit($missatge);
 
-        if ($usuari && $contrasenya) {
-
-            captchaBuit($missatge);
+        if ($usuari && $contrasenya && $captcha) {
 
             $login = $userModel->login($usuari, $contrasenya);
             if ($login) {
@@ -50,9 +49,10 @@ function captchaBuit(&$missatge)
 {
     $recaptcha = $_POST['g-recaptcha-response'] ?? null;
 
-    if ($_COOKIE['intentsLogin'] >= 3 && !$recaptcha) {
-        $missatge = error_g1;
+    if (isset($_COOKIE['intentsLogin']) && $_COOKIE['intentsLogin'] >= 3 && !$recaptcha) {
+        return false;
     }
+    return true;
 }
 
 function loginFallit(&$missatge)

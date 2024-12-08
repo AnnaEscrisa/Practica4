@@ -93,10 +93,7 @@ function getConditionalUserValidation($nom, $usuari, $email){
     $dades = [$usuari, $nom, $email];
     if (comprovarHtmlCamps($dades)) {
         return 4;
-    }
-   
-   
-    
+    }  
 }
 
 function getInitialArticleValidation($titol, $cos, $ingredients)
@@ -109,7 +106,7 @@ function getInitialArticleValidation($titol, $cos, $ingredients)
     return NULL;
 }
 
-function validacioDades($userModel, $operacio, $id, $usuari, $nom, $email, $repeticioContrasenya = NULL, $contrasenya = NULL)
+function validacioDades($userModel, $operacio, $usuari, $nom, $email, $id = NULL, $repeticioContrasenya = NULL, $contrasenya = NULL)
 {
     //validacio inicial al controlador
     $result = getInitialUserValidation($operacio, $usuari, $nom, $email, $contrasenya, $repeticioContrasenya);

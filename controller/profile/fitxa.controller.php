@@ -22,7 +22,7 @@ function processarEdicioUser($userModel, &$missatge, &$tipus)
         $nouEmail = $_POST['email'] ?? '';
         $nouNom = $_POST['nom'] ?? '';
 
-        $result = validacioDades($userModel, 'edit', $id, $nouUser, $nouNom, $nouEmail);
+        $result = validacioDades($userModel, 'edit',  $nouUser, $nouNom, $nouEmail, id: $id);
 
         $dadesmissatge = parseUserError($result, "edit");
         $missatge = $dadesmissatge[0];
