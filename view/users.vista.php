@@ -9,6 +9,7 @@
         <section class="userCards">
             <?php if (!empty($usuarisMostrats)):
                 foreach ($usuarisMostrats[$paginesData['currentPage'] - 1] as $key => $value): ?>
+                    <?php if ($value['user'] != 'Admin' && $value['user'] != 'Anon') : ?>
                     <article class="card">
                         <h2 class="card-title"><?= $value['user'] ?></h2>
                         <div>
@@ -20,19 +21,16 @@
                         </div>
                         <div class="card-body footer ">
                             <a class="btn btn-primary" href="profile?id=<?= $value['id'] ?>&isEdit=true">Editar</a>
-                            <button class="btn btn-danger" onclick="new bootstrap.Modal(document.getElementById('modal-delete')).show();">Eliminar</button>
-                            <?php
-                            $item = 'usuari';
-                            $ruta = "profile?isDelete=true&id=".$value['id'];
-                            include "view/partials/_modal-delete.vista.php"; ?>
+                            <button class="btn btn-danger" onclick="openDeleteModal(`profile?isDelete=true&id=<?=$value['id']?>`, 'usuari')">Eliminar</button>
                         </div>
                     </article>
-
+                    <?php endif;?>
                 <?php endforeach; ?>
             <?php else: ?>
-                No hi ha articles per mostrar
+                No hi ha usuaris per mostrar
             <?php endif; ?>
         </section>
+        <?php include "view/partials/_modal-delete.vista.php"; ?>
         <section class="pages">
             <form action="" method="POST">
                 <select name="selectPagines" onchange="this.form.submit();">

@@ -102,8 +102,14 @@ input[name="buscadorArticle"] {
 
 .cards_container {
     display: grid;
-    grid-template-columns: auto auto auto;
-    justify-content: space-evenly
+    grid-template-columns: 30% 30% 30%;
+    justify-content: space-between;
+    row-gap: 1em;
+}
+
+.grid_card {
+    height: 100%;
+    width: 100%;
 }
 
 .article_card {
@@ -115,11 +121,18 @@ input[name="buscadorArticle"] {
     background-repeat: no-repeat;
     outline-offset: 5px;
     cursor: pointer;
+    max-width: 80%;
 }
 
 .ac_outline_evocation {
     outline: 3px solid rgb(0, 251, 255);
-    filter: drop-shadow(5px 5px 10px #4444dd); 
+    transition: 0.5s;
+}
+
+.ac_outline_evocation:hover {
+    outline: 3px solid rgb(0, 251, 255);
+    filter: drop-shadow(1px 1px 10px #4444dd); 
+    transform: scale(1.2);
 }
 
 /* .ac_outline_mal {
