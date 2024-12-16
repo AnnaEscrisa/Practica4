@@ -38,6 +38,11 @@
                 </div>
             </div>
 
+            <div>
+                <label for="" class="form-label">Imatge</label>
+                <input type="file" name="img" class="form-control" placeholder="Imatge">
+            </div>
+
             <button type="submit" class="btn btn-primary"><?= $pageTitle != 'Nou Article' ? 'Editar' : 'Inserir' ?></button>
         </form>
     </main>
