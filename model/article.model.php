@@ -58,16 +58,25 @@ class Article extends Database
         if (
             $this->comprovarCaractersMaxims(40, $titol) ||
             $this->comprovarCaractersMaxims(400, $cos) ||
-            $this->comprovarCaractersMaxims(400, $ingredients) 
+            $this->comprovarCaractersMaxims(400, $ingredients)
         ) {
             return 2;
         }
-        return $this->insert($this->taula, "titol, cos, user_id, ingredients", [$titol, $cos, $user_id, $ingredients], "?, ?, ?, ?") ? 1 : 0;
+
+
+        return $this->insert(
+            $this->taula, 
+            "titol, cos, user_id, ingredients", 
+            [$titol, $cos, $user_id, $ingredients],
+            "?, ?, ?, ?") 
+            ? 1 : 0;
+
+
     }
 
     //Modifica un article. Retorna els mateixos valors amb les mateixes condicions que la funcio d'inserir
     //Comprova si estem canviant el titol, i si es així, comprova si ja existeix
-    function updateArticle($id, $titol, $cos, $ingredients)
+    function updateArticle($id, $titol, $cos, $ingredients, $imatge)
     {
         $article = $this->selectArticleById($id);
         $titolActual = $article[0]['titol'];
@@ -79,17 +88,18 @@ class Article extends Database
         if (
             $this->comprovarCaractersMaxims(40, $titol) ||
             $this->comprovarCaractersMaxims(400, $cos) ||
-            $this->comprovarCaractersMaxims(500, $ingredients) 
+            $this->comprovarCaractersMaxims(500, $ingredients)
         ) {
             return 2;
         }
 
-        $reassignacions = "titol = ?, cos = ?, ingredients = ?";
-        return $this->update($this->taula, $id, [$titol, $cos, $ingredients], $reassignacions) ? 1 : 0;
+        $reassignacions = "titol = ?, cos = ?, ingredients = ?, image = ?";
+        return $this->update($this->taula, $id, [$titol, $cos, $ingredients, $imatge], $reassignacions) ? 1 : 0;
     }
 
     //Modifica el user_id d'un article a 0 (anonim)
-    function setArticleAnonimous($user_id) {
+    function setArticleAnonimous($user_id)
+    {
         $this->updateBy($this->taula, "user_id", $user_id, [0], "user_id =?");
     }
 

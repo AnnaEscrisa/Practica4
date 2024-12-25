@@ -45,7 +45,6 @@ class Database
         }
     }
 
-    //get last inserted id
     function getLastId(){
         return $this->db->lastInsertId();
     }

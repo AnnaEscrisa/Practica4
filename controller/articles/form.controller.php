@@ -1,7 +1,7 @@
 <?php
 // Anna Escribano
 
-function carregarEdicio($articleModel)
+function carregarEdicio($articleModel, &$missatge)
 {
     $permisCanvis = comprovarPermis($articleModel);
 
@@ -16,6 +16,8 @@ function carregarEdicio($articleModel)
         } else {
             $article = $article[0];
         }
+    } else {
+        buildMessage(error_a5, "error", "home", "");
     }
     return $article;
 }
@@ -47,36 +49,31 @@ function eliminarArticle($articleModel)
         buildMessage(error_a4, "error", "home", "");
 
     } else {
-
+        buildMessage(error_g6, "error", "home", "");
     }
 }
 
 function processarEdicio($articleModel, &$missatge, &$tipus)
 {
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        $permisCanvis = comprovarPermis($articleModel);
-        if (!$permisCanvis) buildMessage();
 
         $id = $_POST['id'] ?? false;
         $nouCos = $_POST["nouCos"] ?? false;
         $nouTitol = $_POST["nouTitol"] ?? false;
         $nousIngredients = $_POST["nousIngredients"] ?? false;
+        $novaImatge = $_FILES["imatge"] ?? false;
 
         if ($nouCos && $nouTitol && $id) {
-            $result = getInitialArticleValidation($nouTitol, $nouCos, $nousIngredients);
-            if (!$result) {
+            $img = processarImatge($missatge);
+            if (!empty($novaImatge['name']) && $img) {
 
-                $result = $articleModel->updateArticle($id, $nouTitol, $nouCos, $nousIngredients);
+                getResult($nouTitol, $nouCos, $nousIngredients, 'edit', $img, $articleModel, $missatge, $id);
+
+            } elseif (empty($novaImatge['name'])) {
+
+                getResult($nouTitol, $nouCos, $nousIngredients, 'edit', null, $articleModel, $missatge, $id);
             }
 
-            $dadesMissatge = parseArticleError($result, 'edit');
-            $missatge = $dadesMissatge[0];
-            $tipus = $dadesMissatge[1];
-
-            if ($tipus == 'success') {
-
-                buildMessage(success_a2, $tipus, "home", "myArticles=true");
-            }
         } else {
             $missatge = error_g1;
         }
@@ -86,28 +83,22 @@ function processarEdicio($articleModel, &$missatge, &$tipus)
 function insertarArticle($articleModel, &$missatge, &$tipus, &$displayEliminar)
 {
     $pageTitle = 'Nou Article';
-    $nouTitol = $nouCos = $nousIngredients = $user_id = "";
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         $nouCos = $_POST["nouCos"] ?? false;
         $nouTitol = $_POST["nouTitol"] ?? false;
         $nousIngredients = $_POST["nousIngredients"] ?? false;
+        $novaImatge = $_FILES["imatge"] ?? false;
         $user_id = $_SESSION['user_id'];
-
         if ($nouCos && $nouTitol) {
-            $result = getInitialArticleValidation($nouTitol, $nouCos, $nousIngredients);
 
-            if (!$result) {
-                $result = $articleModel->insertArticle($nouTitol, $nouCos, $user_id, $nousIngredients);
-            }
+            $img = processarImatge($missatge);
+            if (!empty($novaImatge['name']) && $img) {
 
-            $dadesMissatge = parseArticleError($result, 'insert');
+                getResult($nouTitol, $nouCos, $nousIngredients, 'insert', $img, $articleModel, $missatge, $user_id );
 
-            $missatge = $dadesMissatge[0];
-            $tipus = $dadesMissatge[1];
-            if ($tipus == 'success') {
-
-                buildMessage(success_a1, $tipus, "home", "myArticles=true");
+            } elseif (empty($novaImatge['name'])) {
+                getResult($nouTitol, $nouCos, $nousIngredients, 'insert', null, $articleModel, $missatge, $user_id);
             }
         } else {
             $missatge = error_g1;
@@ -116,3 +107,30 @@ function insertarArticle($articleModel, &$missatge, &$tipus, &$displayEliminar)
     include "view/form.vista.php";
 
 }
+
+function getResult($titol, $cos, $ingred, $operacio, $img, $articleModel, &$missatge, $id)
+{
+    $result = getInitialArticleValidation($titol, $cos, $ingred);
+    if (!$result) {
+        if ($operacio == "insert") {
+            $result = $articleModel->insertArticle($titol, $cos, $id, $ingred);
+            $id = $articleModel->getLastId();
+        }
+        if ($img) {
+            $img = uploadImatge($id, $img, 'article');
+        } else {
+            $img = $_POST["imatgePrevia"];
+        }
+        $result = $articleModel->updateArticle($id, $titol, $cos, $ingred, $img);
+    }
+
+    $dadesMissatge = parseArticleError($result, $operacio);
+
+    $missatge = $dadesMissatge[0];
+    $tipus = $dadesMissatge[1];
+    // if ($tipus == 'success') {
+
+    //     buildMessage(success_a1, $tipus, "home", "myArticles=true");
+    // }
+}
+

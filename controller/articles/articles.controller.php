@@ -4,6 +4,7 @@ require "model/article.model.php";
 
 require 'controller/utils/rutes.controller.php';
 require 'controller/utils/validacio.controller.php';
+require 'controller/utils/image.controller.php';
 
 $articleModel = new Article();
 
@@ -26,7 +27,7 @@ switch ($ruta) {
         require 'form.controller.php';
 
         $pageTitle = "Editar article";
-        $article = carregarEdicio($articleModel);
+        $article = carregarEdicio($articleModel, $missatge);
         processarEdicio($articleModel, $missatge, $tipus);
        
         include "view/form.vista.php";
