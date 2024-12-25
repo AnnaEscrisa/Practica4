@@ -14,5 +14,3 @@
         </form>
 
     </main>
-
-</body>

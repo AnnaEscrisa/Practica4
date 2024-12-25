@@ -20,5 +20,3 @@
             <button type="submit" class="btn btn-primary">Registra't</button>
         </form>
     </main>
-
-</body>

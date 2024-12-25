@@ -2,6 +2,7 @@
 define('ENVIRONMENT', 'dev');
 
 define('BASE_URL', '');
+define('IMG_PATH', 'public/img/');
 
 //BBDD
 

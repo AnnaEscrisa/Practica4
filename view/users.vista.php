@@ -60,6 +60,3 @@
             ?>
         </section>
     </main>
-</body>
-
-</html>
