@@ -82,29 +82,35 @@ function processarEdicio($articleModel, &$missatge, &$tipus)
 
 function insertarArticle($articleModel, &$missatge, &$tipus, &$displayEliminar)
 {
-    $pageTitle = 'Nou Article';
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $permisCanvis = comprovarPermis($articleModel);
 
-        $nouCos = $_POST["nouCos"] ?? false;
-        $nouTitol = $_POST["nouTitol"] ?? false;
-        $nousIngredients = $_POST["nousIngredients"] ?? false;
-        $novaImatge = $_FILES["imatge"] ?? false;
-        $user_id = $_SESSION['user_id'];
-        if ($nouCos && $nouTitol) {
+    if ($permisCanvis) {
+        $pageTitle = 'Nou Article';
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-            $img = processarImatge($missatge);
-            if (!empty($novaImatge['name']) && $img) {
+            $nouCos = $_POST["nouCos"] ?? false;
+            $nouTitol = $_POST["nouTitol"] ?? false;
+            $nousIngredients = $_POST["nousIngredients"] ?? false;
+            $novaImatge = $_FILES["imatge"] ?? false;
+            $user_id = $_SESSION['user_id'];
+            if ($nouCos && $nouTitol) {
 
-                getResult($nouTitol, $nouCos, $nousIngredients, 'insert', $img, $articleModel, $missatge, $user_id );
+                $img = processarImatge($missatge);
+                if (!empty($novaImatge['name']) && $img) {
 
-            } elseif (empty($novaImatge['name'])) {
-                getResult($nouTitol, $nouCos, $nousIngredients, 'insert', null, $articleModel, $missatge, $user_id);
+                    getResult($nouTitol, $nouCos, $nousIngredients, 'insert', $img, $articleModel, $missatge, $user_id);
+
+                } elseif (empty($novaImatge['name'])) {
+                    getResult($nouTitol, $nouCos, $nousIngredients, 'insert', null, $articleModel, $missatge, $user_id);
+                }
+            } else {
+                $missatge = error_g1;
             }
-        } else {
-            $missatge = error_g1;
         }
+        include "view/form.vista.php";
+    } else {
+        buildMessage(error_g6, "error", "home", "");
     }
-    include "view/form.vista.php";
 
 }
 
