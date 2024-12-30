@@ -6,10 +6,13 @@ function comprovarPermis($articleModel){
     $currentUser = $_SESSION['user_id'] ?? false;
     $id = $_GET["id"] ?? '';
 
-    if ($currentUser) {
-
+    if ($currentUser && $id) {
         $permisCanvis = comprovarPossesioArticle($articleModel, $currentUser, $id);
-    } else {
+    } 
+    else if ($currentUser) {
+        $permisCanvis = true;
+    }
+    else {
         buildMessage(error_a5, "error", 'login', "");
     }
     
