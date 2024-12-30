@@ -134,9 +134,8 @@ function getResult($titol, $cos, $ingred, $operacio, $img, $articleModel, &$miss
 
     $missatge = $dadesMissatge[0];
     $tipus = $dadesMissatge[1];
-    // if ($tipus == 'success') {
-
-    //     buildMessage(success_a1, $tipus, "home", "myArticles=true");
-    // }
+    if ($tipus == 'success') {
+        buildMessage(success_a1, $tipus, "home", "myArticles=true");
+    }
 }
 
