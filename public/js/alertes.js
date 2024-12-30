@@ -5,3 +5,4 @@ function openDeleteModal(ruta, item) {
   const modal = new bootstrap.Modal(document.getElementById('modal-delete'));
   modal.show();
 }
+
