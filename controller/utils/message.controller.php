@@ -49,6 +49,9 @@ const error_rec2 = "No pots canviar la contrasenya. El link pot ser incorrecte o
 const success_rec1 = 'Mail enviat amb èxit';
 const success_rec2 = "Contrasenya canviada amb éxit";
 
+const error_i1 = "Format d'imatge no permesa. S'admeten extensions PNG, JPG, JPEG i WEBP.";
+const error_i2 = "L'arxiu és massa gran. El màxim permès és de 2MB.";
+
 
 //-------------------Finestra d'error----------------------
 /*variables per recollir possibles errors.

@@ -22,5 +22,3 @@
         <p> No tens compte d'usuari? <a href="registre">Registra't</a> </p>
         <p> Iniciar sessio amb <a href="login?github=true">GitHub</a> <a href="login?deviantart=true">DeviantArt</a></p>
     </main>
-    
-</body>

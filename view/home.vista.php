@@ -47,10 +47,6 @@
 
                                 </article>
                             </div>
-                            <?php
-                            $item = 'article';
-                            $ruta = "articles_form?isDelete=true&id=" . $value['id'];
-                            include "view/partials/_modal-delete.vista.php"; ?>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <p>No hi ha articles per mostrar</p>
@@ -78,6 +74,8 @@
 
                     <? endif ?>
                 </section>
+                <?php
+                            include "view/partials/_modal-delete.vista.php"; ?>
             </main>
         </div>
 
@@ -86,7 +84,5 @@
         </div>
 
     </div>
+    <?php include 'view/partials/_footer.vista.php'; ?>
 
-</body>
-
-</html>

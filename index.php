@@ -32,7 +32,6 @@ switch ($route) {
     case 'profile':
         require 'controller/profile/profile.controller.php';
         break;
-    case 'logout':
     case 'info':
     case 'contacte':
         echo 'en construcció';
