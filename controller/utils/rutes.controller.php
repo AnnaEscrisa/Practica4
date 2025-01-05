@@ -54,6 +54,8 @@ function transformarRutaArticle()
             return 'myArticles';
         case str_contains($ruta, 'isEdit=true'):
             return 'editar';
+        case str_contains($ruta, 'isClone=true'):
+            return 'clonar';
         case str_contains($ruta, 'isDelete=true'):
             return 'eliminar';
         case str_contains($ruta, 'home'):
