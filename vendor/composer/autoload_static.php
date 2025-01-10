@@ -6,11 +6,23 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitdcaf32a97f6b5203512d55d331e4b5b9
 {
+    public static $files = array (
+        '74f78b6b99713ff89d56028b614df71a' => __DIR__ . '/..' . '/libern/qr-code-reader/src/lib/common/customFunctions.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'c' => 
         array (
             'chillerlan\\Settings\\' => 20,
             'chillerlan\\QRCode\\' => 18,
+        ),
+        'Z' => 
+        array (
+            'Zxing\\' => 6,
+        ),
+        'L' => 
+        array (
+            'Libern\\QRCodeReader\\' => 20,
         ),
     );
 
@@ -22,6 +34,14 @@ class ComposerStaticInitdcaf32a97f6b5203512d55d331e4b5b9
         'chillerlan\\QRCode\\' => 
         array (
             0 => __DIR__ . '/..' . '/chillerlan/php-qrcode/src',
+        ),
+        'Zxing\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/libern/qr-code-reader/src/lib',
+        ),
+        'Libern\\QRCodeReader\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/libern/qr-code-reader/src',
         ),
     );
 

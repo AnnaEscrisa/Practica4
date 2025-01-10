@@ -1,5 +1,6 @@
 {
     "require": {
-        "chillerlan/php-qrcode": "^5.0"
+        "chillerlan/php-qrcode": "^5.0",
+        "libern/qr-code-reader": "^1.0"
     }
 }

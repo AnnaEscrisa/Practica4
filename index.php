@@ -1,6 +1,5 @@
 <?php
 //Anna Escribano
-
 require 'config.php';
 require 'controller/utils/message.controller.php';
 require 'controller/utils/session.controller.php';
@@ -31,6 +30,9 @@ switch ($route) {
         break;
     case 'profile':
         require 'controller/profile/profile.controller.php';
+        break;
+    case 'qr':
+        require 'controller/qr/qr.controller.php';
         break;
     case 'info':
     case 'contacte':

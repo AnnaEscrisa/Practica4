@@ -11,6 +11,13 @@ define('DB_USER', 'ddb238991');
 define('DB_PASS', 'IPXi@g)lUrDFi4');
 define('DB_NAME', "ddb238991");
 
+// QR URL
+if(ENVIRONMENT == 'dev'){
+    define('ARTICLE_URL', "http://localhost/Xavi/practica2_1/articles_form?isClone=true&id=");
+}else {
+    define('ARTICLE_URL', "http://www.annaescribano.cat/backend/articles_form?isClone=true&id=");
+}
+
 //API KEYS
 
 if(ENVIRONMENT == 'dev'){

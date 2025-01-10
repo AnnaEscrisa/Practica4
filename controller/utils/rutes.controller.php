@@ -67,3 +67,17 @@ function transformarRutaArticle()
 
     }
 }
+
+function transformarRutaQr()
+{
+    $ruta = array_slice(explode('/', $_SERVER["REQUEST_URI"]), -1)[0];
+    switch (true) {
+        case str_contains($ruta, 'article'):
+            return 'article';
+        case str_contains($ruta, 'lector'):
+            return 'lector';
+        default:
+            return 'lector';
+    }
+}
+

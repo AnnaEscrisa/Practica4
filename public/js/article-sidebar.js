@@ -8,5 +8,12 @@ function showSidebar(article) {
         function () {
             openDeleteModal(`articles_form?isDelete=true&id=${article.id}`, 'article')
         });
+
+    document.getElementById("ar_clone").addEventListener(
+        "click",
+        function () {
+            openCloneModal(article.id);
+        });
+
     document.getElementById("aside_right").style.display = "block";
 } 

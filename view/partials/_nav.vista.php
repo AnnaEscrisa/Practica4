@@ -16,6 +16,9 @@
         <li id="newArticle" class="nav-item  <?php echo !isset($_SESSION['user']) ? "hidden" : "" ?>">
           <a class="nav-link" href="articles_form">Nou Article</a>
         </li>
+        <li id="qr" class="nav-item  <?php echo !isset($_SESSION['user']) ? "hidden" : "" ?>">
+          <a class="nav-link" href="qr?lector">Qr</a>
+        </li>
         <li id="newArticle" class="nav-item  <?php echo !isset($_SESSION['admin']) || !($_SESSION['admin']) ? "hidden" : '' ?>">
           <a class="nav-link" href="admin">Users</a>
         </li>

@@ -75,7 +75,9 @@
                     <? endif ?>
                 </section>
                 <?php
-                            include "view/partials/_modal-delete.vista.php"; ?>
+                            include "view/partials/_modal-delete.vista.php"; 
+                            include "view/partials/_modal-clone.vista.php";
+                            ?>
             </main>
         </div>
 

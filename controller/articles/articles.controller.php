@@ -1,5 +1,8 @@
 <?php
 
+use chillerlan\QRCode\{QRCode, QROptions};
+require_once 'vendor/autoload.php';
+
 require "model/article.model.php";
 
 require 'controller/utils/rutes.controller.php';
@@ -22,6 +25,12 @@ switch ($ruta) {
 
         carregarArticles($articleModel, $missatge, $tipus, $displayEliminar);
         break;
+    case 'qr':
+        require 'controller/utils/qr.controller.php';
+        $qrCode = articleQr();
+        echo $qrCode;
+        break;
+
     case 'editar':
         require 'permis.controller.php';
         require 'form.controller.php';
@@ -48,7 +57,8 @@ switch ($ruta) {
 
         $pageTitle = "Clonar article";
         $article = carregarEdicio($articleModel, $missatge);
-        //llegir flags i deletejar camps no desitjats
+        $article = llegirFlags($article);
+        print_r($article);
         //processarEdicio($articleModel, $missatge, $tipus);
 
         include "view/form.vista.php";

@@ -114,6 +114,16 @@ function insertarArticle($articleModel, &$missatge, &$tipus, &$displayEliminar)
 
 }
 
+function llegirFlags($article){
+    $flags = $_GET;
+    foreach ($flags as $key => $value) {
+        if ($value == true) {
+            unset($article[$key]);
+        }
+    }
+    return $article;
+}
+
 function getResult($titol, $cos, $ingred, $operacio, $img, $articleModel, &$missatge, $id)
 {
     $result = getInitialArticleValidation($titol, $cos, $ingred);

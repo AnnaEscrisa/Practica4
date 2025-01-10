@@ -8,4 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'chillerlan\\Settings\\' => array($vendorDir . '/chillerlan/php-settings-container/src'),
     'chillerlan\\QRCode\\' => array($vendorDir . '/chillerlan/php-qrcode/src'),
+    'Zxing\\' => array($vendorDir . '/libern/qr-code-reader/src/lib'),
+    'Libern\\QRCodeReader\\' => array($vendorDir . '/libern/qr-code-reader/src'),
 );
