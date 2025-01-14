@@ -1,15 +1,11 @@
 <!-- Anna Escribano -->
-<?php include "view/partials/_head.vista.php"; ?>
+<?php ob_start(); ?>
+<main class="container">
 
-<body>
-    <?php showMessage($tipus, $missatge, $displayEliminar); ?>
-    <?php include "view/partials/_nav.vista.php"; ?>
-    <main class="container">
-
-        <section class="userCards">
-            <?php if (!empty($usuarisMostrats)):
-                foreach ($usuarisMostrats[$paginesData['currentPage'] - 1] as $key => $value): ?>
-                    <?php if ($value['user'] != 'Admin' && $value['user'] != 'Anon') : ?>
+    <section class="userCards">
+        <?php if (!empty($usuarisMostrats)):
+            foreach ($usuarisMostrats[$paginesData['currentPage'] - 1] as $key => $value): ?>
+                <?php if ($value['user'] != 'Admin' && $value['user'] != 'Anon'): ?>
                     <article class="card">
                         <h2 class="card-title"><?= $value['user'] ?></h2>
                         <div>
@@ -21,42 +17,48 @@
                         </div>
                         <div class="card-body footer ">
                             <a class="btn btn-primary" href="profile?id=<?= $value['id'] ?>&isEdit=true">Editar</a>
-                            <button class="btn btn-danger" onclick="openDeleteModal(`profile?isDelete=true&id=<?=$value['id']?>`, 'usuari')">Eliminar</button>
+                            <button class="btn btn-danger"
+                                onclick="openDeleteModal(`profile?isDelete=true&id=<?= $value['id'] ?>`, 'usuari')">Eliminar</button>
                         </div>
                     </article>
-                    <?php endif;?>
-                <?php endforeach; ?>
-            <?php else: ?>
-                No hi ha usuaris per mostrar
-            <?php endif; ?>
-        </section>
-        <?php include "view/partials/_modal-delete.vista.php"; ?>
-        <section class="pages">
-            <form action="" method="POST">
-                <select name="selectPagines" onchange="this.form.submit();">
-                    <option value="5" <?= $max_users == 5 ? 'selected' : '' ?>>5</option>
-                    <option value="10" <?= $max_users == 10 ? 'selected' : '' ?>>10</option>
-                    <option value="15" <?= $max_users == 15 ? 'selected' : '' ?>>15</option>
-                </select>
-            </form>
-            <?php
-            if (!empty($usuarisMostrats)) {
+                <?php endif; ?>
+            <?php endforeach; ?>
+        <?php else: ?>
+            No hi ha usuaris per mostrar
+        <?php endif; ?>
+    </section>
+    <?php include "view/partials/_modal-delete.vista.php"; ?>
+    <section class="pages">
+        <form action="" method="POST">
+            <select name="selectPagines" onchange="this.form.submit();">
+                <option value="5" <?= $max_users == 5 ? 'selected' : '' ?>>5</option>
+                <option value="10" <?= $max_users == 10 ? 'selected' : '' ?>>10</option>
+                <option value="15" <?= $max_users == 15 ? 'selected' : '' ?>>15</option>
+            </select>
+        </form>
+        <?php
+        if (!empty($usuarisMostrats)) {
 
-                echo '
+            echo '
                 <a href="admin?page=' . $paginesData['previousPage'] . '"
-                    class="btn btn-primary ' . $paginesData['previousClass'] . '">
+                    class="button btn-lil ' . $paginesData['previousClass'] . '">
                             Anterior
                     </a>
-                <a class="btn btn-primary"
+                <a class="button btn-lil"
                     href="#" >' .
-                    $paginesData['currentPage']
-                    . '</a>
-                 <a class="btn btn-primary ' . $paginesData['nextClass'] . '"
+                $paginesData['currentPage']
+                . '</a>
+                 <a class="button btn-lil ' . $paginesData['nextClass'] . '"
                     href= "admin?page=' . $paginesData['nextPage'] . '" >
                         Següent
                 </a>';
-            }
+        }
 
-            ?>
-        </section>
-    </main>
+        ?>
+    </section>
+</main>
+
+<?php
+$content = ob_get_clean();
+include "view/layout.php";
+?>

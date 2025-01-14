@@ -16,6 +16,6 @@
             <label class="form-label">Repetir contrasenya</label>
             <input name="passwordRepeat" type="password" class="form-control" required>
 
-            <button type="submit" class="btn btn-primary">Canvia</button>
+            <button type="submit" class="button">Canvia</button>
         </form>
     </main>

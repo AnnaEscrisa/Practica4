@@ -14,6 +14,6 @@
             <label for="">Email</label>
             <input name="email" type="email" class="form-control" value="<?= $user['email'] ?>">
 
-            <button type="submit" class="btn btn-primary">Edita</button>
+            <button type="submit">Edita</button>
         </form>
     </main>

@@ -1,15 +1,89 @@
-* {
+:root {
+    --base-padding: 2.5em;
+    --sub-padding: calc(var(--base-padding)/2);
+    --main-accent: #DA9775;
+    --menu: rgba(217, 217, 217, 0.06);
+    --secondary-accent: #896B9B;
+    --border-radius: 1em;
+    --little-b-radius: 0.5em;
+}
 
+* {
     margin: 0;
     padding: 0
 }
 
 body {
-    background-image: linear-gradient(#120b13, #471a52);
+    background-image: linear-gradient(180deg, #4E256E 0%, #311633 50%, #0C0C12 100%);
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
 }
+
+
+/****** Container ******/
+
+.container_home {
+    padding-left: var(--base-padding);
+    padding-right: var(--base-padding);
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 15% 1fr 15%;
+    grid-template-rows: 4em 1fr 4em;
+    grid-template-areas:
+        "nav nav nav"
+        "left-nav main right-nav"
+        "footer footer footer";
+}
+
+.grid_aside_left {
+    grid-area: left-nav;
+}
+
+.grid_main {
+    grid-area: main;
+}
+
+.grid_aside_right {
+    grid-area: right-nav;
+}
+
+.grid_footer {
+    grid-area: footer;
+}
+
+.aside_left {
+    min-height: 100%;
+}
+
+.home_main {
+    gap: 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    background-color: var(--main-accent);
+    font-size: 1rem;
+    color: black;
+    cursor: pointer;
+    border: none;
+    padding: 0.5em;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    text-decoration: none;
+    height: 2.5em;
+    width: 3em;
+    text-align: center;
+    border-radius: var(--border-radius)
+}
+
+.button-lil {
+    border-radius: var(--little-b-radius);
+}
+
+/* .aside_right {
+   
+} */
 
 /********* NAV *******/
 
@@ -18,20 +92,18 @@ body {
 }
 
 nav {
-    padding: 0;
+    height: 100%;
 }
 
-.navb {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.navbar {
     font-size: 1.2em;
+    padding-bottom: 0;
 }
 
-.navbar-nav {
-    color: white;
-    gap: 10%;
-    text-wrap: nowrap;
+.navbar,
+.navbar a,
+.navbar img {
+    height: 100%;
 }
 
 .nav-link:hover {
@@ -39,54 +111,11 @@ nav {
     color: black;
 }
 
-nav .nav-item.nav-selected {
+.nav-item.nav-selected {
     background-color: blue;
 }
 
-/****** HOME  ******/
-
-.container_home {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 15% 60% 1fr;
-    grid-template-rows: 40px 1fr;
-    grid-template-areas:
-    "nav nav nav"
-    "left-nav main right-nav";
-}
-
-.grid_aside_left{
-    grid-area: left-nav;
-}
-
-.aside_left {
-  min-height: 100%;
-    background-image: linear-gradient(rgb(68, 68, 221, 0.5), transparent);
-}
-
-.grid_main {
-    grid-area: main;
-}
-
-.grid_main main {
-   
-    gap: 2em;
-    display: flex;
-    flex-direction: column;
-}
-
-.grid_aside_right{
-    grid-area: right-nav;
-}
-
-/* .aside_right {
-   
-} */
-
-/** buscador **/
-
-.home-form {
-    margin-top: 10px;
+.navbar_search {
     color: white;
     display: flex;
     justify-content: center;
@@ -95,8 +124,42 @@ nav .nav-item.nav-selected {
 }
 
 input[name="buscadorArticle"] {
-    width: 20%;
+    background-color: var(--menu);
+    width: 90%;
 }
+
+/*** sidebar ***/
+
+.aside_left {
+    background-color: var(--menu);
+    margin-top: var(--base-padding);
+    padding-top: var(--base-padding);
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    border: 1px solid var(--secondary-accent);
+    border-radius: var(--border-radius);
+    list-style: none;
+}
+
+.nav-link {
+    margin-left: var(--sub-padding);
+    display: flex;
+    flex-direction: row;
+}
+
+.aside-link {
+    text-decoration: none;
+
+}
+
+.sub-items {
+    list-style: circle;
+}
+
+
+
+/**------------ POCIONS ----------**/
 
 /**cards**/
 
@@ -131,7 +194,7 @@ input[name="buscadorArticle"] {
 
 .ac_outline_evocation:hover {
     outline: 3px solid rgb(0, 251, 255);
-    filter: drop-shadow(1px 1px 10px #4444dd); 
+    filter: drop-shadow(1px 1px 10px #4444dd);
     transform: scale(1.2);
 }
 
@@ -251,12 +314,15 @@ main:has(form.articleForm) {
     0% {
         opacity: 0;
     }
+
     5% {
         opacity: 1;
     }
-    80%{
+
+    80% {
         opacity: 1;
     }
+
     85% {
         opacity: 0;
     }
