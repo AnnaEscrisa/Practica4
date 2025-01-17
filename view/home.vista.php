@@ -1,23 +1,52 @@
 <?php ob_start(); ?>
 <main class="home_main">
 
-    <form action="" method="POST">
-        <select name="selectOrder" onchange="this.form.submit();">
-            <option value="titol" <?= $ordenacio_art == 'titol' ? 'selected' : '' ?>>Titol</option>
-            <option value="id" <?= $ordenacio_art == 'id' ? 'selected' : '' ?>>Id</option>
-            <option value="name" <?= $ordenacio_art == 'name' ? 'selected' : '' ?>>Autor</option>
-        </select>
-    </form>
+    <section class="hm_menu">
+        <p> <a href="home">Pocions</a> > <?= $pageTitle ?> </p>
+
+        <form action="" method="POST">
+            <button type="button" class="button button-lil" onclick="openOrderDropdown()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M2 4H15V6H2V4ZM2 11H15V13H2V11ZM3 18H2V20H13V18H3ZM19 21.414L19.707 20.707L22.707 17.707L23.414 17L22 15.586L21.293 16.293L20 17.586V4H18V17.586L16.707 16.293L16 15.586L14.586 17L15.293 17.707L18.293 20.707L19 21.414Z"
+                        fill="black" />
+                </svg>
+            </button>
+
+            <select name="selectOrder" id="order_dropdown" class="hidden" onchange="this.form.submit();">
+                <option selected></option>
+                <option value="titol" <?= $ordenacio_art == 'titol' ? 'selected' : '' ?>>Titol</option>
+                <option value="id" <?= $ordenacio_art == 'id' ? 'selected' : '' ?>>Id</option>
+                <option value="name" <?= $ordenacio_art == 'name' ? 'selected' : '' ?>>Autor</option>
+            </select>
+        </form>
+
+        <div class="dropdown">
+            <button class="button button-lil dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M2 4H15V6H2V4ZM2 11H15V13H2V11ZM3 18H2V20H13V18H3ZM19 21.414L19.707 20.707L22.707 17.707L23.414 17L22 15.586L21.293 16.293L20 17.586V4H18V17.586L16.707 16.293L16 15.586L14.586 17L15.293 17.707L18.293 20.707L19 21.414Z"
+                        fill="black" />
+                </svg>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><button type="submit" name="selectOrder" value="titol">Titol</button></li>
+                <li><button type="submit" name="selectOrder" value="id">Id</button></li>
+                <li><button type="submit" name="selectOrder" value="name">Autor</button></li>
+            </ul>
+        </div>
+
+    </section>
+
     <section class="cards_container">
         <?php
 
         if ($articlesMostrats):
             foreach ($articlesMostrats[$paginesData['currentPage'] - 1] as $key => $value): ?>
 
-                <!--! afegir escola a article, i fer una clase per cada una -->
                 <div class="grid_card">
-                    <article class="article_card"
-                        style="background-image: url('public/img/articles/<?= $value['image'] ?>')"
+                    <article class="article_card" style="background-image: url('public/img/articles/<?= $value['image'] ?>')"
                         onclick="showSidebar(<?= htmlspecialchars(json_encode($value)) ?>)">
 
                         <div class="ac_banner">

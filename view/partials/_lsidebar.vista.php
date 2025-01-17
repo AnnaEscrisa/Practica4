@@ -4,26 +4,26 @@
       Home
     </li>
   </a>
-  <div>
-    <a class="nav-link" href="home">
+  <div class="aside_grup">
+    <a class="nav-link nav-item" id="home" href="home">
       <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" fill="none">
         <path
           d="M23.1108 1.63477L22.2328 2.86992L25.2299 4.99512L26.1078 3.76602L23.1108 1.63477ZM19.6354 2.37949L18.7817 3.63281L25.5205 8.24648L26.3742 6.99316L19.6354 2.37949ZM19.1934 5.6127L14.9612 10.626C14.3375 10.4988 13.6957 10.4322 13.0358 10.4322C7.7803 10.4322 3.51477 14.7008 3.51477 19.9563C3.51477 25.1875 7.7803 29.4863 13.0358 29.4863C18.2912 29.4863 22.5598 25.1875 22.5598 19.9563C22.5598 17.6676 21.7485 15.5666 20.4043 13.9258L23.5164 8.66426L19.1934 5.6127ZM19.6414 7.97402L21.4276 9.15469L18.6121 13.8773C20.1924 15.3244 21.1854 17.4012 21.1854 19.7141C21.1854 24.0734 17.6434 27.6094 13.278 27.6094C8.91858 27.6094 5.37356 24.0734 5.37356 19.7141C5.37356 15.3486 8.91858 11.8066 13.278 11.8066C14.6463 11.8066 15.936 12.1578 17.0621 12.7693L19.6414 7.97402ZM17.7342 18.9027C14.8703 18.8604 10.0932 22.4326 6.9387 19.7201C6.94475 23.2137 9.7844 26.0352 13.278 26.0352C16.6746 26.0352 19.4537 23.3711 19.6112 20.0107C19.1873 19.2115 18.5334 18.9148 17.7342 18.9027ZM17.0379 20.3135C17.3467 20.3074 17.6252 20.4043 17.8069 20.6162C18.2246 21.0945 18.0006 21.9725 17.3043 22.5779C16.6141 23.1834 15.7119 23.2863 15.2942 22.808C14.8764 22.3297 15.1004 21.4518 15.7906 20.8463C16.1842 20.5072 16.6383 20.3256 17.0379 20.3135ZM13.617 23.2863C13.6897 23.2863 13.7623 23.2924 13.841 23.3045C14.4405 23.3953 14.8824 23.801 14.8219 24.2188C14.7614 24.6426 14.2285 24.8848 13.6231 24.8242C13.0237 24.7031 12.5817 24.3398 12.6422 23.8979C12.6967 23.5346 13.1084 23.2863 13.617 23.2863Z"
           fill="#FFB58F" />
       </svg>
-      <li id="home" class="nav-item">
+      <li>
         Pocions
       </li>
     </a>
 
-    <div class="sub-items">
+    <div class="sub-items pocions_items">
       <?php if (isset($_SESSION['user'])): ?>
-        <li id="myArticles">
-          <a class="nav-link" href="home?myArticles=true">Els meus articles</a>
-        </li>
-        <li id="newArticle">
-          <a class="nav-link" href="articles_form">Nou Article</a>
-        </li>
+        <a class="nav-link nav-item" id="myArticles" href="home?myArticles=true">
+          <li ">Els meus articles</li>
+        </a>
+        <a class="nav-link nav-item" id="newArticle" href="articles_form">
+          <li>Nou Article</li>
+        </a>
       <?php endif; ?>
     </div>
   </div>
@@ -61,10 +61,19 @@
     </a>
   <?php endif; ?>
 
-
-  <a class="nav-link" href="">
-    <li id="about" class="nav-item">About</li>
-  </a>
+  <div class="aside_grup about_items">
+    <a id="about" class="nav-link nav-item" href="">
+      <li>About</li>
+    </a>
+    <div class="sub-items">
+      <a class="nav-link" href="">
+        <li id="">Lorem</li>
+      </a>
+      <a class="nav-link" href="">
+        <li id="materials">Materials</li>
+      </a>
+    </div>
+  </div>
 
   <a class="nav-link" href="">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -74,6 +83,7 @@
     </svg>
     <li id="contacte" class="nav-item">Contacte</li>
   </a>
+
 </aside>
 
 <!-- <div class="profile_sidebar">

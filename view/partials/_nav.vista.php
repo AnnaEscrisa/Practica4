@@ -17,7 +17,7 @@
 
     <form action="" method="post" class="navbar_search">
       <input class="form-control" type="text" name="buscadorArticle" placeholder="Nom de l'article">
-      <button type="submit" class="button-lil">
+      <button type="submit" class="button button-lil">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
           fill="none">
           <g clip-path="url(#clip0_155_74)">

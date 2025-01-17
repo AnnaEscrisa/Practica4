@@ -9,4 +9,9 @@ function showSidebar(article) {
             openDeleteModal(`articles_form?isDelete=true&id=${article.id}`, 'article')
         });
     document.getElementById("aside_right").style.display = "block";
-} 
+}
+
+function openOrderDropdown() {
+    let select = document.getElementById("order_dropdown");
+    select.trigger('click')
+}
