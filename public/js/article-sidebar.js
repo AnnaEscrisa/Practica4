@@ -10,8 +10,3 @@ function showSidebar(article) {
         });
     document.getElementById("aside_right").style.display = "block";
 }
-
-function openOrderDropdown() {
-    let select = document.getElementById("order_dropdown");
-    select.trigger('click')
-}
