@@ -12,6 +12,7 @@ function changeArticleQr() {
         type: 'POST',
         data: Object.fromEntries(formData),
         success: function (response) {
+            console.log(response)
             $("#modal-qr").html(response);
         },
     });

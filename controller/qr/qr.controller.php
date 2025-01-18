@@ -4,6 +4,7 @@ require_once 'vendor/autoload.php';
 
 require 'controller/utils/rutes.controller.php';
 require 'controller/utils/qr.controller.php';
+require 'controller/utils/api.controller.php';
 require 'lector.controller.php';
 
 $ruta = transformarRutaQr();
