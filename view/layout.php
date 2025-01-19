@@ -17,6 +17,7 @@
         <div class="grid_main">
             <?php echo $content; ?>
         </div>
+        
         <div class="grid_aside_right">
             <?php include 'view/partials/_rsidebar-article.vista.php'; ?>
         </div>

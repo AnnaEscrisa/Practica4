@@ -1,5 +1,7 @@
 :root {
     --base-padding: 2.5em;
+    --double-padding: 5em;
+    --triple-padding: 7.5em;
     --sub-padding: calc(var(--base-padding)/2);
     --gradient: linear-gradient(180deg, #4E256E 0%, #311633 50%, #0C0C12 100%);
     --main-accent: #DA9775;
@@ -9,8 +11,7 @@
     --secondary-accent: #896B9B;
     --border-radius: 1em;
     --little-b-radius: 0.5em;
-    --central-size: 90%;
-    scrollbar-color: var(--secondary-accent) #311633; 
+    scrollbar-color: var(--secondary-accent) #311633;
 }
 
 * {
@@ -27,7 +28,19 @@ body {
 
 main {
     padding-top: var(--base-padding);
-    margin: 0 var(--base-padding) 0 var(--base-padding);
+    margin: 0 var(--triple-padding);
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+.unselectable {
+    pointer-events: none;
 }
 
 .button {
@@ -42,18 +55,38 @@ main {
     height: 2.5em;
     width: 3em;
     text-align: center;
-    border-radius: var(--border-radius)
-}
-
-.button-lil {
     border-radius: var(--little-b-radius);
 }
 
-/****** Container ******/
+input.form-control,
+textarea.form-control {
+    background-color: var(--menu);
+    border: 1px solid var(--secondary-accent);
+}
+
+input,
+::placeholder,
+textarea {
+    color: white !important;
+}
+
+::placeholder {
+    font-style: italic;
+    opacity: 0.5 !important;
+}
+
+input.form-control:focus,
+textarea.form-control:focus {
+    background-color: var(--menu-focus);
+    border: 1px solid var(--main-accent);
+    outline: 1px solid var(--main-accent);
+    box-shadow: none;
+}
+
+/****** GRID ******/
 
 .container_home {
-    padding-left: var(--base-padding);
-    padding-right: var(--base-padding);
+    margin: 0 var(--double-padding);
     min-height: 100vh;
     display: grid;
     grid-template-columns: 15% 1fr 15%;
@@ -86,25 +119,6 @@ main {
 }
 
 
-/*** home ***/
-.home_main {
-    display: flex;
-    height: 100%;
-    justify-content: space-between;
-    flex-direction: column;
-}
-
-.hm_menu {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* .aside_right {
-   
-} */
-
 /********* NAV *******/
 
 .grid_nav {
@@ -123,8 +137,30 @@ nav {
 .navbar,
 .navbar a,
 .navbar img {
+    flex: 15%;
     height: 100%;
+    justify-content: flex-end
 }
+
+.navbar div {
+    flex: 15%;
+}
+
+.navbar_search {
+    flex: 70%;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--triple-padding);
+}
+
+
+input[name="buscadorArticle"] {
+    width: 95%;
+}
+
+/** sidebar **/
 
 .nav-link:hover {
     background-color: aqua;
@@ -134,23 +170,6 @@ nav {
 .nav-item.nav-selected {
     background-color: blue;
 }
-
-.navbar_search {
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-input[name="buscadorArticle"] {
-    background-color: var(--menu);
-    width: 90%;
-}
-
-/*** sidebar ***/
-
-.aside_left {}
 
 .aside_left {
     background-color: var(--menu);
@@ -185,16 +204,33 @@ input[name="buscadorArticle"] {
 }
 
 
-
 /**------------ POCIONS ----------**/
+
+/*** home ***/
+.home_main {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.hm_menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
 
 /**cards**/
 
 .cards_container {
     display: grid;
-    grid-template-columns: 30% 30% 30%;
+    grid-template-columns: 25% 25% 25%;
+    margin: var(--base-padding) 0 var(--base-padding) 0;
     justify-content: space-between;
-    row-gap: 1em;
+    row-gap: var(--base-padding);
 }
 
 .grid_card {
@@ -212,7 +248,7 @@ input[name="buscadorArticle"] {
     outline-offset: 5px;
     cursor: pointer;
     border-radius: var(--little-b-radius);
-    max-width: 80%;
+    width: 100%;
     outline: 3px solid var(--main-accent);
     transition: 0.5s;
 }
@@ -222,17 +258,8 @@ input[name="buscadorArticle"] {
     transform: scale(1.2);
 }
 
-/* .ac_outline_mal {
-    outline: 3px solid red;
-    filter: drop-shadow(5px 5px 10px #dd2266); 
-}
 
-.ac_outline_nigrom {
-    outline: 3px solid green;
-} */
-
-
-/********* PAGINATION *******/
+/** PAGINATION **/
 
 section.pages {
     display: flex;
@@ -242,35 +269,116 @@ section.pages {
 }
 
 
-/******* login *******/
-/* .login_main {
-    min-height: 90%;
-} */
-
-
-
-/************** FORM **********/
-
-main:has(form.articleForm) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+/**--------- forms -------------**/
+.main_login {
+    height: 100%;
 }
 
-.articleForm_form-text {
-    color: white;
-    margin-top: .25rem;
-    font-size: .875em;
+.form_section, .form_section_h{
+    height: 100%;
+    background-color: var(--menu);
+    display: flex;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--secondary-accent);
+    padding: var(--double-padding) var(--double-padding);
+    justify-content: space-between;
 }
 
-
-.articleForm {
-    margin-top: 20px;
-    display: flex;
+.form_section {
     flex-direction: column;
-    gap: 10px;
+}
+
+.form_section_h {
+    flex-direction: row;
+    gap: var(--base-padding)
+}
+
+.form_section_h img {
     width: 50%;
+    height: auto;
+}
+
+.form_main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sub-padding);
+}
+
+.form-group {
+    width: 100%;
+}
+
+.form_section .button {
+    width: 100%;
+}
+
+.form_section a:not(.button) {
+    color: var(--secondary-accent);
+    text-decoration: underline;
+}
+
+.form_social {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--sub-padding);
+}
+
+.form-group:has(.checkbox) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+input[type=checkbox] {
+    display: none;
+}
+
+label.checkbox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.checkbox-container {
+    height: 1em;
+    width: 1em;
+    background-color: var(--menu);
+    border: 1px solid var(--secondary-accent);
+    border-radius: 0.1em;
+}
+
+label input:checked~.checkbox-container {
+    background-color: var(--main-accent);
+}
+
+/* Checkmark */
+.checkbox-container::after {
+    content: "";
+    display: none;
+    width: 0.5em;
+    height: 0.7em;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+label input:checked~.checkbox-container::after {
+    display: block;
+}
+
+.hstack {
+    gap: var(--base-padding);
+}
+
+/************** CREACIO/ EDICIO **********/
+
+.form_section.article {
+    padding: var(--base-padding) var(--double-padding);
 }
 
 
@@ -284,14 +392,6 @@ main:has(form.articleForm) {
     max-height: 30%;
     z-index: 7;
     backdrop-filter: blur(10px);
-}
-
-.hidden {
-    display: none;
-}
-
-.visible {
-    display: block;
 }
 
 .alert-success {
