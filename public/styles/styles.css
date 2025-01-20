@@ -24,11 +24,16 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
+    overflow-x: hidden;
 }
 
 main {
     padding-top: var(--base-padding);
     margin: 0 var(--triple-padding);
+}
+
+.main_open {
+    margin: 0 var(--base-padding);
 }
 
 .hidden {
@@ -90,7 +95,7 @@ textarea.form-control:focus {
     min-height: 100vh;
     display: grid;
     grid-template-columns: 15% 1fr 15%;
-    grid-template-rows: 4em 1fr 4em;
+    grid-template-rows: 4em 1fr;
     gap: var(--base-padding);
     grid-template-areas:
         "nav nav nav"
@@ -99,6 +104,16 @@ textarea.form-control:focus {
 
     @media only screen and (max-width: 1440px) {
         grid-template-columns: 20% 1fr 20%;
+        margin: 0 var(--base-padding);
+    }
+}
+
+.container_home_open {
+    grid-template-columns: 15% 1fr 30%;
+
+    @media only screen and (max-width: 1440px) {
+        grid-template-columns: 20% 1fr 25%;
+        margin: 0 var(--base-padding);
     }
 }
 
@@ -172,9 +187,12 @@ input[name="buscadorArticle"] {
 }
 
 .aside_left {
+    position: sticky;
+    top: var(--base-padding);
     background-color: var(--menu);
     margin-top: var(--base-padding);
     padding-top: var(--base-padding);
+    min-height: 50vh;
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -221,6 +239,11 @@ input[name="buscadorArticle"] {
     align-items: center;
 }
 
+.hm_menu .icons {
+    display: flex;
+    flex-direction: row;
+    gap:var(--base-padding);
+}
 
 
 /**cards**/
@@ -240,7 +263,6 @@ input[name="buscadorArticle"] {
 
 .article_card {
     aspect-ratio: 1/1;
-    text-wrap: wrap;
     color: black;
     background-size: cover;
     background-position: center;
@@ -256,6 +278,21 @@ input[name="buscadorArticle"] {
 .article_card:hover {
     filter: drop-shadow(1px 1px 10px var(--main-accent-variant));
     transform: scale(1.2);
+
+    .ac_banner {
+        display: block;
+        transition: 0.5s;
+    }
+}
+
+.ac_banner {
+    display: none;
+}
+
+.a_title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 
@@ -269,12 +306,64 @@ section.pages {
 }
 
 
+/** aside articles **/
+.aside_right {
+    width: 0%;
+    translate: 800px 0;
+    height: 100%;
+    border-radius: var(--border-radius);
+    transition: 0.5s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--sub-padding);
+}
+
+.aside_right_visible {
+    width: 100%;
+    translate: 0 0;
+    border: 1px solid var(--secondary-accent);
+}
+
+.aside_right>div {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+}
+
+.aside_right img {
+    width: 100%;
+    height: auto;
+}
+
+.divider {
+    border: 1px solid var(--secondary-accent);
+    height: 1px;
+    width: 90%;
+}
+
+.ar_header,
+.ar_body {
+    flex-direction: column;
+}
+
+.ar_header button {
+    align-self: flex-end;
+}
+
+.ar_user {
+    font-style: italic;
+    color: var(--secondary-accent);
+    align-self: flex-end;
+}
+
 /**--------- forms -------------**/
 .main_login {
     height: 100%;
 }
 
-.form_section, .form_section_h{
+.form_section,
+.form_section_h {
     height: 100%;
     background-color: var(--menu);
     display: flex;
@@ -375,10 +464,36 @@ label input:checked~.checkbox-container::after {
     gap: var(--base-padding);
 }
 
-/************** CREACIO/ EDICIO **********/
+/**---------- CREACIO/ EDICIO -----------**/
 
 .form_section.article {
     padding: var(--base-padding) var(--double-padding);
+}
+
+/**---------- FOOTER ---------**/
+
+footer {
+    display: flex;
+    align-items: center;
+    padding: var(--base-padding) var(--double-padding) 0 var(--double-padding);
+    background-color: var(--menu);
+    color: white;
+    border-top: 1px solid var(--secondary-accent);
+    justify-content: space-around;
+}
+
+footer > ul {
+    display: flex;
+    padding: 0 var(--double-padding);
+    gap: var(--base-padding);
+    list-style: none;
+    flex-direction: row;
+    width: 70%;
+    justify-content: space-around;
+}
+
+footer a {
+    color: var(--secondary-accent);
 }
 
 
@@ -454,4 +569,12 @@ label input:checked~.checkbox-container::after {
     85% {
         opacity: 0;
     }
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
 }
