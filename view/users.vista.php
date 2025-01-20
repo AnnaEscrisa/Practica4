@@ -1,12 +1,46 @@
 <!-- Anna Escribano -->
 <?php ob_start(); ?>
-<main class="container">
+<main class="home_main">
+    <section class="hm_menu">
+        <div class="icons">
+            <form action="" method="POST">
+                <div class="dropdown">
+                    <div class="button button-lil" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M2 4H15V6H2V4ZM2 11H15V13H2V11ZM3 18H2V20H13V18H3ZM19 21.414L19.707 20.707L22.707 17.707L23.414 17L22 15.586L21.293 16.293L20 17.586V4H18V17.586L16.707 16.293L16 15.586L14.586 17L15.293 17.707L18.293 20.707L19 21.414Z"
+                                fill="black" />
+                        </svg>
+                    </div>
+                    <ul class="dropdown-menu">
+                        <li><button type="submit" class="dropdown-item" name="selectOrder" value="id">Id</button>
+                        </li>
+                        <li><button type="submit" class="dropdown-item" name="selectOrder" value="user">User</button></li>
+                        <li><button type="submit" class="dropdown-item" name="selectOrder" value="mail">Mail</button>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </section>
 
-    <section class="userCards">
+
+    <section class="cards_container">
         <?php if (!empty($usuarisMostrats)):
             foreach ($usuarisMostrats[$paginesData['currentPage'] - 1] as $key => $value): ?>
                 <?php if ($value['user'] != 'Admin' && $value['user'] != 'Anon'): ?>
-                    <article class="card">
+                    <div class="grid_card">
+                    <article class="article_card" style="background-image: url('public/img/users/none.webp')"
+                        onclick="showUserSidebar(<?= htmlspecialchars(json_encode($value)) ?>)">
+
+                        <div class="ac_banner">
+                            <h4 class="a_title"> <?= $value['user'] ?></h4>
+                        </div>
+
+                    </article>
+                </div>
+                    
+                    <!-- <article class="card">
                         <h2 class="card-title"><?= $value['user'] ?></h2>
                         <div>
                             <p class="card-text"><?= $value['name'] ?></p>
@@ -20,7 +54,7 @@
                             <button class="btn btn-danger"
                                 onclick="openDeleteModal(`profile?isDelete=true&id=<?= $value['id'] ?>`, 'usuari')">Eliminar</button>
                         </div>
-                    </article>
+                    </article> -->
                 <?php endif; ?>
             <?php endforeach; ?>
         <?php else: ?>
@@ -37,24 +71,18 @@
             </select>
         </form>
         <?php
-        if (!empty($usuarisMostrats)) {
+        if (!empty($usuarisMostrats)): ?>
 
-            echo '
-                <a href="admin?page=' . $paginesData['previousPage'] . '"
-                    class="button btn-lil ' . $paginesData['previousClass'] . '">
-                            Anterior
-                    </a>
-                <a class="button btn-lil"
-                    href="#" >' .
-                $paginesData['currentPage']
-                . '</a>
-                 <a class="button btn-lil ' . $paginesData['nextClass'] . '"
-                    href= "admin?page=' . $paginesData['nextPage'] . '" >
-                        Següent
-                </a>';
-        }
+            <a href="home?page=<?= $paginesData['previousPage'] ?>"
+                class="button button-lil <?= $paginesData['previousClass'] ?>">
+                ←
+            </a>
+            <a class="button button-lil" href="#"> <?= $paginesData['currentPage'] ?></a>
+            <a class="button button-lil <?= $paginesData['nextClass'] ?>" href="home?page=<?= $paginesData['nextPage'] ?>">
+                →
+            </a>
+        <?php endif; ?>
 
-        ?>
     </section>
 </main>
 

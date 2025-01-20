@@ -10,9 +10,17 @@
     </div>
 
     <div class="ar_body">
-        <p class="ar_user"></p>
-        <p id="ar_description"></p>
-        <ul class="ar_ingredients"></ul>
+        <? if ($pageTitle = 'home') :?>
+            <p class="ar_user"></p>
+            <p id="ar_description"></p>
+            <ul class="ar_ingredients"></ul>
+        <? elseif ($pageTitle = 'users') :?>
+            <p class="ar_email"></p>
+            <p id="ar_nom"></p>
+        <? elseif ($pageTitle = 'materials') :?>
+            <p id="ar_description"></p>
+        <? endif; ?>
+
     </div>
 
     <div class="ar_footer">
