@@ -66,10 +66,10 @@
       <li>About</li>
     </a>
     <div class="sub-items">
-      <a class="nav-link" href="">
+      <a class="nav-link" href="about">
         <li id="">Sobre la web</li>
       </a>
-      <a class="nav-link" href="">
+      <a class="nav-link" href="materials">
         <li id="materials">Materials</li>
       </a>
     </div>

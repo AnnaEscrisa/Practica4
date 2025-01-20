@@ -357,6 +357,34 @@ section.pages {
     align-self: flex-end;
 }
 
+
+/**------about----------**/
+
+.about {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--base-padding);
+}
+
+.about section {
+    border: 1px solid var(--secondary-accent);
+    border-radius: var(--border-radius);
+    padding: var(--base-padding);
+}
+
+.about .materials .buttons {
+    display: flex;
+    gap: var(--base-padding);
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.materials .button {
+    width: auto;
+}
+
+
 /**--------- forms -------------**/
 .main_login {
     height: 100%;
@@ -371,6 +399,10 @@ section.pages {
     border: 1px solid var(--secondary-accent);
     padding: var(--double-padding) var(--double-padding);
     justify-content: space-between;
+
+    @media only screen and (max-width: 1440px) {
+        padding: var(--base-padding) var(--double-padding);;
+    }
 }
 
 .form_section {
