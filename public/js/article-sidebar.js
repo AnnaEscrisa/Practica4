@@ -30,12 +30,12 @@ function showUserSidebar(user){
     $(".ar_email").html(user.email);
     $("#ar_nom").html(user.name);
 
-    //document.getElementById("ar_edit").href = `articles_form?isEdit=true&id=${article.id}`;
-    // document.getElementById("ar_delete").addEventListener(
-    //     "click",
-    //     function () {
-    //         openDeleteModal(`articles_form?isDelete=true&id=${article.id}`, 'article')
-    //     });
+    document.getElementById("ar_edit").href = `profile?isEdit=true&id=${user.id}`;
+    document.getElementById("ar_delete").addEventListener(
+        "click",
+        function () {
+            openDeleteModal(`profile?isDelete=true&id=${user.id}`, 'usuari')
+        });
     
     $("#aside_right").toggleClass('aside_right_visible');
     $(".container_home").toggleClass('container_home_open');

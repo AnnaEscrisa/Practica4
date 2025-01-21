@@ -7,7 +7,7 @@
                     <a href="home">Llista de pocions</a>
                 </li>
                 <li>
-                    <a href="home?filter=new">Nova poció</a>
+                    <a href="articles_form">Nova poció</a>
                 </li>
                 <li>
                     <a href="home?myArticles=true">Les meves pocions</a>
@@ -38,9 +38,8 @@
             </ul>
         </li>
         <li>
-            <a href="contact">Contacte</a>
+            <a href="contacte">Contacte</a>
         </li>
-
 
     </ul>
 </footer>
