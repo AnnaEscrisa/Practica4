@@ -178,12 +178,16 @@ input[name="buscadorArticle"] {
 /** sidebar **/
 
 .nav-link:hover {
-    background-color: aqua;
+    background-color: var(--secondary-accent);
     color: black;
+    transition: background-color 0.3s ease;
+    border-radius: var(--little-b-radius);
 }
 
 .nav-item.nav-selected {
-    background-color: blue;
+    background-color: var(--main-accent-variant);
+    color: black;
+    border-radius: var(--little-b-radius);
 }
 
 .aside_left {
