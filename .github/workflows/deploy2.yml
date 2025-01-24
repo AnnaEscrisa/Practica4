@@ -31,3 +31,4 @@ jobs:
                 public/img/**
                 config.php
                 vendor/**
+                
