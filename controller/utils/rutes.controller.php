@@ -54,6 +54,8 @@ function transformarRutaArticle()
             return 'myArticles';
         case str_contains($ruta, 'isEdit=true'):
             return 'editar';
+        case str_contains($ruta, 'isClone=true'):
+            return 'clonar';
         case str_contains($ruta, 'isDelete=true'):
             return 'eliminar';
         case str_contains($ruta, 'home'):
@@ -65,3 +67,17 @@ function transformarRutaArticle()
 
     }
 }
+
+function transformarRutaQr()
+{
+    $ruta = array_slice(explode('/', $_SERVER["REQUEST_URI"]), -1)[0];
+    switch (true) {
+        case str_contains($ruta, 'article'):
+            return 'article';
+        case str_contains($ruta, 'lector'):
+            return 'lector';
+        default:
+            return 'lector';
+    }
+}
+

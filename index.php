@@ -1,6 +1,5 @@
 <?php
 //Anna Escribano
-
 require 'config.php';
 require 'controller/utils/message.controller.php';
 require 'controller/utils/session.controller.php';
@@ -36,6 +35,10 @@ switch ($route) {
         $pageTitle = 'about';
         include 'view/about.vista.php';
         break;
+    case 'qr':
+        require 'controller/qr/qr.controller.php';
+        break;
+    case 'info':
     case 'contacte':
         $pageTitle = 'contact';
         include 'view/contact.vista.php';

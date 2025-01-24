@@ -90,11 +90,13 @@
                 →
             </a>
 
-        <? endif ?>
-    </section>
-    <?php
-    include "view/partials/_modal-delete.vista.php"; ?>
-</main>
+                    <? endif ?>
+                </section>
+                <?php
+                            include "view/partials/_modal-delete.vista.php"; 
+                            include "view/partials/_modal-clone.vista.php";
+                            ?>
+            </main>
 
 <?php
 $content = ob_get_clean();

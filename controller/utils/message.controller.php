@@ -52,6 +52,12 @@ const success_rec2 = "Contrasenya canviada amb éxit";
 const error_i1 = "Format d'imatge no permesa. S'admeten extensions PNG, JPG, JPEG i WEBP.";
 const error_i2 = "L'arxiu és massa gran. El màxim permès és de 2MB.";
 
+//errors qr
+const error_q1 = "No s'ha pogut generar el codi QR";
+const error_q2 = "No s'ha enviat cap codi QR.";
+const success_q1 = "Codi QR generat amb èxit";
+
+
 
 //-------------------Finestra d'error----------------------
 /*variables per recollir possibles errors.

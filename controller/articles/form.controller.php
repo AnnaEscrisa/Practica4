@@ -3,7 +3,15 @@
 
 function carregarEdicio($articleModel, &$missatge)
 {
-    $permisCanvis = comprovarPermis($articleModel);
+    $edit = $_GET['isEdit'] ?? false;
+    $clone = $_GET['isClone'] ?? false;
+
+    if ($edit) {
+        $permisCanvis = comprovarPermis($articleModel, 'edit');
+
+    } elseif ($clone) {
+        $permisCanvis = comprovarPermis($articleModel, 'clone');
+    }
 
     if ($permisCanvis) {
         $id = $_GET["id"] ?? '';
@@ -36,7 +44,7 @@ function parsejarPropietats($article)
 
 function eliminarArticle($articleModel)
 {
-    $permisCanvis = comprovarPermis($articleModel);
+    $permisCanvis = comprovarPermis($articleModel, 'delete');
 
     if ($permisCanvis) {
         $id = $_GET["id"] ?? '';
@@ -82,7 +90,7 @@ function processarEdicio($articleModel, &$missatge, &$tipus)
 
 function insertarArticle($articleModel, &$missatge, &$tipus, &$displayEliminar)
 {
-    $permisCanvis = comprovarPermis($articleModel);
+    $permisCanvis = comprovarPermis($articleModel, 'nou');
 
     if ($permisCanvis) {
         $pageTitle = 'Nou Article';
@@ -112,6 +120,17 @@ function insertarArticle($articleModel, &$missatge, &$tipus, &$displayEliminar)
         buildMessage(error_g6, "error", "home", "");
     }
 
+}
+
+function llegirFlags($article)
+{
+    $flags = $_GET;
+    foreach ($flags as $key => $value) {
+        if ($value == true) {
+            unset($article[$key]);
+        }
+    }
+    return $article;
 }
 
 function getResult($titol, $cos, $ingred, $operacio, $img, $articleModel, &$missatge, $id)

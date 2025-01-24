@@ -1,4 +1,7 @@
 //! PENDENT
+
+    // coven folder
+        //en basico (rutas), una es join
    
     //! OJO en form.vista, esta puesto session user id como campo id, vigila que en edit de admin esto no puede ser
 
@@ -9,9 +12,7 @@
     
     // canviar edit articles + nou article per que no es repeteixi codi
 
-    //!implementar imatges
-    
-
+  
     //! implementar ingredients
 
     //!implementar tipus pocio

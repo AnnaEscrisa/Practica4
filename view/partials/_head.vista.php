@@ -16,6 +16,7 @@
     <script defer src="public/js/nav-selected.js"></script>
     <script src="public/js/alertes.js"></script>
     <script src="public/js/article-sidebar.js"></script>
+    <script defer src="public/js/qr.js"></script>
     <script defer src="public/js/search-size.js"></script>
     <link rel="stylesheet" href="public/styles/styles.css">
 </head>

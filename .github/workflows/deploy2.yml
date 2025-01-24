@@ -30,3 +30,4 @@ jobs:
                 .gitignore
                 public/img/**
                 config.php
+                vendor/**
