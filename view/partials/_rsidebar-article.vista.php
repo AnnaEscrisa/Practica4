@@ -10,14 +10,14 @@
     </div>
 
     <div class="ar_body">
-        <? if ($pageTitle = 'home') :?>
+        <? if ($pageTitle = 'home'): ?>
             <p class="ar_user"></p>
             <p id="ar_description"></p>
             <ul class="ar_ingredients"></ul>
-        <? elseif ($pageTitle = 'users') :?>
+        <? elseif ($pageTitle = 'users'): ?>
             <p class="ar_email"></p>
             <p id="ar_nom"></p>
-        <? elseif ($pageTitle = 'materials') :?>
+        <? elseif ($pageTitle = 'materials'): ?>
             <p id="ar_description"></p>
         <? endif; ?>
 
@@ -36,13 +36,19 @@
                     d="M 10 2 L 9 3 L 3 3 L 3 5 L 21 5 L 21 3 L 15 3 L 14 2 L 10 2 z M 4.3652344 7 L 5.8925781 20.263672 C 6.0245781 21.253672 6.877 22 7.875 22 L 16.123047 22 C 17.121047 22 17.974422 21.254859 18.107422 20.255859 L 19.634766 7 L 4.3652344 7 z">
                 </path>
             </svg></button>
+        <button id="ar_clone" class="button <?= isset($_SESSION['user']) ? '' : 'hidden' ?>">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <g clip-path="url(#clip0_8_2)">
+                    <path
+                        d="M13.5 21H3V10.5H6V7.5H3C1.34531 7.5 0 8.84531 0 10.5V21C0 22.6547 1.34531 24 3 24H13.5C15.1547 24 16.5 22.6547 16.5 21V18H13.5V21ZM10.5 16.5H21C22.6547 16.5 24 15.1547 24 13.5V3C24 1.34531 22.6547 0 21 0H10.5C8.84531 0 7.5 1.34531 7.5 3V13.5C7.5 15.1547 8.84531 16.5 10.5 16.5Z"
+                        fill="black" />
+                </g>
+                <defs>
+                    <clipPath id="clip0_8_2">
+                        <rect width="24" height="24" fill="white" />
+                    </clipPath>
+                </defs>
+            </svg>
+        </button>
     </div>
-
-<aside id="aside_right" style="display: none">
-    <img id="ar_img" class="ar_img" src="" alt="">
-    <h3 id="ar_title"></h3>
-    <p id="ar_description"></p>
-    <a id="ar_edit" class="btn btn-primary <?= $hiddenButton ?>">Edit</a>
-    <button id="ar_delete" class="btn btn-danger <?= $hiddenButton ?>">Eliminar</button>
-    <button id="ar_clone" class="btn btn-info <?= isset($_SESSION['user']) ? '' : 'hidden'?>">Clonar</button>
 </aside>

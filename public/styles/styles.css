@@ -584,7 +584,14 @@ footer a {
 }
 
 .modal {
-    color: black;
+    color: white;
+}
+
+.modal-content {
+    background-color: var(--menu-focus);
+    border: 1px solid var(--secondary-accent);
+    border-radius: var(--border-radius);
+    backdrop-filter: blur(10px);
 }
 
 #alerta_miss {
