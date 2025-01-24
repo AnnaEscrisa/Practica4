@@ -166,6 +166,67 @@
             "install-path": "../chillerlan/php-settings-container"
         },
         {
+            "name": "curl/curl",
+            "version": "2.5.0",
+            "version_normalized": "2.5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-mod/curl.git",
+                "reference": "c4f8799c471e43b7c782c77d5c6e178d0465e210"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-mod/curl/zipball/c4f8799c471e43b7c782c77d5c6e178d0465e210",
+                "reference": "c4f8799c471e43b7c782c77d5c6e178d0465e210",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": "^5.6 | ^7.0 | ^8.0"
+            },
+            "require-dev": {
+                "yoast/phpunit-polyfills": "^0.2.0"
+            },
+            "time": "2022-12-14T13:27:59+00:00",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Curl": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "php-curl-class",
+                    "homepage": "https://github.com/php-curl-class"
+                },
+                {
+                    "name": "Hassan Amouhzi",
+                    "email": "hassan@anezi.net",
+                    "homepage": "http://hassan.amouhzi.com"
+                },
+                {
+                    "name": "user52",
+                    "homepage": "https://github.com/user52"
+                }
+            ],
+            "description": "cURL class for PHP",
+            "homepage": "https://github.com/php-mod/curl",
+            "keywords": [
+                "curl",
+                "dot"
+            ],
+            "support": {
+                "issues": "https://github.com/php-mod/curl/issues",
+                "source": "https://github.com/php-mod/curl/tree/2.5.0"
+            },
+            "install-path": "../curl/curl"
+        },
+        {
             "name": "guzzlehttp/guzzle",
             "version": "7.9.2",
             "version_normalized": "7.9.2.0",
@@ -551,6 +612,53 @@
                 "source": "https://github.com/libern/qr-code-reader/tree/v1.0.10"
             },
             "install-path": "../libern/qr-code-reader"
+        },
+        {
+            "name": "nguyenary/qr-code-monkey",
+            "version": "v1.0",
+            "version_normalized": "1.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nguyenary/QRCodeMonkey.git",
+                "reference": "77a3941f73eba25d1ef749bb75de8f5a7755c2df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nguyenary/QRCodeMonkey/zipball/77a3941f73eba25d1ef749bb75de8f5a7755c2df",
+                "reference": "77a3941f73eba25d1ef749bb75de8f5a7755c2df",
+                "shasum": ""
+            },
+            "require": {
+                "curl/curl": "^2.3",
+                "php": ">=7.2"
+            },
+            "suggest": {
+                "ext-json": "*"
+            },
+            "time": "2021-09-01T14:50:17+00:00",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-4": {
+                    "nguyenary\\QRCodeMonkey\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "nguyenary",
+                    "email": "nguyenary.dev@gmail.com"
+                }
+            ],
+            "description": "PHP Library for free generator QR Code from qrcode-monkey.com",
+            "support": {
+                "issues": "https://github.com/nguyenary/QRCodeMonkey/issues",
+                "source": "https://github.com/nguyenary/QRCodeMonkey/tree/v1.0"
+            },
+            "install-path": "../nguyenary/qr-code-monkey"
         },
         {
             "name": "psr/http-client",

@@ -1,4 +1,7 @@
 <?php
+require 'vendor/autoload.php'; // Include Composer's autoload
+
+use nguyenary\QRCodeMonkey\QRCode as Monkey;
 
 use chillerlan\QRCode\{QRCode, QROptions};
 use chillerlan\QRCode\Output\QRGdImage;
@@ -23,39 +26,22 @@ function articleQr()
             $data .= "&{$key}=false";
         }
     }
-    $url = "https://api.qr-code-monkey.com/qr/custom";
-    $payload = [
-        "data" => $data,
-        "config" => [
-            "body" => "rounded-pointed",
-            "eye" => "frame14",
-            "eyeBall" => "ball16",
-            "bodyColor" => "#5C8B29",
-            "bgColor" => "#FFFFFF",
-            "eye1Color" => "#3F6B2B",
-            "eye2Color" => "#3F6B2B",
-            "eye3Color" => "#3F6B2B",
-            "eyeBall1Color" => "#60A541",
-            "eyeBall2Color" => "#60A541",
-            "eyeBall3Color" => "#60A541",
-            "gradientColor1" => "#5C8B29",
-            "gradientColor2" => "#25492F",
-            "gradientType" => "radial",
-            "gradientOnEyes" => false,
-            "logo" => ""
-        ],
-        "size" => 300,
-        "download" => false,
-        "file" => "png"
-    ];
 
     try {
-        return sendToQrMonkey($url, $payload);
+        return sendToQrMonkey($data);
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
     }
-    //crear qr
-   // return createQr($url);
+
+    /*
+    Funcionament original:
+
+    try {
+        return createQr($data);
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+    }
+   */
 }
 
 
@@ -70,9 +56,41 @@ function articleQr()
 
 
 
-//create qr (url basica)
-// ficar url basica a qr
-// mostrar qr al usuari (return)
+//Crear QR mitjan qr monkey api
+function sendToQrMonkey($data)
+{
+    $qrcode = new Monkey($data);
+
+    $qrcode->setConfig([
+        "body" => "star",
+        "eye" => "frame14",
+        "eyeBall" => "ball19",
+        "bodyColor" => "#5C8B29",
+        "bgColor" => "#FFFFFF",
+        "eye1Color" => "#6A1195",
+        "eye2Color" => "#6A1195",
+        "eye3Color" => "#6A1195",
+        "eyeBall1Color" => "#6A1195",
+        "eyeBall2Color" => "#6A1195",
+        "eyeBall3Color" => "#6A1195",
+        "gradientColor1" => "#6A1195",
+        "gradientColor2" => "#896B9B",
+        "gradientType" => "radial",
+        "gradientOnEyes" => false,
+        "erf2" => ["fh"],
+        "erf3" => ["fv"],
+        "logo" => ""
+    ]);
+
+    $qrcode->setFileType('png');
+    $qrcode->setSize(300);
+
+    return "<img data-url=$data height='300' alt='QR Code' src='" . $qrcode->create() . "' />";
+}
+
+
+//Crear QR Original
+// Funcional. Mitjançant llibreria chillerlean
 function createQr($url)
 {
     $options = new QROptions([
@@ -89,6 +107,3 @@ function createQr($url)
     $img = "<img data-url=$url height='300' alt='QR Code' src='" . (new QRCode($options))->render($url) . "' />";
     return $img;
 }
-
-
-//read qr

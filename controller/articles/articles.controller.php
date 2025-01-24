@@ -58,7 +58,6 @@ switch ($ruta) {
         $pageTitle = "Clonar article";
         $article = carregarEdicio($articleModel, $missatge);
         $article = llegirFlags($article);
-        print_r($article);
         //processarEdicio($articleModel, $missatge, $tipus);
 
         include "view/form.vista.php";

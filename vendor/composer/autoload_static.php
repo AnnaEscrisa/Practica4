@@ -14,6 +14,10 @@ class ComposerStaticInitdcaf32a97f6b5203512d55d331e4b5b9
     );
 
     public static $prefixLengthsPsr4 = array (
+        'n' => 
+        array (
+            'nguyenary\\QRCodeMonkey\\' => 23,
+        ),
         'c' => 
         array (
             'chillerlan\\Settings\\' => 20,
@@ -41,6 +45,10 @@ class ComposerStaticInitdcaf32a97f6b5203512d55d331e4b5b9
     );
 
     public static $prefixDirsPsr4 = array (
+        'nguyenary\\QRCodeMonkey\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nguyenary/qr-code-monkey/src',
+        ),
         'chillerlan\\Settings\\' => 
         array (
             0 => __DIR__ . '/..' . '/chillerlan/php-settings-container/src',
@@ -55,8 +63,8 @@ class ComposerStaticInitdcaf32a97f6b5203512d55d331e4b5b9
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -80,6 +88,16 @@ class ComposerStaticInitdcaf32a97f6b5203512d55d331e4b5b9
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'C' => 
+        array (
+            'Curl' => 
+            array (
+                0 => __DIR__ . '/..' . '/curl/curl/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
@@ -89,6 +107,7 @@ class ComposerStaticInitdcaf32a97f6b5203512d55d331e4b5b9
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitdcaf32a97f6b5203512d55d331e4b5b9::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitdcaf32a97f6b5203512d55d331e4b5b9::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitdcaf32a97f6b5203512d55d331e4b5b9::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitdcaf32a97f6b5203512d55d331e4b5b9::$classMap;
 
         }, null, ClassLoader::class);
