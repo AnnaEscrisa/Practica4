@@ -1,8 +1,5 @@
 <?php
 
-use chillerlan\QRCode\{QRCode, QROptions};
-require_once 'vendor/autoload.php';
-
 require "model/article.model.php";
 
 require 'controller/utils/rutes.controller.php';
@@ -23,7 +20,7 @@ switch ($ruta) {
         require 'permis.controller.php';
         include 'controller/utils/pagination.controller.php';
 
-        carregarArticles($articleModel, $missatge, $tipus, $displayEliminar);
+        carregarArticles($articleModel, $missatge, $tipus);
         break;
 
     case 'editar':

@@ -2,7 +2,7 @@
 <?php include "partials/_head.vista.php"; ?>
 
 <body>
-    <?php showMessage($tipus, $missatge, $displayEliminar); ?>
+    <?php showMessage($tipus, $missatge); ?>
     <?php include "view/partials/_nav.vista.php"; ?>
     <main class="container">
 

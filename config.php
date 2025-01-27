@@ -1,7 +1,7 @@
 <?php 
 define('ENVIRONMENT', 'dev');
 
-define('BASE_URL', '');
+define('BASE_URL', $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
 define('IMG_PATH', 'public/img/');
 
 //BBDD
@@ -13,9 +13,9 @@ define('DB_NAME', "ddb238991");
 
 // QR URL
 if(ENVIRONMENT == 'dev'){
-    define('ARTICLE_URL', "http://localhost/Xavi/practica2_1/articles_form?isClone=true&id=");
+    define('ARTICLE_URL', BASE_URL . "/articles_form?isClone=true&id=");
 }else {
-    define('ARTICLE_URL', "http://www.annaescribano.cat/backend/articles_form?isClone=true&id=");
+    define('ARTICLE_URL', BASE_URL . "/articles_form?isClone=true&id=");
 }
 
 //API KEYS

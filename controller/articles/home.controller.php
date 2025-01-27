@@ -1,6 +1,6 @@
 <?php
 
-function carregarArticles($articleModel, $missatge, $tipus, $displayEliminar)
+function carregarArticles($articleModel, $missatge, $tipus)
 {
     $privat = $_GET["myArticles"] ?? false;
     $articleName = $_POST['buscadorArticle'] ?? null;
