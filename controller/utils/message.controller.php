@@ -74,17 +74,13 @@ $displayEliminar = "hidden";
 
 
 //si missatge te valor, mostrarà un missatge a la pàgina a la que ens trobem
-function showMessage($tipus, $missatge, $displayEliminar)
+function showMessage($tipus, $missatge)
 {
     if ($missatge) {
 
         $alerta = "<div id='alerta_miss' class='alert alert-dismissible alert-$tipus' role='alert'>
             <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Tancar'></button>
             <h4>$missatge</h4>
-            <form action='' method='post' class='$displayEliminar'>
-                <input class='btn btn-danger' type='submit' name='elimina' value='Si'></input>
-                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Tancar'>No</button>
-            </form>
         </div>
         <script src='public/js/reload.js'></script>";
         echo $alerta;

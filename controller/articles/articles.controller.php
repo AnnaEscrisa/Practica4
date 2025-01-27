@@ -25,11 +25,6 @@ switch ($ruta) {
 
         carregarArticles($articleModel, $missatge, $tipus, $displayEliminar);
         break;
-    case 'qr':
-        require 'controller/utils/qr.controller.php';
-        $qrCode = articleQr();
-        echo $qrCode;
-        break;
 
     case 'editar':
         require 'permis.controller.php';
@@ -49,7 +44,12 @@ switch ($ruta) {
     case 'nou':
         require 'permis.controller.php';
         require 'form.controller.php';
-        insertarArticle($articleModel, $missatge, $tipus, $displayEliminar);
+
+        $pageTitle = 'Nou Article';
+        
+        insertarArticle($articleModel);
+        processarInsercio($articleModel, $missatge, $tipus);
+        include "view/form.vista.php";
         break;
     case 'clonar':
         require 'permis.controller.php';
@@ -58,7 +58,7 @@ switch ($ruta) {
         $pageTitle = "Clonar article";
         $article = carregarEdicio($articleModel, $missatge);
         $article = llegirFlags($article);
-        //processarEdicio($articleModel, $missatge, $tipus);
+        processarInsercio($articleModel, $missatge, $tipus);
 
         include "view/form.vista.php";
         break;

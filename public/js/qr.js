@@ -5,8 +5,8 @@ $(document).ready(function () {
 });
 
 function changeArticleQr() {
+   
     const formData = new FormData(document.getElementById('codeForm'));
-    console.log(document.getElementById('modal-article-id').value);
     $.ajax({
         url: 'qr?article=true',
         type: 'POST',

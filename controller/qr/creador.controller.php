@@ -1,10 +1,9 @@
 <?php
-require 'vendor/autoload.php'; // Include Composer's autoload
+require 'vendor/autoload.php';
 
 use nguyenary\QRCodeMonkey\QRCode as Monkey;
 
 use chillerlan\QRCode\{QRCode, QROptions};
-use chillerlan\QRCode\Output\QRGdImage;
 use chillerlan\QRCode\Output\QROutputInterface;
 use chillerlan\QRCode\Data\QRMatrix;
 
@@ -34,7 +33,7 @@ function articleQr()
     }
 
     /*
-    Funcionament original:
+    ** Funcionament original: **
 
     try {
         return createQr($data);
@@ -56,7 +55,7 @@ function articleQr()
 
 
 
-//Crear QR mitjan qr monkey api
+//Crear QR mitjançant qr monkey api
 function sendToQrMonkey($data)
 {
     $qrcode = new Monkey($data);

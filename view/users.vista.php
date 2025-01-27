@@ -2,6 +2,7 @@
 <?php ob_start(); ?>
 <main class="home_main">
     <section class="hm_menu">
+    <p> <a href="admin">Admin </a> > <?= $pageTitle ?> </p>
         <div class="icons">
             <form action="" method="POST">
                 <div class="dropdown">
@@ -31,7 +32,7 @@
                 <?php if ($value['user'] != 'Admin' && $value['user'] != 'Anon'): ?>
                     <div class="grid_card">
                     <article class="article_card" style="background-image: url('public/img/users/none.webp')"
-                        onclick="showUserSidebar(<?= htmlspecialchars(json_encode($value)) ?>)">
+                        onclick="showSidebar(<?= htmlspecialchars(json_encode($value)) ?>, 'user')">
 
                         <div class="ac_banner">
                             <h4 class="a_title"> <?= $value['user'] ?></h4>

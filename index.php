@@ -38,7 +38,6 @@ switch ($route) {
     case 'qr':
         require 'controller/qr/qr.controller.php';
         break;
-    case 'info':
     case 'contacte':
         $pageTitle = 'contact';
         include 'view/contact.vista.php';

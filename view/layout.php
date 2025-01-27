@@ -2,7 +2,7 @@
 <?php include "view/partials/_head.vista.php"; ?>
 
 <body>
-    <?php showMessage($tipus, $missatge, $displayEliminar); ?>
+    <?php showMessage($tipus, $missatge); ?>
     <div class="container_home">
         <div class="grid_nav">
             <?php include "view/partials/_nav.vista.php"; ?>
@@ -17,9 +17,14 @@
         <div class="grid_main">
             <?php echo $content; ?>
         </div>
-        
+
         <div class="grid_aside_right">
-            <?php include 'view/partials/_rsidebar-article.vista.php'; ?>
+            <?php if (str_contains(strtolower($pageTitle), 'articles_form')) {
+                include 'view/partials/_rsidebar-opcions.vista.php';
+            } else {
+                include 'view/partials/_rsidebar-fitxa.vista.php';
+            }
+            ?>
         </div>
 
         <div class="grid_footer">

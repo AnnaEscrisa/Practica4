@@ -14,11 +14,6 @@
             Títol
           </label>
           <label class="form-label checkbox">
-            <input type="checkbox" name="titol" id="" value="checkedValue" checked>
-            <span class="checkbox-container"></span>
-            Descripció
-          </label>
-          <label class="form-label checkbox">
             <input type="checkbox" name="descripcio" id="" value="checkedValue" checked>
             <span class="checkbox-container"></span>
             Descripció

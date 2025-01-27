@@ -4,7 +4,7 @@
     <section class="hm_menu">
         <p> <a href="home">Pocions</a> > <?= $pageTitle ?> </p>
     </section>
-    <form action="" method="post" class="form_section article" enctype="multipart/form-data">
+    <form action="" method="post" class="form_section article" enctype="multipart/form-data" id="article_form">
         <input hidden class="form-control" type="text" name="id" value="<?= $_GET['id'] ?? '' ?>">
         <div class="form-group">
             <label for="" class="form-label">Títol*</label>
@@ -17,6 +17,8 @@
             <textarea class="form-control" name="nouCos"
                 placeholder="Descripció de l'article"><?php echo $nouCos ?? $article['cos'] ?? '' ?></textarea>
         </div>
+
+        <!--no implementat a backend -->
         <div class="form-group">
             <label for="" class="form-label">Tipus</label>
             <select name="tipus">
@@ -27,13 +29,13 @@
             </select>
         </div>
 
-
+        <!--no implementat a backend -->
         <div class="form-group">
             <label for="" class="form-label"> Ingredients</label>
             <div class="hstack">
-                <button class="button" data-ingredients>Vegetals</button>
-                <button class="button" data-ingredients>Animals</button>
-                <button class="button" data-ingredients>Minerals</button>
+                <button type="button" class="button" data-ingredients onclick="showSidebar('vegetals', 'form')">Vegetals</button>
+                <button type="button" class="button" data-ingredients onclick="showSidebar('animals', 'form')">Animals</button>
+                <button type="button" class="button" data-ingredients onclick="showSidebar('minerals', 'form')">Minerals</button>
             </div>
         </div>
 

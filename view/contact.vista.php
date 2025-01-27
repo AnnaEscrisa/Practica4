@@ -2,15 +2,20 @@
 <?php ob_start(); ?>
 <main class="home_main">
     <form action="" method="post" class="form_section">
-        <input class="form-control" type="text" value="<?= $_SESSION['user'] ?>" hidden>
+        <?php if (isset($_SESSION['user'])): ?>
+            <input class="form-control" name="id" type="text" value="<?= $_SESSION['user'] ?>" hidden>
+        <?php else: ?>
+            <div class="form-group">
+                <label for="">Nom</label>
+                <input class="form-control" type="text" name="nom">
+            </div>
+            <div class="form-group">
+                <label for="">Email</label>
+                <input class="form-control" type="email" name="email">
+            </div>
+        <?php endif; ?>
 
         <div class="form-group">
-            <label for="">Titol</label>
-            <input class="form-control" type="text" name="titol">
-        </div>
-
-        <div class="form-group">
-
             <label for="" class="form-label">Asumpte</label>
             <select name="" id="">
                 <option value="Dubtes">Dubtes

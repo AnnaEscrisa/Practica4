@@ -58,7 +58,7 @@
 
                 <div class="grid_card">
                     <article class="article_card" style="background-image: url('public/img/articles/<?= $value['image'] ?>')"
-                        onclick="showSidebar(<?= htmlspecialchars(json_encode($value)) ?>)">
+                        onclick="showSidebar(<?= htmlspecialchars(json_encode($value)) ?>, 'article')">
 
                         <div class="ac_banner">
                             <h4 class="a_title"> <?= $value['titol'] ?></h4>

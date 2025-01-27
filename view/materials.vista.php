@@ -51,7 +51,7 @@
 
             <div class="grid_card">
                 <article class="article_card" style="background-image: url('public/img/article/none.webp')"
-                    onclick="showSidebar(<?= htmlspecialchars($mat) ?>)">
+                    onclick="showSidebar(<?= htmlspecialchars($mat) ?>, 'material')">
 
                     <div class="ac_banner">
                         <h4 class="a_title"> Material</h4>
