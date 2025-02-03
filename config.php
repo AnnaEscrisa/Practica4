@@ -1,7 +1,7 @@
 <?php 
 define('ENVIRONMENT', 'dev');
 
-define('BASE_URL', $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
+define('BASE_URL', 'http://'. $_SERVER['HTTP_HOST']. dirname($_SERVER['SCRIPT_NAME']) . '/');
 define('IMG_PATH', 'public/img/');
 
 //BBDD
@@ -12,19 +12,26 @@ define('DB_PASS', 'IPXi@g)lUrDFi4');
 define('DB_NAME', "ddb238991");
 
 // QR URL
-if(ENVIRONMENT == 'dev'){
-    define('ARTICLE_URL', BASE_URL . "/articles_form?isClone=true&id=");
-}else {
-    define('ARTICLE_URL', BASE_URL . "/articles_form?isClone=true&id=");
-}
+define('ARTICLE_URL', "articles_form?isClone=true&id=");
+
+
+//API
+define('API_ENDPOINT', BASE_URL. "api/");
+define ('API', [
+    "articles" => 'articles',
+    "article" => 'articles/{id}',
+    "users" => 'users',
+    "user" => 'users/{id}'
+]);
+
 
 //API KEYS
 
 if(ENVIRONMENT == 'dev'){
     define('GITHUB_ID', 'Ov23liuvq0ONjCjFACZu');
     define('GITHUB_SECRET','2f6b30072107ccb7cf2e0c81059e4e8f201e7fa1');
-    define('CALLBACK', 'http://localhost/Xavi/practica2_1/login?github=true');
-    define('DEVIANT_CALLBACK', 'http://localhost/Xavi/practica2_1/login?deviantart=true');
+    define('CALLBACK', BASE_URL . 'login?github=true');
+    define('DEVIANT_CALLBACK', BASE_URL . 'login?deviantart=true');
 
 } else {
     define('GITHUB_ID', 'Ov23liIJrpyrzzkGvrTy');

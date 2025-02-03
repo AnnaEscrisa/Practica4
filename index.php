@@ -1,5 +1,7 @@
 <?php
 //Anna Escribano
+require_once 'vendor/autoload.php';
+
 require 'config.php';
 require 'controller/utils/message.controller.php';
 require 'controller/utils/session.controller.php';
@@ -45,6 +47,9 @@ switch ($route) {
     case 'materials':
         $pageTitle = 'materials';
         include 'view/materials.vista.php';
+        break;
+    case 'api':
+        require 'api/index.php';
         break;
 
     default:

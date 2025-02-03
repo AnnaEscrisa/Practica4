@@ -1,11 +1,11 @@
 <?php
 //Anna Escribano
 
+use Backend\Model\Usuari;
+
 require 'lib/reCaptcha/recaptchalib.php';
 require 'lib/Hybridauth/autoload.php';
 require 'lib/OAuth2/autoloader.php';
-
-require "model/user.model.php";
 
 require "controller/utils/validacio.controller.php";
 require 'controller/utils/rutes.controller.php';

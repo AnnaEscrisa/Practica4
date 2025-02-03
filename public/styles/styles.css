@@ -341,6 +341,18 @@ section.pages {
     align-self: flex-end;
 }
 
+#ar_edit:hover {
+    background-color: #d6b255;
+}
+
+#ar_delete:hover {
+    background-color: #c95b5b;
+}
+
+#ar_clone:hover {
+    background-color: #a97abb;
+}
+
 /** modal qr **/
 
 #modal-qr {

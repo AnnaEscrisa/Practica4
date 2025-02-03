@@ -19,7 +19,6 @@ function carregarArticles($articleModel, $missatge, $tipus)
             $articles = $articleModel->selectArticleByUser($_SESSION['user_id']) ?? null;
         }
 
-
     } else if (!$privat) {
         $pageTitle = "Home";
         $hiddenButton = 'hidden';

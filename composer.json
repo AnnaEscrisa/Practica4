@@ -4,5 +4,10 @@
         "libern/qr-code-reader": "^1.0",
         "guzzlehttp/guzzle": "^7.9",
         "nguyenary/qr-code-monkey": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Backend\\": ""
+        }
     }
 }

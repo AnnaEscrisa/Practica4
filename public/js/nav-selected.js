@@ -28,10 +28,11 @@ for (r of routes) {
         nav_item.classList.add('nav-selected');
         if (r.group != null) {
             let grup = document.querySelector(r.group);
-            console.log(grup);
             grup.classList.add('visible');
         }
         
         break;
     }
 }
+
+//buscar manera de identificar href i escollir item?

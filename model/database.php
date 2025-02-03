@@ -1,5 +1,9 @@
 <?php
 // Anna Escribano Sabio
+namespace Backend\Model;
+
+use PDO;
+use Exception;
 
 class Database
 {

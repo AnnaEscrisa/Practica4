@@ -1,5 +1,4 @@
 <?php
-require 'vendor/autoload.php';
 
 use nguyenary\QRCodeMonkey\QRCode as Monkey;
 

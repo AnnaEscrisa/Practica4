@@ -1,7 +1,9 @@
 <?php
 // Anna Escribano Sabio
+namespace Backend\Model;
 
-require_once 'database.model.php';
+use Backend\Model\Database;
+
 class Article extends Database
 {
     private $taula;//taula corresponent a la bbdd
@@ -14,31 +16,29 @@ class Article extends Database
         $this->taula = "articles";
         $this->select = " articles.id, articles.cos, articles.titol, articles.ingredients, articles.image, users.name, users.id as user_id ";
         $this->join = ' LEFT JOIN users ON articles.user_id = users.id ';
-
     }
 
     //Selecciona tots els articles i la info de l'usuari creador
-    function selectArticles()
+    public function selectArticles()
     {
         $resultat = $this->selectAllSpecific($this->taula, $this->select, $this->join);
         return $resultat;
     }
 
     //Selecciona per id
-    function selectArticleById($id)
+    public function selectArticleById($id)
     {
         $resultat = $this->selectSpecific($this->taula, $this->select, "articles.id", $id, $this->join);
         return $resultat;
     }
 
-    //Selecciona per usuari
-    function selectArticleByUser($id)
+    public function selectArticleByUser($id)
     {
         $resultat = $this->selectSpecific($this->taula, $this->select, "user_id", $id, $this->join);
         return $resultat;
     }
 
-    function selectArticleByName($name)
+    public function selectArticleByName($name)
     {
         $resultat = $this->selectSpecific($this->taula, $this->select, "articles.titol", $name, $this->join);
         return $resultat;
@@ -48,7 +48,7 @@ class Article extends Database
         Comprova si el titol existeix i si les dades tenen mes caracters dels permessos.
         Retorna codis que seran llegits per validacio.controller
     */
-    function insertArticle($titol, $cos, $user_id, $ingredients)
+    public function insertArticle($titol, $cos, $user_id, $ingredients)
     {
         $existeix = $this->comprovarExistent($this->taula, "titol", $titol);
 
@@ -76,7 +76,7 @@ class Article extends Database
 
     //Modifica un article. Retorna els mateixos valors amb les mateixes condicions que la funcio d'inserir
     //Comprova si estem canviant el titol, i si es així, comprova si ja existeix
-    function updateArticle($id, $titol, $cos, $ingredients, $imatge)
+    public function updateArticle($id, $titol, $cos, $ingredients, $imatge)
     {
         $article = $this->selectArticleById($id);
         $titolActual = $article[0]['titol'];
@@ -98,13 +98,13 @@ class Article extends Database
     }
 
     //Modifica el user_id d'un article a 0 (anonim)
-    function setArticleAnonimous($user_id)
+    public function setArticleAnonimous($user_id)
     {
         $this->updateBy($this->taula, "user_id", $user_id, [0], "user_id =?");
     }
 
     //eleimina article 
-    function deleteArticle($id)
+    public function deleteArticle($id)
     {
         $this->delete($this->taula, $id);
     }

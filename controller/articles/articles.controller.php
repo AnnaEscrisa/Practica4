@@ -1,6 +1,6 @@
 <?php
 
-require "model/article.model.php";
+use Backend\Model\Article;
 
 require 'controller/utils/rutes.controller.php';
 require 'controller/utils/validacio.controller.php';

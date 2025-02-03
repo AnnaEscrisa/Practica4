@@ -40,8 +40,8 @@ function parsejarPropietats()
         'novaImatge' => $_FILES["imatge"] ?? false,
         'user_id' => $_SESSION['user_id']
     ];
+    
     return $data;
-
 }
 
 
