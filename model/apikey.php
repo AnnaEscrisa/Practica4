@@ -45,7 +45,7 @@ class ApiKey extends Database
         }
         $key = md5(uniqid(rand(), true));
         $key .= $usuari['isAdmin'] ? 'API_ADMIN' : "";
-        $expiracio = date('Y-m-d H:i:s', strtotime('+2 minutes'));
+        $expiracio = date('Y-m-d H:i:s', strtotime('+365 days'));
 
         if ($this->selectKeyByUserId($userId) == null) {
             $this->insert($this->taula, ' user_fk, apikey, expiracio ', [$userId, $key, $expiracio], ' ?, ?, ? ');

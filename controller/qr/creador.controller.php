@@ -25,33 +25,26 @@ function articleQr()
         }
     }
 
+    /** Funcionament mitjan QRMonkey */
+
     try {
         return sendToQrMonkey($data);
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
     }
 
-    /*
-    ** Funcionament original: **
-
-    try {
-        return createQr($data);
-    } catch (Exception $e) {
-        echo "Error: " . $e->getMessage();
-    }
-   */
+    /** Funcionament original: **/
+    
+    // try {
+    //     return createQr($data);
+    // } catch (Exception $e) {
+    //     echo "Error: " . $e->getMessage();
+    // }
+   
 }
 
 
-
-
 //user qr?
-
-
-
-
-//coven qr
-
 
 
 //Crear QR mitjançant qr monkey api
