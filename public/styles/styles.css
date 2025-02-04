@@ -238,17 +238,19 @@ input[name="buscadorArticle"] {
 }
 
 .article_card {
-    aspect-ratio: 1/1;
     color: black;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     outline-offset: 5px;
     cursor: pointer;
     border-radius: var(--little-b-radius);
     width: 100%;
     outline: 3px solid var(--main-accent);
     transition: 0.5s;
+}
+
+.article_card img {
+    aspect-ratio: 1/1;
+    width: 100%;
+    border-radius: var(--little-b-radius);
 }
 
 .article_card:hover {
@@ -258,6 +260,9 @@ input[name="buscadorArticle"] {
     .ac_banner {
         display: block;
         transition: 0.5s;
+        position: absolute;
+        top: -0.5rem;
+        z-index: 1;
     }
 }
 
@@ -555,7 +560,7 @@ footer a:hover {
     color: var(--main-accent);
 }
 
-a+ul a{
+a+ul a {
     text-decoration: none;
 }
 
@@ -655,6 +660,19 @@ a+ul a{
 
 .no-opacity {
     opacity: 0;
+}
+
+.hidden-accessible {
+    border: 0;
+    clip: rect(1px 1px 1px 1px);
+    /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
 }
 
 .unselectable {

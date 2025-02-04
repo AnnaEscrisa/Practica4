@@ -7,21 +7,21 @@
     <form action="" method="post" class="form_section article" enctype="multipart/form-data" id="article_form">
         <input hidden class="form-control" type="text" name="id" value="<?= $_GET['id'] ?? '' ?>">
         <div class="form-group">
-            <label for="" class="form-label">Títol*</label>
-            <input class="form-control" type="text" name="nouTitol" placeholder="Títol de l'article"
+            <label for="nouTitol" class="form-label">Títol*</label>
+            <input id="nouTitol" class="form-control" type="text" name="nouTitol" placeholder="Títol de l'article"
                 value="<?php echo $nouTitol ?? $article['titol'] ?? '' ?>">
         </div>
 
         <div class="form-group">
-            <label for="" class="form-label">Descripció*</label>
-            <textarea class="form-control" name="nouCos"
+            <label for="nouCos" class="form-label">Descripció*</label>
+            <textarea id="nouCos" class="form-control" name="nouCos"
                 placeholder="Descripció de l'article"><?php echo $nouCos ?? $article['cos'] ?? '' ?></textarea>
         </div>
 
         <!--no implementat a backend -->
         <div class="form-group">
-            <label for="" class="form-label">Tipus</label>
-            <select name="tipus">
+            <label for="tipus" class="form-label">Tipus</label>
+            <select name="tipus" id="tipus">
                 <option value="proteccio">Protecció</option>
                 <option value="malediccio">Maledicció</option>
                 <option value="encanteri">Encanteri</option>
@@ -31,7 +31,7 @@
 
         <!--no implementat a backend -->
         <div class="form-group">
-            <label for="" class="form-label"> Ingredients</label>
+            <label class="form-label"> Ingredients</label>
             <div class="hstack">
                 <button type="button" class="button" data-ingredients onclick="showSidebar('vegetals', 'form')">Vegetals</button>
                 <button type="button" class="button" data-ingredients onclick="showSidebar('animals', 'form')">Animals</button>
@@ -40,8 +40,8 @@
         </div>
 
         <div class="form-group">
-            <label for="" class="form-label">Imatge</label>
-            <input type="file" name="imatge" class="form-control" placeholder="Imatge">
+            <label for="imatge" class="form-label">Imatge</label>
+            <input id="imatge" type="file" name="imatge" class="form-control" placeholder="Imatge">
             <input type="hidden" name="imatgePrevia" value="<?= $article['image'] ?? 'none.webp' ?>">
         </div>
 

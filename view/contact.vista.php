@@ -6,18 +6,18 @@
             <input class="form-control" name="id" type="text" value="<?= $_SESSION['user'] ?>" hidden>
         <?php else: ?>
             <div class="form-group">
-                <label for="">Nom</label>
-                <input class="form-control" type="text" name="nom">
+                <label for="nom">Nom</label>
+                <input id="nom" class="form-control" type="text" name="nom">
             </div>
             <div class="form-group">
-                <label for="">Email</label>
-                <input class="form-control" type="email" name="email">
+                <label for="email">Email</label>
+                <input id="email" class="form-control" type="email" name="email">
             </div>
         <?php endif; ?>
 
         <div class="form-group">
-            <label for="" class="form-label">Asumpte</label>
-            <select name="" id="">
+            <label for="opcions contacte" class="form-label">Asumpte</label>
+            <select name="" id="opcions contacte">
                 <option value="Dubtes">Dubtes
                 </option>
                 <option value="Reportar">Reportar poció</option>
@@ -28,8 +28,8 @@
         </div>
 
         <div class="form-group">
-            <label for="">Missatge</label>
-            <textarea class="form-control" name="" id="" cols="30" rows="5"></textarea>
+            <label for="missatge">Missatge</label>
+            <textarea class="form-control" name="missatge" id="missatge" cols="30" rows="5"></textarea>
         </div>
 
         <button class="button">Envia</button>
