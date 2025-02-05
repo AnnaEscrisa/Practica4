@@ -15,7 +15,7 @@ function openCloneModal(id) {
   }
 
   $('#modal-article-id').val(id);
-  const formData = new FormData($('#codeForm'));
+  const formData = new FormData(document.getElementById('codeForm'));
   $.ajax({
     url: 'qr?article=true',
     type: 'POST',
