@@ -1,9 +1,6 @@
 <?php
 
-require_once 'vendor/autoload.php';
-
 require 'controller/utils/rutes.controller.php';
-require 'controller/utils/api.controller.php';
 require 'lector.controller.php';
 require 'creador.controller.php';
 

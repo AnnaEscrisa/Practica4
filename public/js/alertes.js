@@ -1,19 +1,21 @@
 
 function openDeleteModal(ruta, item) {
-  document.getElementById('modal-item').textContent = item;
-  document.getElementById('modal-delete-link').href = ruta;
+  $('#modal-item').html(item);
+  $('#modal-delete-link').attr('href', ruta);
 
-  const modal = new bootstrap.Modal(document.getElementById('modal-delete'));
+  const modal = new bootstrap.Modal($('#modal-delete'));
   modal.show();
 }
 
 function openCloneModal(id) {
-  const existingModal = bootstrap.Modal.getInstance(document.getElementById('modal-clone'));
+  //tanquem possibles modals perque no s'acumulin
+  const existingModal = bootstrap.Modal.getInstance($('#modal-clone'));
   if (existingModal) {
     existingModal.dispose();
   }
-  document.getElementById('modal-article-id').value = id;
-  const formData = new FormData(document.getElementById('codeForm'));
+
+  $('#modal-article-id').val(id);
+  const formData = new FormData($('#codeForm'));
   $.ajax({
     url: 'qr?article=true',
     type: 'POST',
@@ -23,7 +25,7 @@ function openCloneModal(id) {
     },
   });
 
-  const modal = new bootstrap.Modal(document.getElementById('modal-clone'));
+  const modal = new bootstrap.Modal($('#modal-clone'));
 
   modal.show();
 }

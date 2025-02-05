@@ -1,7 +1,9 @@
 <?php
 //Anna Escribano
+namespace Backend\Model;
 
-require_once 'database.model.php';
+use Backend\Model\Database;
+
 class Usuari extends Database
 {
     private $taula;

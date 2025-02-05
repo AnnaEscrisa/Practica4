@@ -1,6 +1,6 @@
 <?php
 
-function carregarArticles($articleModel, $missatge, $tipus, $displayEliminar)
+function carregarArticles($articleModel, $missatge, $tipus)
 {
     $privat = $_GET["myArticles"] ?? false;
     $articleName = $_POST['buscadorArticle'] ?? null;
@@ -18,7 +18,6 @@ function carregarArticles($articleModel, $missatge, $tipus, $displayEliminar)
         } else {
             $articles = $articleModel->selectArticleByUser($_SESSION['user_id']) ?? null;
         }
-
 
     } else if (!$privat) {
         $pageTitle = "Home";

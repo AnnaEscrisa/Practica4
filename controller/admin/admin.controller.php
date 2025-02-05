@@ -1,7 +1,7 @@
 <?php
 // Anna Escribano
 
-require "model/user.model.php";
+use Backend\Model\Usuari;
 
 require 'permis.controller.php';
 require 'users.controller.php';

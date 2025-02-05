@@ -19,6 +19,10 @@ let routes = [{
     ruta: 'home',
     nav: 'home',
     group: '.pocions_items'
+},
+ {
+    ruta: 'api-key',
+    nav: 'api-key'
 }];
 
 for (r of routes) {
@@ -28,10 +32,11 @@ for (r of routes) {
         nav_item.classList.add('nav-selected');
         if (r.group != null) {
             let grup = document.querySelector(r.group);
-            console.log(grup);
             grup.classList.add('visible');
         }
         
         break;
     }
 }
+
+//buscar manera de identificar href i escollir item?

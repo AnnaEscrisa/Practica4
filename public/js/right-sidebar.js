@@ -39,14 +39,12 @@ function sidebarArticle(article) {
     $('.ar_user').html(article.name);
 
     $("#ar_edit").attr('href', `articles_form?isEdit=true&id=${article.id}`);
-    document.getElementById("ar_delete").addEventListener(
-        "click",
+    $("#ar_delete").click(
         function () {
             openDeleteModal(`articles_form?isDelete=true&id=${article.id}`, 'article')
         });
 
-    document.getElementById("ar_clone").addEventListener(
-        "click",
+    $("#ar_clone").click(
         function () {
             openCloneModal(article.id);
         });
