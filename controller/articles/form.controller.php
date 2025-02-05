@@ -3,7 +3,15 @@
 
 function carregarEdicio($articleModel, &$missatge)
 {
-    $permisCanvis = comprovarPermis($articleModel);
+    $edit = $_GET['isEdit'] ?? false;
+    $clone = $_GET['isClone'] ?? false;
+
+    if ($edit) {
+        $permisCanvis = comprovarPermis($articleModel, 'edit');
+
+    } elseif ($clone) {
+        $permisCanvis = comprovarPermis($articleModel, 'clone');
+    }
 
     if ($permisCanvis) {
         $id = $_GET["id"] ?? '';
@@ -22,21 +30,24 @@ function carregarEdicio($articleModel, &$missatge)
     return $article;
 }
 
-function parsejarPropietats($article)
+function parsejarPropietats()
 {
-    //turn article properties into array keys
-    return get_object_vars($article);
-    // return $articleArray;
-    // $titol = $article["titol"];
-    // $cos = $article["cos"];
-    // $ingredients = $article["ingredients"];
-    // $user_id = $article["user_id"];
+    $data = [
+        'id' => $_POST['id'] ?? false,
+        'nouCos' => $_POST["nouCos"] ?? false,
+        'nouTitol' => $_POST["nouTitol"] ?? false,
+        'nousIngredients' => $_POST["nousIngredients"] ?? false,
+        'novaImatge' => $_FILES["imatge"] ?? false,
+        'user_id' => $_SESSION['user_id']
+    ];
+    
+    return $data;
 }
 
 
 function eliminarArticle($articleModel)
 {
-    $permisCanvis = comprovarPermis($articleModel);
+    $permisCanvis = comprovarPermis($articleModel, 'delete');
 
     if ($permisCanvis) {
         $id = $_GET["id"] ?? '';
@@ -57,11 +68,7 @@ function processarEdicio($articleModel, &$missatge, &$tipus)
 {
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-        $id = $_POST['id'] ?? false;
-        $nouCos = $_POST["nouCos"] ?? false;
-        $nouTitol = $_POST["nouTitol"] ?? false;
-        $nousIngredients = $_POST["nousIngredients"] ?? false;
-        $novaImatge = $_FILES["imatge"] ?? false;
+        extract(parsejarPropietats());
 
         if ($nouCos && $nouTitol && $id) {
             $img = processarImatge($missatge);
@@ -73,6 +80,7 @@ function processarEdicio($articleModel, &$missatge, &$tipus)
 
                 getResult($nouTitol, $nouCos, $nousIngredients, 'edit', null, $articleModel, $missatge, $id);
             }
+            
 
         } else {
             $missatge = error_g1;
@@ -80,38 +88,45 @@ function processarEdicio($articleModel, &$missatge, &$tipus)
     }
 }
 
-function insertarArticle($articleModel, &$missatge, &$tipus, &$displayEliminar)
+function insertarArticle($articleModel)
 {
-    $permisCanvis = comprovarPermis($articleModel);
+    $permisCanvis = comprovarPermis($articleModel, 'nou');
 
-    if ($permisCanvis) {
-        $pageTitle = 'Nou Article';
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
-
-            $nouCos = $_POST["nouCos"] ?? false;
-            $nouTitol = $_POST["nouTitol"] ?? false;
-            $nousIngredients = $_POST["nousIngredients"] ?? false;
-            $novaImatge = $_FILES["imatge"] ?? false;
-            $user_id = $_SESSION['user_id'];
-            if ($nouCos && $nouTitol) {
-
-                $img = processarImatge($missatge);
-                if (!empty($novaImatge['name']) && $img) {
-
-                    getResult($nouTitol, $nouCos, $nousIngredients, 'insert', $img, $articleModel, $missatge, $user_id);
-
-                } elseif (empty($novaImatge['name'])) {
-                    getResult($nouTitol, $nouCos, $nousIngredients, 'insert', null, $articleModel, $missatge, $user_id);
-                }
-            } else {
-                $missatge = error_g1;
-            }
-        }
-        include "view/form.vista.php";
-    } else {
+    if (!$permisCanvis) {
         buildMessage(error_g6, "error", "home", "");
     }
+}
 
+function processarInsercio($articleModel, &$missatge, &$tipus){
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+        extract(parsejarPropietats());
+
+        if ($nouCos && $nouTitol) {
+
+            $img = processarImatge($missatge);
+            if (!empty($novaImatge['name']) && $img) {
+
+                getResult($nouTitol, $nouCos, $nousIngredients, 'insert', $img, $articleModel, $missatge, $user_id);
+
+            } elseif (empty($novaImatge['name'])) {
+                getResult($nouTitol, $nouCos, $nousIngredients, 'insert', null, $articleModel, $missatge, $user_id);
+            }
+        } else {
+            $missatge = error_g1;
+        }
+    }
+}
+
+function llegirFlags($article)
+{
+    $flags = $_GET;
+    foreach ($flags as $key => $value) {
+        if ($value == true) {
+            unset($article[$key]);
+        }
+    }
+    return $article;
 }
 
 function getResult($titol, $cos, $ingred, $operacio, $img, $articleModel, &$missatge, $id)

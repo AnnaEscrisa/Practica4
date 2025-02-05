@@ -1,5 +1,6 @@
 <?php
 //Anna Escribano
+require_once 'vendor/autoload.php';
 
 require 'config.php';
 require 'controller/utils/message.controller.php';
@@ -32,9 +33,28 @@ switch ($route) {
     case 'profile':
         require 'controller/profile/profile.controller.php';
         break;
-    case 'info':
+    case 'about':
+        $pageTitle = 'about';
+        include 'view/about.vista.php';
+        break;
+    case 'qr':
+        require 'controller/qr/qr.controller.php';
+        break;
     case 'contacte':
-        echo 'en construcció';
+        $pageTitle = 'contact';
+        include 'view/contact.vista.php';
+        break;
+    case 'materials':
+        $pageTitle = 'materials';
+        include 'view/materials.vista.php';
+        break;
+    case 'api-key':
+        $pageTitle = 'Api Key';
+        include 'view/api.vista.php';
+        break;
+    case 'api':
+        require 'api/index.php';
+        break;
 
     default:
         http_response_code(404);

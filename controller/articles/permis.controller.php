@@ -1,21 +1,31 @@
 <?php
 
 
-function comprovarPermis($articleModel){
+function comprovarPermis($articleModel, $accio)
+{
     $permisCanvis = false;
     $currentUser = $_SESSION['user_id'] ?? false;
     $id = $_GET["id"] ?? '';
 
-    if ($currentUser && $id) {
-        $permisCanvis = comprovarPossesioArticle($articleModel, $currentUser, $id);
-    } 
-    else if ($currentUser) {
-        $permisCanvis = true;
+    switch ($accio) {
+        case 'edit':
+            $permisCanvis = comprovarPossesioArticle($articleModel, $currentUser, $id);
+            break;
+
+        case 'delete':
+            $permisCanvis = comprovarPossesioArticle($articleModel, $currentUser, $id);
+            break;
+
+        case 'nou':
+            $permisCanvis = $currentUser ? true : false;
+
+        case 'clone':
+            $permisCanvis = $currentUser ? true : false;
+            break;
+        default:
+            break;
     }
-    else {
-        buildMessage(error_a5, "error", 'login', "");
-    }
-    
+
     if (!$permisCanvis) {
         buildMessage(error_a5, "error", 'home', "");
     }

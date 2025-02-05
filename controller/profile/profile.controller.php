@@ -1,7 +1,8 @@
 <?php
 //Controla els diferents updates de les dades de l'usuari
 
-require 'model/user.model.php';
+use Backend\Model\Usuari;
+use Backend\Model\Article;
 
 require 'fitxa.controller.php';
 require 'controller/utils/validacio.controller.php';
@@ -28,8 +29,7 @@ switch ($ruta) {
         include 'view/edicioUser.vista.php';
         break;
 
-    case 'eliminar':
-        require 'model/article.model.php';
+    case 'eliminar':;
 
         $articleModel = new Article();
         eliminarUser($userModel, $articleModel);

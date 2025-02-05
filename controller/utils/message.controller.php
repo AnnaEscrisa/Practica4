@@ -52,6 +52,12 @@ const success_rec2 = "Contrasenya canviada amb éxit";
 const error_i1 = "Format d'imatge no permesa. S'admeten extensions PNG, JPG, JPEG i WEBP.";
 const error_i2 = "L'arxiu és massa gran. El màxim permès és de 2MB.";
 
+//errors qr
+const error_q1 = "No s'ha pogut generar el codi QR";
+const error_q2 = "No s'ha enviat cap codi QR.";
+const success_q1 = "Codi QR generat amb èxit";
+
+
 
 //-------------------Finestra d'error----------------------
 /*variables per recollir possibles errors.
@@ -68,17 +74,13 @@ $displayEliminar = "hidden";
 
 
 //si missatge te valor, mostrarà un missatge a la pàgina a la que ens trobem
-function showMessage($tipus, $missatge, $displayEliminar)
+function showMessage($tipus, $missatge)
 {
     if ($missatge) {
 
         $alerta = "<div id='alerta_miss' class='alert alert-dismissible alert-$tipus' role='alert'>
             <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Tancar'></button>
             <h4>$missatge</h4>
-            <form action='' method='post' class='$displayEliminar'>
-                <input class='btn btn-danger' type='submit' name='elimina' value='Si'></input>
-                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Tancar'>No</button>
-            </form>
         </div>
         <script src='public/js/reload.js'></script>";
         echo $alerta;

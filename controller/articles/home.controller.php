@@ -1,6 +1,6 @@
 <?php
 
-function carregarArticles($articleModel, $missatge, $tipus, $displayEliminar)
+function carregarArticles($articleModel, $missatge, $tipus)
 {
     $privat = $_GET["myArticles"] ?? false;
     $articleName = $_POST['buscadorArticle'] ?? null;
@@ -19,7 +19,6 @@ function carregarArticles($articleModel, $missatge, $tipus, $displayEliminar)
             $articles = $articleModel->selectArticleByUser($_SESSION['user_id']) ?? null;
         }
 
-
     } else if (!$privat) {
         $pageTitle = "Home";
         $hiddenButton = 'hidden';
@@ -31,7 +30,7 @@ function carregarArticles($articleModel, $missatge, $tipus, $displayEliminar)
         buildMessage(error_g6, 'error', 'home', '');
     }
 
-    $max_articles = $_POST['selectPagines'] ?? $_COOKIE['paginacioHome'] ?? 5;
+    $max_articles = $_POST['selectPagines'] ?? $_COOKIE['paginacioHome'] ?? 6;
     $ordenacio_art = $_POST['selectOrder'] ?? $_COOKIE['order_art'] ?? 'titol';
 
     setHomeCookies($max_articles, $ordenacio_art);

@@ -7,22 +7,36 @@ let routes = [{
 },
 {
     ruta: 'myArticles',
-    nav: 'myArticles'
+    nav: 'myArticles',
+    group: '.pocions_items'
 },
 {
     ruta: 'form',
-    nav: 'newArticle'
+    nav: 'newArticle',
+    group: '.pocions_items'
 },
 {
     ruta: 'home',
-    nav: 'home'
+    nav: 'home',
+    group: '.pocions_items'
+},
+ {
+    ruta: 'api-key',
+    nav: 'api-key'
 }];
 
-for (ruta of routes) {
-    if ((current_url).includes(ruta.ruta)) {
+for (r of routes) {
+    if ((current_url).includes(r.ruta)) {
        
-        let nav_item = document.getElementById(ruta.nav);
+        let nav_item = document.getElementById(r.nav);
         nav_item.classList.add('nav-selected');
+        if (r.group != null) {
+            let grup = document.querySelector(r.group);
+            grup.classList.add('visible');
+        }
+        
         break;
     }
 }
+
+//buscar manera de identificar href i escollir item?

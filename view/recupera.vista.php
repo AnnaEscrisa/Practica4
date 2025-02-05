@@ -2,7 +2,7 @@
 <?php include "partials/_head.vista.php"; ?>
 
 <body>
-    <?php showMessage($tipus, $missatge, $displayEliminar); ?>
+    <?php showMessage($tipus, $missatge); ?>
     <?php include "view/partials/_nav.vista.php"; ?>
     <main class="container">
 
@@ -10,7 +10,7 @@
             <label class="form-label">Usuari</label>
             <input name="usuari" class="form-control" type="text" type="text">
             <p>Si hi ha un correu associat a aquest usuari, se li enviarà un codi de confirmació</p>
-            <input type="submit" class="btn btn-primary" value="Envia mail"></input>
+            <input type="submit" class="button" value="Envia mail"></input>
         </form>
 
     </main>

@@ -1,6 +1,6 @@
 <?php
 
-require "model/article.model.php";
+use Backend\Model\Article;
 
 require 'controller/utils/rutes.controller.php';
 require 'controller/utils/validacio.controller.php';
@@ -17,11 +17,12 @@ switch ($ruta) {
     case 'home':
     case 'myArticles':
         require 'home.controller.php';
-        include 'permis.controller.php';
+        require 'permis.controller.php';
         include 'controller/utils/pagination.controller.php';
 
-        carregarArticles($articleModel, $missatge, $tipus, $displayEliminar);
+        carregarArticles($articleModel, $missatge, $tipus);
         break;
+
     case 'editar':
         require 'permis.controller.php';
         require 'form.controller.php';
@@ -29,7 +30,7 @@ switch ($ruta) {
         $pageTitle = "Editar article";
         $article = carregarEdicio($articleModel, $missatge);
         processarEdicio($articleModel, $missatge, $tipus);
-       
+
         include "view/form.vista.php";
         break;
     case 'eliminar':
@@ -40,7 +41,23 @@ switch ($ruta) {
     case 'nou':
         require 'permis.controller.php';
         require 'form.controller.php';
-        insertarArticle($articleModel, $missatge, $tipus, $displayEliminar);
+
+        $pageTitle = 'Nou Article';
+        
+        insertarArticle($articleModel);
+        processarInsercio($articleModel, $missatge, $tipus);
+        include "view/form.vista.php";
+        break;
+    case 'clonar':
+        require 'permis.controller.php';
+        require 'form.controller.php';
+
+        $pageTitle = "Clonar article";
+        $article = carregarEdicio($articleModel, $missatge);
+        $article = llegirFlags($article);
+        processarInsercio($articleModel, $missatge, $tipus);
+
+        include "view/form.vista.php";
         break;
     default:
         # code...

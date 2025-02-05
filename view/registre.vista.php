@@ -1,22 +1,40 @@
 <!-- Anna Escribano -->
-<?php include "partials/_head.vista.php"; ?>
+<?php ob_start(); ?>
 
-<body>
-    <?php showMessage($tipus, $missatge, $displayEliminar); ?>
-    <?php include "view/partials/_nav.vista.php"; ?>
-    <main class="container">
-        <form action="" method="post">
-            <label class="form-label">Usuari</label>
-            <input name="usuari" class="form-control" type="text" required>
+<main class="main_login">
+    <form action="" method="post" class="form_section">
+
+        <div class="hstack">
+            <div class="form-group">
+                <label class="form-label">Usuari</label>
+                <input name="usuari" class="form-control" type="text" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Nom</label>
+                <input name="nom" type="text" class="form-control" required>
+            </div>
+        </div>
+
+        <div class="form-group">
             <label class="form-label">Contrasenya</label>
             <input name="password" type="password" class="form-control" required>
+        </div>
+
+        <div class="form-group">
             <label class="form-label">Repetir contrasenya</label>
             <input name="passwordRepeat" type="password" class="form-control" required>
-            <label for="">Nom</label>
-            <input name="nom" type="text" class="form-control" required>
-            <label for="">Email</label>
-            <input name="email" type="email" class="form-control" required>
+        </div>
 
-            <button type="submit" class="btn btn-primary">Registra't</button>
-        </form>
-    </main>
+        <div class="form-group">
+            <label for="form-label">Email</label>
+            <input name="email" type="email" class="form-control" required>
+        </div>
+        <button type="submit" class="button button-lil">Registrar-se</button>
+    </form>
+</main>
+
+<?php
+$content = ob_get_clean();
+include "view/layout.php";
+?>
