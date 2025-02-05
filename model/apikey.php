@@ -26,7 +26,7 @@ class ApiKey extends Database
     {
         $resultat = $this->selectSpecific($this->taula, $this->select, "user_fk", $id, $this->join);
         if ($resultat) {
-            return $resultat[0]['apikey'];
+            return $resultat[0];
         }
         return null;
     }
@@ -37,7 +37,7 @@ class ApiKey extends Database
         return $resultat ? $resultat[0] : null;
     }
 
-    function generarKey($userId): string
+    function generarKey($userId)
     {
         $usuari = $this->userModel->selectUserById($userId);
         if ($usuari == null) {
@@ -52,7 +52,12 @@ class ApiKey extends Database
         } else {
             $this->updateBy($this->taula, 'user_fk', $userId, [$key, $expiracio], ' apikey = ?, expiracio = ? ');
         }
-        return $key;
+
+        $apikey = [
+            'apikey' => $key,
+            'expiracio' => $expiracio
+        ];
+        return $apikey;
     }
 
     function comprovarKey($key)
@@ -62,7 +67,7 @@ class ApiKey extends Database
             return false;
 
         } else {
-            return true;
+            return $possibleKey;
         }
     }
 

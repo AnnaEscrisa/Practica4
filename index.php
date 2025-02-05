@@ -48,6 +48,10 @@ switch ($route) {
         $pageTitle = 'materials';
         include 'view/materials.vista.php';
         break;
+    case 'api-key':
+        $pageTitle = 'Api Key';
+        include 'view/api.vista.php';
+        break;
     case 'api':
         require 'api/index.php';
         break;

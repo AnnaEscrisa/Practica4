@@ -9,13 +9,12 @@ Situar la carpeta del projecte a *htdocs* en cas d'utilitzar XAMPP i accedir a *
 No cal importar la base de dades; és allotjada al núvol (dondominio).
 
 
-- **Rutes**
+### Rutes
 Les rutes (home, login, registre...) passen per un primer filtre per l'htacces, que les canvia de ""index?route=home" a "home". Secundariament, passen per altre filtre als controladors, que les redirigeixen a la funcionalitat especifica (edicio, inserció, etc).
 
 ### Models
 Conté classes que representen l'accés a les dades de la base de dades.
 La clase database serveix com a base per realizar les principals interaccions amb una bbdd (conexio, insertar, modificar, eliminar, seleccionar...).
-
 
 ### Controllers
 Organitzats per carpetes depenent de les seves funcions.
@@ -24,6 +23,7 @@ Organitzats per carpetes depenent de les seves funcions.
 Controladors per l'acces a la aplicació (login, registre...). No es prohibeix que un email estigui a més d'un compte (tant socials com normals). 
 
 - **Admin**
+Acces a tots els usuaris, i la seva administracio. Nomes un usuari admin pot entrar.
 En eliminar un usuari, passa els seus articles a anònim.
 
 - **Articles**
@@ -35,10 +35,10 @@ Diversos controladors amb funcionalitats extra utilitzades a diferents seccions 
 
 ### Vistes
 Incorporen un layout, que estableix la base del diseny de les pàgines. Serà inclòs a totes les vistes principals. 
-Dividit entre vistes i partials. Les vistes només inclouen el body de l'html per reduir el codi repetit.
+Vistes dividides entre vistes i partials. Les vistes només inclouen el body de l'html per reduir el codi repetit.
 
 ### API
-Present a la carpeta Api. Utilitzable des de Postman.
+Present a la carpeta Api. Utilitzable des de Postman. Es pot obtenir una api-key des de la propia web (annaescribano/backend/api-key) i veure una explicació breu del funcionament.
 
 La validació de l'entrada a la api es fa mitjançant API KEY, no JWT.
 
@@ -52,10 +52,12 @@ Requereix api key per accedir. Exemple d'endpoint: /api/articles o /api/articles
 
 A postman, cal afegir la api key als headers, i seleccionar especificament API KEY. Com a "Key", escriure la variable "api-key", i el valor de la key a "value".
 
-### QR
+### Lectura d'API
+Implementada amb la lectura de l'api pròpia. 
 
-Implementat tant la lectura com la creació de QR. Per estètica, s'ha implementat la creació de qr a partir de l'API de qrmonkey. La creació de qr amb la llibreria de chillerlean encara està implementada però comentada. Per utilitzar aquesta en comptes de la de qrmonkey, al controlador creador.controller.php, a la funció articleQR(), comentar la secció "Funcionament mitjan QRMonkey" i descomentar la secció "Funcionament original".
+### QR
+Implementades tant la lectura com la creació de QR. Per estètica, s'ha implementat la creació de qr a partir de l'API de qrmonkey. La creació de qr amb la llibreria de chillerlean encara està implementada però comentada. Per utilitzar aquesta en comptes de la de qrmonkey, al controlador creador.controller.php, a la funció articleQR(), comentar la secció "Funcionament mitjan QRMonkey" i descomentar la secció "Funcionament original".
 
 ### AJAX
-Utilitzat als scripts de JavaScript (alertes.js i qr.js) per carregar el codi QR i actualitzar-lo en base als canvis que fa l'usuari.
+Utilitzat als scripts de JavaScript (alertes.js, qr.js i api-key.js) per carregar el codi QR i actualitzar-lo en base als canvis que fa l'usuari i per carregar l-api key de l'usuari al moment de crear-la.
 

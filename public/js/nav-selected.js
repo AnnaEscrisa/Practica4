@@ -19,6 +19,10 @@ let routes = [{
     ruta: 'home',
     nav: 'home',
     group: '.pocions_items'
+},
+ {
+    ruta: 'api-key',
+    nav: 'api-key'
 }];
 
 for (r of routes) {
