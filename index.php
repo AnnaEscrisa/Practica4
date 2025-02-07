@@ -11,6 +11,7 @@ registrarActivitat();
 
 $route = $_GET['route'];
 $route = explode('/', $route)[0];
+$route = strtolower($route);
 
 switch ($route) {
     case '':
