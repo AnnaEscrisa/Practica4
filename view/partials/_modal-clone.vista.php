@@ -10,22 +10,22 @@
           <input type="text" name="id" id="modal-article-id" hidden>
           <label class="form-label checkbox">
             <input type="checkbox" name="titol" id="" value="checkedValue" checked>
-            <span class="checkbox-container"></span>
+            <span tabindex="0" class="checkbox-container"></span>
             Títol
           </label>
           <label class="form-label checkbox">
             <input type="checkbox" name="descripcio" id="" value="checkedValue" checked>
-            <span class="checkbox-container"></span>
+            <span tabindex="0" class="checkbox-container"></span>
             Descripció
           </label>
           <label class="form-label checkbox">
             <input type="checkbox" name="ingredients" id="" value="checkedValue" checked>
-            <span class="checkbox-container"></span>
+            <span tabindex="0" class="checkbox-container"></span>
             Ingredients
           </label>
           <label class="form-label checkbox">
             <input type="checkbox" name="imatge" id="" value="checkedValue" checked>
-            <span class="checkbox-container"></span>
+            <span tabindex="0" class="checkbox-container"></span>
             Imatge
           </label>
 

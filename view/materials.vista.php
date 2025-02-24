@@ -6,7 +6,8 @@
         <div class="icons">
             <form action="" method="">
                 <div class="dropdown">
-                    <div class="button button-lil" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div tabindex="0" class="button button-lil" role="button" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false" id="orderButton">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-label="Selecciona l'ordre dels elements" width="24"
                             height="24" viewBox="0 0 24 24" fill="none">
                             <title>Selecciona l'ordre dels elements</title>
@@ -25,7 +26,8 @@
             </form>
             <form action="">
                 <div class="dropdown">
-                    <div class="button button-lil" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div tabindex="0" class="button button-lil" role="button" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false" id="filterButton">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-label="Filtra els elements" width="21" height="20"
                             viewBox="0 0 21 20" fill="none">
                             <title>Filtra els elements</title>

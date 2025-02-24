@@ -79,7 +79,7 @@ function showMessage($tipus, $missatge)
     if ($missatge) {
 
         $alerta = "<div id='alerta_miss' class='alert alert-dismissible alert-$tipus' role='alert'>
-            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Tancar'></button>
+            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Tancar missatge'></button>
             <h4>$missatge</h4>
         </div>
         <script src='public/js/reload.js'></script>";

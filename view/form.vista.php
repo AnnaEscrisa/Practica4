@@ -22,10 +22,12 @@
         <div class="form-group">
             <label for="tipus" class="form-label">Tipus</label>
             <select name="tipus" id="tipus">
-                <option value="proteccio">Protecció</option>
-                <option value="malediccio">Maledicció</option>
-                <option value="encanteri">Encanteri</option>
-                <option value="endevinacio">Endevinacio</option>
+                <optgroup>
+                    <option value="proteccio">Protecció</option>
+                    <option value="malediccio">Maledicció</option>
+                    <option value="encanteri">Encanteri</option>
+                    <option value="endevinacio">Endevinacio</option>
+                </optgroup>
             </select>
         </div>
 
@@ -33,9 +35,12 @@
         <div class="form-group">
             <label class="form-label"> Ingredients</label>
             <div class="hstack">
-                <button type="button" class="button" data-ingredients onclick="showSidebar('vegetals', 'form')">Vegetals</button>
-                <button type="button" class="button" data-ingredients onclick="showSidebar('animals', 'form')">Animals</button>
-                <button type="button" class="button" data-ingredients onclick="showSidebar('minerals', 'form')">Minerals</button>
+                <button type="button" class="button" data-ingredients
+                    onclick="showSidebar('vegetals', 'form')">Vegetals</button>
+                <button type="button" class="button" data-ingredients
+                    onclick="showSidebar('animals', 'form')">Animals</button>
+                <button type="button" class="button" data-ingredients
+                    onclick="showSidebar('minerals', 'form')">Minerals</button>
             </div>
         </div>
 

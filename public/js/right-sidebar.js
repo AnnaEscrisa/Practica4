@@ -7,7 +7,17 @@ function showSidebar(item, type) {
         $(".container_home").removeClass('container_home_open');
         $('main').removeClass('main_open');
         $("#aside_right").removeClass('aside_right_visible');
+        $('#aside_right').hide();
     })
+
+    $(document).keyup(function (e) {
+        if (e.key === 'Escape') {
+            $(".container_home").removeClass('container_home_open');
+            $('main').removeClass('main_open');
+            $("#aside_right").removeClass('aside_right_visible');
+            $('#aside_right').hide();
+        }
+    });
 
     switch (type) {
         case 'article':
@@ -27,6 +37,7 @@ function showSidebar(item, type) {
             break;
     }
 
+    $('#aside_right').show();
     $("#aside_right").toggleClass('aside_right_visible');
     $(".container_home").toggleClass('container_home_open');
     $('main').toggleClass('main_open');

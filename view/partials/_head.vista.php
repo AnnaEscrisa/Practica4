@@ -18,5 +18,6 @@
     <script src="public/js/right-sidebar.js"></script>
     <script defer src="public/js/qr.js"></script>
     <script defer src="public/js/search-size.js"></script>
+    <script defer src="public/js/accessible.js"></script>
     <link rel="stylesheet" href="public/styles/styles.css">
 </head>

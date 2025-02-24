@@ -6,9 +6,9 @@
         <div class="icons">
             <form action="" method="POST">
                 <div class="dropdown">
-                    <div class="button button-lil" role="img" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Selecciona l'ordre dels elements" width="24"
+                    <div tabindex="0" class="button button-lil" role="button" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false" id="orderButton">
+                        <svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Selecciona l'ordre dels elements" width="24"
                             height="24" viewBox="0 0 24 24" fill="none">
                             <title>Selecciona l'ordre dels elements</title>
                             <path
@@ -27,8 +27,8 @@
             </form>
             <form action="" method="POST">
                 <div class="dropdown">
-                    <div class="button button-lil" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" aria-label=="Filtra els elements" width="21" height="20"
+                    <div tabindex="0" role="button" id="filterButton" class="button button-lil" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Filtra els elements" width="21" height="20"
                             viewBox="0 0 21 20" fill="none">
                             <title>Filtra els elements</title>
                             <path
@@ -57,17 +57,18 @@
         <?php
 
         if ($articlesMostrats):
+            $counter = 0;
             foreach ($articlesMostrats[$paginesData['currentPage'] - 1] as $key => $value): ?>
 
                 <div class="grid_card">
 
-                    <article class="article_card"
+                    <article class="article_card" tabindex="0" aria-labelledby="article<?=$counter?>" role="button"
                         onclick="showSidebar(<?= htmlspecialchars(json_encode($value)) ?>, 'article')">
                         <img src="public/img/articles/<?= $value['image'] ?>"
                             alt="<?= $value['image'] == 'none.webp' ? 'Imatge no disponible' : 'Imatge de poció ' . $value['titol'] ?>">
 
                         <div class="ac_banner">
-                            <h4 class="a_title"> <?= $value['titol'] ?></h4>
+                            <h4 id="<?= 'article'.$counter++ ?>" class="a_title"> <?= $value['titol'] ?></h4>
                         </div>
                     </article>
                 </div>

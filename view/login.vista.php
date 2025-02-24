@@ -5,18 +5,18 @@
     <form action="" method="post" class="form_section">
         <section class="form_main">
             <div class="form-group">
-                <label class="form-label">Usuari</label>
+                <label class="form-label">Usuari *</label>
                 <input name="usuari" class="form-control" type="text" value="<?= $_COOKIE['recorda'] ?? '' ?>">
             </div>
             <div class="form-group">
-                <label class="form-label">Contrasenya</label>
+                <label class="form-label">Contrasenya *</label>
                 <input name="password" type="password" class="form-control">
             </div>
             <div class="form-group">
 
                 <label class="form-label checkbox">
-                    <input type="checkbox" name="recorda">
-                    <span class="checkbox-container"></span>
+                    <input type="checkbox" name="recorda" class="hidden-accessible">
+                    <span  class="checkbox-container"></span>
                     Recorda'm
                 </label>
 
